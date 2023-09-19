@@ -62,10 +62,11 @@ const onSlideChange = (swiper) => {
             <div class="py-4 px-4 sm:px-6 lg:py-8 lg:px-8 lg:flex lg:items-center lg:justify-between">
                 <div class="tracking-tight nightwind-prevent-block" >
                     <span class="block text-sm font-medium text-white">
-                        Saldo Rekening
+                        Lorem ipsum
                     </span>
                     <span class="block text-lg font-bold text-white">
-                        <span class="text-sm font-medium">Rp</span> {{ formatPrice($page.props.user.wallet_balance) }}
+<!--                        <span class="text-sm font-medium">Rp</span> {{ formatPrice($page.props.user.wallet_balance) }}-->
+                        Lorem ipsum
                     </span>
                 </div>
                 <div class="mt-5 flex lg:mt-0 lg:flex-shrink-0 gap-x-2">

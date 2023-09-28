@@ -88,12 +88,17 @@ onMounted(() => {
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 lg:flex">
-                                <NavLink :href="route('landing.welcome')"
-                                         :active="route().current('landing.welcome')" >
+                                <NavLink
+                                    :href="route('landing.welcome')"
+                                    :active="route().current('landing.welcome')"
+                                >
                                     Beranda
                                 </NavLink>
 
-<!--                                <NavLink :href="route('landing.gallery')" :active="$page.url.startsWith('/galeri')" >-->
+<!--                                <NavLink -->
+<!--                                    :href="route('landing.gallery')" -->
+<!--                                    :active="$page.url.startsWith('/galeri')" -->
+<!--                                >-->
 <!--                                    Galeri-->
 <!--                                </NavLink>-->
 

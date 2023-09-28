@@ -37,7 +37,7 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
         <div class="mt-4 flex items-center justify-between">
             <form @submit.prevent="submit">
                 <PrimaryButton :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Kirim email verifikasi
+                    Kirim ulang email verifikasi
                 </PrimaryButton>
 
                 <Link
@@ -46,7 +46,7 @@ const verificationLinkSent = computed(() => props.status === 'verification-link-
                     as="button"
                     class="underline text-sm text-gray-600 hover:text-gray-900 ml-5"
                 >
-                    Log Out
+                    Logout
                 </Link>
             </form>
 

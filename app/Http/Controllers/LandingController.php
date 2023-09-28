@@ -29,8 +29,9 @@ class LandingController extends Controller
      */
     public function welcome(): Response
     {
+//        dd(Blog::all());
         return Inertia::render('Landing/Welcome', [
-//            'trip' => Trip::all()
+            'blog' => Blog::latest()->get(),
         ]);
 //        return Redirect::route('dashboard');
     }

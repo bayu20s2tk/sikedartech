@@ -71,8 +71,8 @@ watch(() => props.modelValue, (newValue, oldValue) => {
         <GroupButtonLink @click="editor.chain().focus().toggleBold().run()"><b>Bold</b></GroupButtonLink>
         <GroupButtonLink @click="editor.chain().focus().toggleBulletList().run()" class="rounded-r-2xl mr-2">List</GroupButtonLink>
 
-<!--        <GroupButtonLink @click="editor.chain().focus().undo().run()" class="rounded-l-2xl" :disabled="!editor.can().chain().focus().undo().run()">undo</GroupButtonLink>-->
-<!--        <GroupButtonLink @click="editor.chain().focus().redo().run()" class="rounded&#45;&#45;2xl" :disabled="!editor.can().chain().focus().redo().run()">redo</GroupButtonLink>-->
+        <!--        <GroupButtonLink @click="editor.chain().focus().undo().run()" class="rounded-l-2xl" :disabled="!editor.can().chain().focus().undo().run()">undo</GroupButtonLink>-->
+        <!--        <GroupButtonLink @click="editor.chain().focus().redo().run()" class="rounded&#45;&#45;2xl" :disabled="!editor.can().chain().focus().redo().run()">redo</GroupButtonLink>-->
     </GroupButton>
 
     <EditorContent

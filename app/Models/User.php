@@ -34,6 +34,7 @@ class User extends Authenticatable implements Wallet, MustVerifyEmail
         'email',
         'password',
         'role_id',
+        'email_verified_at' //just for development
     ];
 
     /**

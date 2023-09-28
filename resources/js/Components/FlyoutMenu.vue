@@ -29,7 +29,7 @@ const props = defineProps({
             leave-to-class="translate-y-1 opacity-0"
         >
             <PopoverPanel
-                class="absolute left-20 z-10 mt-5 w-screen max-w-sm -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl"
+                class="absolute left-52 z-10 mt-5 w-screen max-w-sm -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl"
             >
                 <div
                     class="overflow-hidden rounded-3xl shadow-lg border border-gray-300"
@@ -41,7 +41,7 @@ const props = defineProps({
                             :href="item.href"
                             class="-m-3 flex items-center rounded-3xl p-2 transition duration-150 ease-in-out hover:bg-gray-300 hover:bg-opacity-50"
                         >
-                            <i class="fa-regular text-primary-700 dark:text-white text-2xl ml-2" :class="item.icon" />
+                            <i class="fa-regular text-primary-700 text-2xl ml-2" :class="item.icon" />
                             <div class="ml-4 text-left">
                                 <p class="text-sm font-medium text-gray-900">
                                     {{ item.name }}

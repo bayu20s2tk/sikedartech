@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
-use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
@@ -77,7 +76,7 @@ class UserController extends Controller
     {
         return Inertia::render('User/Show', [
             'users' => $user,
-            'history' => Transaction::where('user_id', $user->id)->get()
+//            'history' => Transaction::where('user_id', $user->id)->get()
         ]);
     }
 

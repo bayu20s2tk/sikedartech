@@ -7,7 +7,10 @@ const props = defineProps({
     data: Array,
     columns: Array,
     filterKey: String,
-    routes: String,
+    routes: {
+        type: String,
+        default: null
+    },
     paginate: Object,
     slug: {
         type: Boolean,
@@ -85,7 +88,7 @@ function capitalize(str) {
                     {{ entry[key] ?? ' - ' }}
                 </td>
 
-                <td v-if="routes" class="pl-3 pr-4 text-right text-sm font-medium">
+                <td v-if="routes!=null" class="pl-3 pr-4 text-right text-sm font-medium space-x-2">
                     <template v-if="slug">
                         <Link v-if="view"
                               :href="route(routes+'.show', entry.slug)"

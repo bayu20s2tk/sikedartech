@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AppSettingController;
+use App\Http\Controllers\BlogCategoryController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CarouselController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepositController;
@@ -38,6 +40,13 @@ Route::get('/', [LandingController::class, 'welcome'])->name('landing.welcome');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+
+    Route::resource('/blog', BlogController::class)->names('blog');
+    Route::post('blog/add-hero', [BlogController::class, 'addHero'])->name('blog.addHero');
+    Route::delete('blog/delete-hero/{blog}/{id}', [BlogController::class, 'deleteHero'])->name('blog.deleteHero');
+
+    Route::resource('/blog-category', BlogCategoryController::class)->names('blogCategory');
 
     Route::resource('/information', InformationController::class)->names('information');
 

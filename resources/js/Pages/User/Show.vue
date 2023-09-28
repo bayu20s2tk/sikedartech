@@ -10,7 +10,6 @@ import moment from "moment/moment";
 
 const props = defineProps({
     users: Object | String,
-    history: Object,
 });
 
 function formattedDate(value) {
@@ -39,7 +38,7 @@ function formatPrice(value) {
         </template>
 
         <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
-            <div class="py-4 px-4 sm:px-6 lg:py-8 lg:px-8 lg:flex lg:items-center lg:justify-between">
+            <div class="py-4 px-4 sm:px-6 lg:px-8 lg:flex lg:items-center lg:justify-between">
                 <div class="tracking-tight flex gap-5 items-center">
                     <div class="">
                         <img v-if="props.users.profile_photo_url" class="mx-auto h-20 w-20 object-cover rounded-full"
@@ -69,46 +68,46 @@ function formatPrice(value) {
 
         <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
             <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
-                <template v-for="history in $page.props.history">
-                    <li>
-                        <Link preserve-scroll :href="route('history.show', history)" class="block hover:bg-primary-50" >
-                            <div class="px-4 py-4 sm:px-6">
-                                <div class="flex items-center justify-between">
-                                    <p class="font-medium text-primary-600 truncate">{{ history.product_name }}</p>
-                                    <div class="ml-2 flex-shrink-0 flex">
-                                        <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full "
-                                           :class="history.status_id == 1 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'"
-                                        >
-                                            {{ history.status }}
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="mt-2 sm:flex sm:justify-between">
-                                    <div class="sm:flex">
-                                        <p class="flex items-center text-sm text-gray-900">
-                                            <!--                                                <i class="fa-regular text-gray-500 pr-2" :class="history.category_id == 1 ? 'fa-plus' : 'fa-minus' " />-->
-                                            {{ history.category_id == 1 ? '+' : '-' }} Rp {{ formatPrice(history.gross_amount) }}
-                                        </p>
-                                        <!--                                        <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">-->
-                                        <!--&lt;!&ndash;                                                <i class="fa-regular fa-down-to-bracket text-gray-500 pr-2" />&ndash;&gt;-->
-                                        <!--                                            {{ history.order_id }}-->
-                                        <!--                                        </p>-->
-                                    </div>
-                                    <div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
-                                        <i class="fa-regular fa-calendar text-gray-500 pr-2" />
-                                        <p>
-                                            {{ formattedDate(history.created_at) }}
-                                        </p>
-                                        <p class="text-gray-900 ml-2">
-                                            {{ formattedTime(history.created_at) }}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </Link>
-                    </li>
+<!--                <template v-for="history in $page.props.history">-->
+<!--                    <li>-->
+<!--                        <Link preserve-scroll :href="route('history.show', history)" class="block hover:bg-primary-50" >-->
+<!--                            <div class="px-4 py-4 sm:px-6">-->
+<!--                                <div class="flex items-center justify-between">-->
+<!--                                    <p class="font-medium text-primary-600 truncate">{{ history.product_name }}</p>-->
+<!--                                    <div class="ml-2 flex-shrink-0 flex">-->
+<!--                                        <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full "-->
+<!--                                           :class="history.status_id == 1 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'"-->
+<!--                                        >-->
+<!--                                            {{ history.status }}-->
+<!--                                        </p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="mt-2 sm:flex sm:justify-between">-->
+<!--                                    <div class="sm:flex">-->
+<!--                                        <p class="flex items-center text-sm text-gray-900">-->
+<!--                                            &lt;!&ndash;                                                <i class="fa-regular text-gray-500 pr-2" :class="history.category_id == 1 ? 'fa-plus' : 'fa-minus' " />&ndash;&gt;-->
+<!--                                            {{ history.category_id == 1 ? '+' : '-' }} Rp {{ formatPrice(history.gross_amount) }}-->
+<!--                                        </p>-->
+<!--                                        &lt;!&ndash;                                        <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">&ndash;&gt;-->
+<!--                                        &lt;!&ndash;&lt;!&ndash;                                                <i class="fa-regular fa-down-to-bracket text-gray-500 pr-2" />&ndash;&gt;&ndash;&gt;-->
+<!--                                        &lt;!&ndash;                                            {{ history.order_id }}&ndash;&gt;-->
+<!--                                        &lt;!&ndash;                                        </p>&ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                    <div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">-->
+<!--                                        <i class="fa-regular fa-calendar text-gray-500 pr-2" />-->
+<!--                                        <p>-->
+<!--                                            {{ formattedDate(history.created_at) }}-->
+<!--                                        </p>-->
+<!--                                        <p class="text-gray-900 ml-2">-->
+<!--                                            {{ formattedTime(history.created_at) }}-->
+<!--                                        </p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </Link>-->
+<!--                    </li>-->
 
-                </template>
+<!--                </template>-->
             </ul>
         </div>
 

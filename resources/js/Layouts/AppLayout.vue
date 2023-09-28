@@ -55,11 +55,12 @@ const setting = [
         icon: 'fa-screwdriver-wrench',
     },
     {
-        name: 'Pengguna',
+        name: 'Kategori Blog',
         desc: 'Measure actions your users take',
-        href: '/setting/user',
+        href: '/blog-category',
         icon: 'fa-user-doctor',
     },
+
 ]
 
 const logout = () => {
@@ -202,6 +203,16 @@ const logout = () => {
 <!--                                        </NavLinkAlt>-->
 
                                         <NavLinkAlt
+                                            :href="route('blog.index')"
+                                            :active="$page.component.startsWith('Blog')"
+                                            icon="fa-blog"
+                                            v-if="$page.props.user.role_id==1"
+
+                                        >
+                                            Blog
+                                        </NavLinkAlt>
+
+                                        <NavLinkAlt
                                             :href="route('user.index')"
                                             :active="$page.component.startsWith('User')"
                                             icon="fa-person"
@@ -209,6 +220,19 @@ const logout = () => {
 
                                         >
                                             Pengguna
+                                        </NavLinkAlt>
+
+
+                                        <NavLinkAlt
+                                            href="#"
+                                            :active="$page.url.startsWith('/setting')"
+                                            icon="fa-gear"
+                                            v-if="$page.props.user.role_id==1"
+                                        >
+                                            <FlyoutMenu
+                                                title="Pengaturan"
+                                                :data="setting"
+                                            />
                                         </NavLinkAlt>
 
                                         <NavLinkAlt

@@ -15,12 +15,14 @@ const gridTitle = [
     'Nama',
     'Email',
     'Peran',
+    'Status',
     'Bergabung',
 ]
 const gridColumns = [
     'name',
     'email',
     'role',
+    'status',
     'created',
 ]
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\BlogCategory;
+use App\Models\Gallery;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -20,7 +21,6 @@ class BlogController extends Controller
     {
         return Inertia::render('Blog/Index', [
             'blog' => Blog::latest()->paginate(20),
-//            'category' => BlogCategory::all(),
         ]);
     }
 
@@ -30,7 +30,7 @@ class BlogController extends Controller
     public function create()
     {
         return Inertia::render('Blog/CreateEdit', [
-            'selectCategory' => BlogCategory::all()->pluck('name', 'id')
+            'selectCategory' => BlogCategory::all()->pluck('name', 'id'),
         ]);
     }
 
@@ -57,6 +57,7 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
+//        dd($blog);
         return Inertia::render('Blog/Show', [
             'blog' => $blog
         ]);
@@ -67,11 +68,11 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        return Inertia::render('Blog/CreateEdit',
-            [
-                'blog' => $blog,
-                'selectCategory' => BlogCategory::all()->pluck('name', 'id')
-            ]);
+        return Inertia::render('Blog/CreateEdit', [
+            'blog' => $blog,
+            'gallery' => Gallery::all(),
+            'selectCategory' => BlogCategory::all()->pluck('name', 'id')
+        ]);
     }
 
     /**
@@ -87,9 +88,7 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
-//        $blog = Blog::find($request['id']);
         $blog->delete();
-
         return Redirect::route('blog.index');
     }
 

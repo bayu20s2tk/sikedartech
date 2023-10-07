@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -27,6 +28,7 @@ class UserController extends Controller
      */
     public function index()
     {
+//        dd(User::latest()->get());
         return Inertia::render('User/Index', [
             'users' => User::latest()->paginate(20),
         ]);
@@ -40,6 +42,7 @@ class UserController extends Controller
     public function create(): Response
     {
         return Inertia::render('User/CreateEdit', [
+            'selectStatus' => User::STATUS,
             'selectRole' => User::ROLE
         ]);
     }
@@ -60,6 +63,8 @@ class UserController extends Controller
         ])->validateWithBag('storeInformation');
 
         $request['password'] = bcrypt(12345678);
+
+        $request['email_verified_at'] = Carbon::now(); //just for development
 
         return Redirect::route('user.index', [
             'users' => User::create($request->all()),
@@ -90,11 +95,11 @@ class UserController extends Controller
     {
 //        $users = User::find($id);
 //        dd($users);
-        return Inertia::render('User/CreateEdit',
-            [
-                'users' => User::find($id),
-                'selectRole' => User::ROLE
-            ]);
+        return Inertia::render('User/CreateEdit', [
+            'users' => User::find($id),
+            'selectStatus' => User::STATUS,
+            'selectRole' => User::ROLE
+        ]);
     }
 
     /**

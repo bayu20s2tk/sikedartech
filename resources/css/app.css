@@ -42,9 +42,9 @@
 /*    @apply bg-opacity-100;*/
 /*}*/
 
-/*strong {*/
-/*    @apply text-gray-900;*/
-/*}*/
+strong {
+    @apply text-gray-900 dark:text-white;
+}
 
 /*ul {*/
 /*    @apply list-disc;*/

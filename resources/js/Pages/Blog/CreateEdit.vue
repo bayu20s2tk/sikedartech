@@ -2,11 +2,11 @@
 import AppLayout from '@/Layouts/AppLayout.vue';
 import SectionBorder from '@/Components/SectionBorder.vue';
 
-import UpdateInformationForm from "@/Pages/Blog/Partials/UpdateInformationForm.vue";
-import DeleteForm from "@/Pages/Blog/Partials/DeleteForm.vue";
-import UpdateHeroForm from "@/Pages/Blog/Partials/UpdateHeroForm.vue";
-import UpdateContentForm from "@/Pages/Blog/Partials/UpdateContentForm.vue";
-import PreviousButton from "../../Components/PreviousButton.vue";
+import UpdateInformationForm from "./Partials/UpdateInformationForm.vue";
+import DeleteForm from "./Partials/DeleteForm.vue";
+import UpdateHeroForm from "./Partials/UpdateHeroForm.vue";
+import UpdateContentForm from "./Partials/UpdateContentForm.vue";
+import PreviousButton from "@/Components/PreviousButton.vue";
 
 </script>
 
@@ -29,9 +29,9 @@ import PreviousButton from "../../Components/PreviousButton.vue";
                 </div>
 
                 <template v-if="$page.props.blog">
-                    <UpdateHeroForm :blog="$page.props.blog" />
+<!--                    <UpdateHeroForm :blog="$page.props.blog" />-->
 
-                    <SectionBorder />
+<!--                    <SectionBorder />-->
 
                     <UpdateContentForm :blog="$page.props.blog" />
 

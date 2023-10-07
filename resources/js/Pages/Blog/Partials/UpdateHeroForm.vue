@@ -96,15 +96,15 @@ const clearPhotoFileInput = () => {
 
             <div class="col-span-6 grid grid-cols-2 gap-3 flex-wrap mb-5">
                 <template v-for="(hero, index) in props.blog.media">
-                    <div class="relative flex-1 flex flex-col border border-gray-300 rounded-2xl shadow-xl">
-                        <img v-if="hero" class="aspect-video rounded-2xl"
+                    <div class="relative flex-1 flex flex-col border border-gray-300 rounded-3xl shadow-xl">
+                        <img v-if="hero" class="aspect-video rounded-3xl object-cover"
                              :src="hero.original_url" alt=""/>
-                        <!--                        <div class="px-6 pt-3 pb-5">-->
-                        <!--                            <h3 class=" text-gray-900 text-base font-semibold">{{ hero.name }}</h3>-->
-                        <!--                            <p class="text-gray-500 text-sm">{{ hero.desc }}</p>-->
-                        <!--                        </div>-->
+<!--                            <div class="px-6 pt-3 pb-5">-->
+<!--                                <h3 class=" text-gray-900 text-base font-semibold">{{ hero.name }}</h3>-->
+<!--                                <p class="text-gray-500 text-sm">{{ hero.desc }}</p>-->
+<!--                            </div>-->
                         <div class="absolute bottom-0 right-0">
-                            <DangerButton @click.prevent="deletePhoto(props.blog.id, hero.id)" class="rounded-none py-4 inline-flex rounded-br-2xl rounded-tl-2xl">
+                            <DangerButton @click.prevent="deletePhoto(props.blog.id, hero.id)" class="rounded-none py-4 inline-flex rounded-br-3xl rounded-tl-3xl">
                                 <i class="fa-duotone fa-trash" />
                                 <span class="ml-3">Hapus</span>
                             </DangerButton>
@@ -128,7 +128,7 @@ const clearPhotoFileInput = () => {
                 <div class="block mt-2">
                     <div v-if="photoPreview" class="" @click.prevent="selectNewPhoto">
                         <span
-                            class="block rounded-2xl w-full aspect-video px-2 bg-cover bg-no-repeat bg-center border border-gray-300"
+                            class="block rounded-3xl w-full aspect-video px-2 bg-cover bg-no-repeat bg-center border border-gray-300"
                             :style="'background-image: url(\'' + photoPreview + '\');'"
                         />
                     </div>

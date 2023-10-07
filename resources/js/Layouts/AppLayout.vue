@@ -54,6 +54,12 @@ const setting = [
         href: '/setting',
         icon: 'fa-screwdriver-wrench',
     },
+  {
+    name: 'Kategori Kelas',
+    desc: 'Measure actions your users take',
+    href: '/course-category',
+    icon: 'fa-user-doctor',
+  },
     {
         name: 'Kategori Blog',
         desc: 'Measure actions your users take',
@@ -203,14 +209,32 @@ const logout = () => {
 <!--                                        </NavLinkAlt>-->
 
                                         <NavLinkAlt
+                                            :href="route('course.index')"
+                                            :active="$page.component.startsWith('Course')"
+                                            icon="fa-users"
+                                            v-if="$page.props.user.role_id==1"
+                                        >
+                                          Kelas
+                                        </NavLinkAlt>
+
+                                        <NavLinkAlt
                                             :href="route('blog.index')"
                                             :active="$page.component.startsWith('Blog')"
                                             icon="fa-blog"
                                             v-if="$page.props.user.role_id==1"
-
                                         >
-                                            Blog
+                                            Artikel
                                         </NavLinkAlt>
+
+                                      <NavLinkAlt
+                                          :href="route('gallery.index')"
+                                          :active="$page.component.startsWith('Gallery')"
+                                          icon="fa-image"
+                                          v-if="$page.props.user.role_id==1"
+
+                                      >
+                                        Galeri
+                                      </NavLinkAlt>
 
                                         <NavLinkAlt
                                             :href="route('user.index')"
@@ -486,8 +510,8 @@ const logout = () => {
                     <div class="py-10 block lg:hidden">
 
                     </div>
-                    <div class="border-t border-gray-300 py-5 text-sm text-gray-500 text-center sm:text-left hidden lg:block" v-if="$page.props.appSetting">
-                        <span class="block sm:inline capitalize">&copy; 2023 {{ $page.props.appSetting.name }}. </span>
+                    <div class="border-t border-gray-300 py-5 text-sm text-gray-500 text-center sm:text-left hidden lg:block" >
+                        <span class="block sm:inline capitalize">&copy; 2023 {{ $page.props.appSetting?.name }}. </span>
                         <span class="block sm:inline">All rights reserved.</span>
                     </div>
                 </div>

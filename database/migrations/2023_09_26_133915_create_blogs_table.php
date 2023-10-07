@@ -21,6 +21,9 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
+
+            $table->foreign('category_id')->on('blog_categories')->references('id')->restrictOnDelete();
+            $table->foreign('user_id')->on('users')->references('id')->restrictOnDelete();
         });
     }
 

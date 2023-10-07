@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Blog extends Model implements HasMedia
+class Blog extends Model
 {
-    use HasFactory, InteractsWithMedia;
+    use HasFactory;
 
     /**
      * The attributes that are mass assignable.
@@ -46,16 +47,19 @@ class Blog extends Model implements HasMedia
     ];
 
     protected $with = [
-        'media',
         'user',
-        'category'
+        'category',
+        'comment',
     ];
 
     public function getRouteKeyName(): string
     {
         return 'slug';
     }
-
+    public function getStatusAttribute(): string
+    {
+        return self::STATUS[$this->status_id];
+    }
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
@@ -64,8 +68,13 @@ class Blog extends Model implements HasMedia
     {
         return $this->belongsTo(BlogCategory::class, 'category_id', 'id');
     }
-    public function getStatusAttribute(): string
+//    public function comment(): HasMany
+//    {
+//        return $this->hasMany(BlogComment::class, 'blog_id', 'id')->latest();
+//    }
+    public function comment(): HasMany
     {
-        return self::STATUS[$this->status_id];
+        return $this->hasMany(BlogComment::class)->whereNull('parent_id')->latest();
     }
+
 }

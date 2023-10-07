@@ -34,6 +34,7 @@ class User extends Authenticatable implements Wallet, MustVerifyEmail
         'email',
         'password',
         'role_id',
+        'status_id',
         'email_verified_at' //just for development
     ];
 
@@ -47,6 +48,15 @@ class User extends Authenticatable implements Wallet, MustVerifyEmail
         'remember_token',
         'two_factor_recovery_codes',
         'two_factor_secret',
+    ];
+
+    const ACTIVE = 1;
+    const NONACTIVE = 2;
+    const BANNED = 3;
+    const STATUS = [
+        self::ACTIVE => 'Aktif',
+        self::NONACTIVE => 'Nonaktif',
+        self::BANNED => 'Blokir',
     ];
 
     const ADMIN = 1;
@@ -77,13 +87,17 @@ class User extends Authenticatable implements Wallet, MustVerifyEmail
         'profile_photo_url',
         'created',
         'role',
+        'status'
     ];
 
     public function getCreatedAttribute()
     {
         return date('d M Y', strtotime($this->created_at));
     }
-
+    public function getStatusAttribute(): string
+    {
+        return self::STATUS[$this->status_id];
+    }
     public function getRoleAttribute(): string
     {
         return self::ROLE[$this->role_id];

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Course;
 use App\Models\Gallery;
 use App\Models\Page;
 use App\Models\PageCta;
@@ -29,10 +30,35 @@ class LandingController extends Controller
      */
     public function welcome(): Response
     {
-//        dd(Blog::all());
+//        dd(Blog::latest()->take(6)->get());
         return Inertia::render('Landing/Welcome', [
-            'blog' => Blog::latest()->get(),
+            'course' =>  Inertia::lazy(fn () => Course::latest()->get()->take(8)),
+            'blog' =>  Inertia::lazy(fn () => Blog::latest()->get()->take(6)),
         ]);
 //        return Redirect::route('dashboard');
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function course(): Response
+    {
+        return Inertia::render('Landing/Course', [
+            'course' =>  Inertia::lazy(fn () => Course::latest()->get()),
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function blog(): Response
+    {
+        return Inertia::render('Landing/Blog', [
+            'blog' =>  Inertia::lazy(fn () => Blog::latest()->get()),
+        ]);
     }
 }

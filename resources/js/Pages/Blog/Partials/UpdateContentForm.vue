@@ -10,6 +10,7 @@ import EditorInput from "@/Components/EditorInput.vue";
 
 const props = defineProps({
     blog: Object | String,
+    gallery: Object
 });
 
 const form = useForm({
@@ -17,10 +18,10 @@ const form = useForm({
     content: props.blog.content ?? '',
 });
 
-const updateBlogContent = () => {
+const updateContent = () => {
 
     form.put(route('blog.update', props.blog), {
-        errorBag: 'updateBlogInformation',
+        errorBag: 'updateInformation',
         preserveScroll: true,
         onSuccess: () => showPage(),
     });
@@ -33,7 +34,7 @@ const showPage = () => {
 </script>
 
 <template>
-    <FormSection @submitted="updateBlogContent">
+    <FormSection @submitted="updateContent">
         <template #title>
             Konten
         </template>
@@ -46,7 +47,9 @@ const showPage = () => {
 
             <div class="col-span-6 sm:col-span-6">
 
-                <EditorInput v-model="form.content" />
+                <EditorInput
+                    v-model="form.content"
+                />
 
                 <InputError :message="form.errors.content" class="mt-2"/>
 

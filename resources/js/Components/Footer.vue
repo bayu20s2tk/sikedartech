@@ -72,7 +72,7 @@ const navigation = {
                     <component :is="item.icon" class="h-6 w-6" aria-hidden="true" />
                 </a>
             </div>
-            <p class="mt-8 text-center text-base text-gray-400">&copy; 2023 {{ $page.props.appSetting.name }}. All rights reserved.</p>
+            <p class="mt-8 text-center text-base text-gray-400">&copy; 2023 {{ $page.props.appSetting?.name }}. All rights reserved.</p>
         </div>
     </footer>
 </template>

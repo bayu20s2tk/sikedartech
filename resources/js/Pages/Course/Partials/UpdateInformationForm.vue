@@ -86,7 +86,7 @@ const showPage = () => {
       <div class="col-span-3">
         <InputLabel for="fees" value="Harga" />
         <div class="flex">
-          <span class="flex items-center bg-white text-black border border-gray-300 border-l-0 rounded-3xl rounded-l-none shadow-sm mt-1 px-3 ">
+          <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">
               Rp
           </span>
           <TextInput

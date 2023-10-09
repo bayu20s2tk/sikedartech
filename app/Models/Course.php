@@ -6,12 +6,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Overtrue\LaravelFollow\Traits\Followable;
+use Overtrue\LaravelSubscribe\Traits\Subscribable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Course extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia;
+    use HasFactory;
+    use InteractsWithMedia;
+    use Subscribable;
+//    use Followable;
 
     /**
      * The attributes that are mass assignable.
@@ -22,6 +27,7 @@ class Course extends Model implements HasMedia
         'slug',
         'name',
         'desc',
+        'about',
         'price',
         'status_id',
         'category_id',
@@ -50,7 +56,8 @@ class Course extends Model implements HasMedia
         'media',
         'user',
         'category',
-        'comment',
+        'item',
+//        'comment',
     ];
 
     public function getRouteKeyName(): string
@@ -68,6 +75,10 @@ class Course extends Model implements HasMedia
     public function category(): BelongsTo
     {
         return $this->belongsTo(CourseCategory::class, 'category_id', 'id');
+    }
+    public function item(): HasMany
+    {
+        return $this->hasMany(CourseItem::class, 'course_id', 'id');
     }
     public function comment(): HasMany
     {

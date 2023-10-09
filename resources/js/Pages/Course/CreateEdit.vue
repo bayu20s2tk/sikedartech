@@ -7,6 +7,7 @@ import DeleteForm from "./Partials/DeleteForm.vue";
 import UpdateContentForm from "./Partials/UpdateContentForm.vue";
 import PreviousButton from "@/Components/PreviousButton.vue";
 import UpdateHeroForm from "./Partials/UpdateHeroForm.vue";
+import UpdateAboutForm from "./Partials/UpdateAboutForm.vue";
 
 </script>
 
@@ -33,9 +34,13 @@ import UpdateHeroForm from "./Partials/UpdateHeroForm.vue";
 
                     <SectionBorder />
 
-<!--                    <UpdateContentForm :course="$page.props.course" />-->
+                    <UpdateContentForm :course="$page.props.course" />
 
-<!--                    <SectionBorder />-->
+                    <SectionBorder />
+
+                    <UpdateAboutForm :course="$page.props.course" />
+
+                    <SectionBorder />
 
                     <DeleteForm :course="$page.props.course" />
                 </template>

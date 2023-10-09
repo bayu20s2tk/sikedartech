@@ -82,7 +82,7 @@ const showPage = () => {
                 <InputError :message="form.errors.desc" class="mt-2" />
             </div>
 
-            <div class="col-span-6 sm:col-span-5">
+            <div class="col-span-6 sm:col-span-3">
                 <InputLabel for="category" value="Kategori" />
                 <SelectInput
                     id="category"

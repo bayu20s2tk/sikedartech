@@ -7,6 +7,7 @@ use App\Models\BlogCategory;
 use App\Models\Course;
 use App\Models\CourseCategory;
 use App\Models\Gallery;
+use App\Models\UserCourse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -22,7 +23,8 @@ class CourseController extends Controller
     public function index()
     {
         return Inertia::render('Course/Index', [
-            'course' => Course::latest()->paginate(20),
+//            'course' => Course::latest()->paginate(20),
+            'course' =>  Inertia::lazy(fn () => Course::latest()->get()),
         ]);
     }
 
@@ -59,9 +61,20 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        return Inertia::render('Course/Show', [
-            'course' => $course
-        ]);
+//        $comment = auth()->user()->attachLikeStatus($course->comment);
+        $comment = auth()->user()->attachVoteStatus($course->comment);
+//        $comment = $comment->toArray();
+//        dd($comment);
+        if (auth()->user()->hasSubscribed($course)) {
+            return Inertia::render('Course/Show', [
+                'course' => $course,
+                'comment' => $comment
+            ]);
+        } else {
+            return Inertia::render('Course/Join', [
+                'course' => $course
+            ]);
+        }
     }
 
     /**
@@ -81,6 +94,7 @@ class CourseController extends Controller
      */
     public function update(Request $request, Course $course)
     {
+//        dd($request->all(), $course);
         $course->update($request->all());
     }
 
@@ -92,6 +106,7 @@ class CourseController extends Controller
         $course->delete();
         return Redirect::route('course.index');
     }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -111,7 +126,7 @@ class CourseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param $blogHero
+     * @param $id
      * @return void
      */
     public function deleteHero($id)
@@ -119,5 +134,21 @@ class CourseController extends Controller
         $media = Media::find($id);
         $model = Course::find($media->model_id);
         $model->deleteMedia($media->id);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Course $course
+     * @return void
+     */
+    public function subscribe(Course $course)
+    {
+//        dd($course);
+//        Validator::make($request->toArray(), [
+//            'photo' => ['required'],
+//        ])->validateWithBag('storeInformation');
+//        auth()->user()->follow($course);
+        auth()->user()->subscribe($course);
     }
 }

@@ -43,7 +43,15 @@
 /*}*/
 
 strong {
-    @apply text-gray-900 dark:text-white;
+    @apply text-gray-900;
+}
+
+iframe {
+    @apply w-full rounded-3xl;
+}
+
+h1, h2, h3, h4, h5 {
+    @apply text-gray-900;
 }
 
 /*ul {*/

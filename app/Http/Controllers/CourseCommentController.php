@@ -71,4 +71,38 @@ class CourseCommentController extends Controller
     {
         //
     }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function like(CourseComment $courseComment)
+    {
+//        dd($courseComment);
+//        auth()->user()->toggleLike($courseComment);
+//        if (auth()->user()->hasVoted($courseComment)) {
+//            auth()->user()->cancelVote($courseComment);
+//        } else {
+//            auth()->user()->cancelVote($courseComment);
+//            auth()->user()->upvote($courseComment);
+//        }
+//        match (auth()->user()->hasVoted($courseComment)) {
+//            true => auth()->user()->cancelVote($courseComment),
+//            false => auth()->user()->upvote($courseComment),
+//        };
+        auth()->user()->cancelVote($courseComment);
+        auth()->user()->upvote($courseComment);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function dislike(CourseComment $courseComment)
+    {
+        auth()->user()->cancelVote($courseComment);
+        auth()->user()->downvote($courseComment);
+//        match (auth()->user()->hasVoted($courseComment)) {
+//            true => auth()->user()->cancelVote($courseComment),
+//            false => auth()->user()->downvote($courseComment),
+//        };
+    }
 }

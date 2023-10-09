@@ -15,6 +15,8 @@ import {router, useForm} from "@inertiajs/vue3";
 import PrimaryButton from "./PrimaryButton.vue";
 import DangerButton from "./DangerButton.vue";
 import InputError from "./InputError.vue";
+import {Youtube} from "@tiptap/extension-youtube";
+import {CodeBlock} from "@tiptap/extension-code-block";
 
 const props = defineProps({
     modelValue: {
@@ -23,6 +25,10 @@ const props = defineProps({
     },
     gallery: Object
 });
+
+onMounted(() => {
+    router.reload({only: ['modelValue']})
+})
 
 const editor = useEditor({
     editorProps: {
@@ -49,7 +55,24 @@ const editor = useEditor({
             HTMLAttributes: {
                 class: ' rounded-3xl ',
             },
-        })
+        }),
+        Youtube.configure({
+            inline: false,
+            ccLanguage: 'id',
+            interfaceLanguage: 'id',
+            enableIFrameApi: 'true',
+            modestBranding: 'true',
+            HTMLAttributes: {
+                class: 'w-full rounded-3xl ',
+            },
+        }),
+        // CodeBlock.configure({
+        //     languageClassPrefix: 'language-',
+        //     HTMLAttributes: {
+        //         class: 'w-full rounded-3xl',
+        //     },
+        // })
+
     ],
     onUpdate: ({editor}) => {
         let content = editor.getHTML()
@@ -60,14 +83,14 @@ const editor = useEditor({
 
 const emit = defineEmits(['update:modelValue']);
 
-// watch(() => props.modelValue, (newValue, oldValue) => {
-//     const isSame = newValue === oldValue
-//     console.log(`Same: ${isSame}`)
-//     if (isSame) {
-//         return
-//     }
-//     // editor.command.setContent(newValue, false)
-// })
+watch(() => props.modelValue, (newValue, oldValue) => {
+    const isSame = newValue === oldValue
+    // console.log(`Same: ${isSame}`)
+    if (isSame) {
+        return
+    }
+    editor.value.commands.setContent(newValue, false,  {preserveWhitespace: "full"})
+})
 
 const form = useForm({
   // id: props.blog.id,
@@ -78,7 +101,7 @@ const photoPreview = ref(null);
 const photoInput = ref(null);
 
 const storePhoto = () => {
-  console.log('halo')
+  // console.log('halo')
   if (photoInput.value) {
     form.photo = photoInput.value.files[0];
   }
@@ -135,6 +158,16 @@ function addImage(img) {
   galleryModal.value=false
 }
 
+function addYoutube() {
+    const url = prompt('Enter YouTube URL')
+
+    editor.value.commands.setYoutubeVideo({
+        src: url,
+        // width: Math.max(320, parseInt(this.width, 10)) || 640,
+        // height: Math.max(180, parseInt(this.height, 10)) || 480,
+    })
+}
+
 const galleryModal = ref(false);
 const closeModal = () => {
     galleryModal.value = false;
@@ -152,7 +185,9 @@ const closeModal = () => {
         <GroupButtonLink @click="editor.chain().focus().toggleHeading({ level: 5 }).run()" >H5</GroupButtonLink>
         <GroupButtonLink @click="editor.chain().focus().setParagraph().run()" class="rounded-r-3xl mr-2" >P</GroupButtonLink>
 
-        <GroupButtonLink @click="galleryModal=true" class="rounded-l-3xl rounded-r-3xl mr-2">Image</GroupButtonLink>
+        <GroupButtonLink @click="galleryModal=true" class="rounded-l-3xl rounded">Image</GroupButtonLink>
+        <GroupButtonLink @click="addYoutube">Youtube</GroupButtonLink>
+        <GroupButtonLink @click="editor.chain().focus().toggleCodeBlock().run()" class="rounded-r-3xl mr-2">Code</GroupButtonLink>
 
         <GroupButtonLink @click="editor.chain().focus().toggleItalic().run()" class="rounded-l-3xl"><i>Italic</i></GroupButtonLink>
         <GroupButtonLink @click="editor.chain().focus().toggleBold().run()"><b>Bold</b></GroupButtonLink>

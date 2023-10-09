@@ -83,7 +83,7 @@ function formattedDate(value) {
           <div v-for="item in props.course" :key="item.id">
             <Link :href="route('course.show', item)">
               <div class="bg-white bg-opacity-50 h-full border border-gray-300 rounded-3xl shadow-lg">
-                <div class="h-72 w-full overflow-hidden rounded-t-3xl">
+                <div class="h-52 w-full overflow-hidden rounded-t-3xl">
                   <img :src="item.media[0].original_url" :alt="item.name"
                        class="rounded-t-3xl h-full w-full object-cover object-center"/>
                 </div>

@@ -83,14 +83,14 @@ const showPage = () => {
         <InputError :message="form.errors.desc" class="mt-2"/>
       </div>
 
-      <div class="col-span-3">
-        <InputLabel for="fees" value="Harga" />
+      <div class="col-span-6 sm:col-span-2">
+        <InputLabel for="price" value="Harga" />
         <div class="flex">
           <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">
               Rp
           </span>
           <TextInput
-              id="fees"
+              id="price"
               v-model="form.price"
               type="number"
               class="mt-1 block w-full rounded-l-none"
@@ -99,7 +99,7 @@ const showPage = () => {
         <InputError :message="form.errors.price" class="mt-2" />
       </div>
 
-      <div class="col-span-6 sm:col-span-5">
+      <div class="col-span-6 sm:col-span-3">
         <InputLabel for="category" value="Kategori"/>
         <SelectInput
             id="category"

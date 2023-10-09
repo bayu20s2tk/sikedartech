@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c96c631c5427a25f2313c46264fe3819",
+    "content-hash": "b9571941fa17c3874d68612c1a012510",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -3032,6 +3032,281 @@
                 }
             ],
             "time": "2023-02-08T01:06:31+00:00"
+        },
+        {
+            "name": "overtrue/laravel-follow",
+            "version": "5.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/overtrue/laravel-follow.git",
+                "reference": "47482cb257f0ebe6842d1f7f4ef0770294e8c74a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/overtrue/laravel-follow/zipball/47482cb257f0ebe6842d1f7f4ef0770294e8c74a",
+                "reference": "47482cb257f0ebe6842d1f7f4ef0770294e8c74a",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^9.0|^10.0"
+            },
+            "require-dev": {
+                "brainmaestro/composer-git-hooks": "dev-master",
+                "friendsofphp/php-cs-fixer": "^3.8",
+                "laravel/pint": "^1.5",
+                "mockery/mockery": "^1.5",
+                "orchestra/testbench": "^8.0",
+                "phpunit/phpunit": "^10.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Overtrue\\LaravelFollow\\FollowServiceProvider"
+                    ]
+                },
+                "hooks": {
+                    "pre-commit": [
+                        "composer fix-style",
+                        "composer test"
+                    ],
+                    "pre-push": [
+                        "composer test",
+                        "composer check-style"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Overtrue\\LaravelFollow\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "overtrue",
+                    "email": "anzhengchao@gmail.com"
+                }
+            ],
+            "description": "User follow unfollow system for Laravel.",
+            "support": {
+                "issues": "https://github.com/overtrue/laravel-follow/issues",
+                "source": "https://github.com/overtrue/laravel-follow/tree/5.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/overtrue",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-02-15T06:15:49+00:00"
+        },
+        {
+            "name": "overtrue/laravel-like",
+            "version": "5.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/overtrue/laravel-like.git",
+                "reference": "60511dfaf4e900ecc713932606e77b6a29e04bc3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/overtrue/laravel-like/zipball/60511dfaf4e900ecc713932606e77b6a29e04bc3",
+                "reference": "60511dfaf4e900ecc713932606e77b6a29e04bc3",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^9.0|^10.0"
+            },
+            "require-dev": {
+                "brainmaestro/composer-git-hooks": "dev-master",
+                "friendsofphp/php-cs-fixer": "^3.0.0",
+                "laravel/pint": "^1.2",
+                "mockery/mockery": "^1.4",
+                "orchestra/testbench": "^8.0",
+                "phpunit/phpunit": "^10.0.7"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Overtrue\\LaravelLike\\LikeServiceProvider"
+                    ]
+                },
+                "hooks": {
+                    "pre-commit": [
+                        "composer fix-style",
+                        "composer test"
+                    ],
+                    "post-merge": "composer install"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Overtrue\\LaravelLike\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "overtrue",
+                    "email": "anzhengchao@gmail.com"
+                }
+            ],
+            "description": "👍 User-like features for Laravel Application.",
+            "support": {
+                "issues": "https://github.com/overtrue/laravel-like/issues",
+                "source": "https://github.com/overtrue/laravel-like/tree/5.2.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/overtrue",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-09-07T05:08:44+00:00"
+        },
+        {
+            "name": "overtrue/laravel-subscribe",
+            "version": "4.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/overtrue/laravel-subscribe.git",
+                "reference": "1ddb7c3ac5c1e145364ef5736f8912eb5dd2d707"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/overtrue/laravel-subscribe/zipball/1ddb7c3ac5c1e145364ef5736f8912eb5dd2d707",
+                "reference": "1ddb7c3ac5c1e145364ef5736f8912eb5dd2d707",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^9.0|^10.0"
+            },
+            "require-dev": {
+                "brainmaestro/composer-git-hooks": "dev-master",
+                "laravel/pint": "^1.5",
+                "mockery/mockery": "^1.4",
+                "orchestra/testbench": "^8.0",
+                "phpunit/phpunit": "^10.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Overtrue\\LaravelSubscribe\\SubscribeServiceProvider"
+                    ]
+                },
+                "hooks": {
+                    "pre-commit": [
+                        "composer test",
+                        "composer fix-style"
+                    ],
+                    "post-merge": "composer install"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Overtrue\\LaravelSubscribe\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "overtrue",
+                    "email": "anzhengchao@gmail.com"
+                }
+            ],
+            "description": "User Subscribe/Unsubscribe features for Laravel Application.",
+            "support": {
+                "issues": "https://github.com/overtrue/laravel-subscribe/issues",
+                "source": "https://github.com/overtrue/laravel-subscribe/tree/4.2.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/overtrue",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-08-28T01:20:03+00:00"
+        },
+        {
+            "name": "overtrue/laravel-vote",
+            "version": "3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/overtrue/laravel-vote.git",
+                "reference": "d3dc02d785d44bf6cbdfc2fc34c1346518e7fb51"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/overtrue/laravel-vote/zipball/d3dc02d785d44bf6cbdfc2fc34c1346518e7fb51",
+                "reference": "d3dc02d785d44bf6cbdfc2fc34c1346518e7fb51",
+                "shasum": ""
+            },
+            "require": {
+                "laravel/framework": "^9.0|^10.0"
+            },
+            "require-dev": {
+                "brainmaestro/composer-git-hooks": "dev-master",
+                "friendsofphp/php-cs-fixer": "^3.6",
+                "laravel/pint": "^1.5",
+                "mockery/mockery": "^1.4",
+                "orchestra/testbench": "^8.0",
+                "phpunit/phpunit": "^10.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Overtrue\\LaravelVote\\VoteServiceProvider"
+                    ]
+                },
+                "hooks": {
+                    "pre-commit": [
+                        "composer fix-style"
+                    ],
+                    "pre-push": [
+                        "composer test"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Overtrue\\LaravelVote\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "overtrue",
+                    "email": "anzhengchao@gmail.com"
+                }
+            ],
+            "description": "User Vote features for Laravel Application.",
+            "support": {
+                "issues": "https://github.com/overtrue/laravel-vote/issues",
+                "source": "https://github.com/overtrue/laravel-vote/tree/3.1.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/overtrue",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-02-16T03:07:37+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",

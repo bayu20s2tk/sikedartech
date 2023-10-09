@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('name');
             $table->string('desc')->nullable();
+            $table->longText('about')->nullable();
             $table->integer('price');
             $table->integer('status_id')->default(1);
             $table->unsignedBigInteger('category_id');

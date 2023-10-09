@@ -20,7 +20,8 @@ class BlogController extends Controller
     public function index()
     {
         return Inertia::render('Blog/Index', [
-            'blog' => Blog::latest()->paginate(20),
+//            'blog' => Blog::latest()->paginate(20),
+            'blog' => Inertia::lazy(fn () => Blog::latest()->get())
         ]);
     }
 
@@ -57,9 +58,10 @@ class BlogController extends Controller
      */
     public function show(Blog $blog)
     {
-//        dd($blog);
+//        dd(auth()->user()->attachVoteStatus($blog->comment));
         return Inertia::render('Blog/Show', [
-            'blog' => $blog
+            'blog' => $blog,
+            'comment' => auth()->user()->attachVoteStatus($blog->comment)
         ]);
     }
 

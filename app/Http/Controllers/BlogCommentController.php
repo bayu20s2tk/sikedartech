@@ -72,4 +72,22 @@ class BlogCommentController extends Controller
     {
         //
     }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function like(BlogComment $blogComment)
+    {
+        auth()->user()->cancelVote($blogComment);
+        auth()->user()->upvote($blogComment);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function dislike(BlogComment $blogComment)
+    {
+        auth()->user()->cancelVote($blogComment);
+        auth()->user()->downvote($blogComment);
+    }
 }

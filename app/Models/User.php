@@ -10,6 +10,10 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Overtrue\LaravelFollow\Traits\Follower;
+use Overtrue\LaravelLike\Traits\Liker;
+use Overtrue\LaravelSubscribe\Traits\Subscriber;
+use Overtrue\LaravelVote\Traits\Voter;
 use Stephenjude\Wallet\Interfaces\Wallet;
 use Stephenjude\Wallet\Traits\HasWallet;
 
@@ -21,6 +25,10 @@ class User extends Authenticatable implements Wallet, MustVerifyEmail
     use Notifiable;
     use TwoFactorAuthenticatable;
     use HasWallet;
+    use Subscriber;
+    use Voter;
+//    use Liker;
+//    use Follower;
 //    use HasUuids;
 
     /**

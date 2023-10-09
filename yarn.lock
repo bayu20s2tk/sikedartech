@@ -305,6 +305,11 @@
   resolved "https://registry.yarnpkg.com/@tiptap/extension-text/-/extension-text-2.1.11.tgz#f67ac1a782a8ee1d30885680e52bba3ef19322f9"
   integrity sha512-Iey0EXYv9079+lbHMvZtLc6XcYfKrq++msEXuFFNHxvL0i/XzndhGf+qlDhLROLgEtDiiTqzOBBwFCGlFjbDow==
 
+"@tiptap/extension-youtube@^2.1.11":
+  version "2.1.11"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-youtube/-/extension-youtube-2.1.11.tgz#659ac2c5c64b105ae8fd0e822cdbdd166991c13b"
+  integrity sha512-R+bXgdrMFptrx+C4vdaOA6shtG3X1ED0M+QWGbwnfdWxsv8aiR17q/Ho9m/3dYq8uR/KU4GMBSczYm1Fh9E+ZQ==
+
 "@tiptap/pm@^2.1.11":
   version "2.1.11"
   resolved "https://registry.yarnpkg.com/@tiptap/pm/-/pm-2.1.11.tgz#023c854d447a6509d52da0be890539037582cf39"

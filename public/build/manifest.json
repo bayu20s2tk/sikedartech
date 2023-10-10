@@ -1578,10 +1578,6 @@
       "_DarkmodeToggle.1cee4b19.js"
     ]
   },
-  "carousel.css": {
-    "file": "assets/carousel.bea71dee.css",
-    "src": "carousel.css"
-  },
   "resources/js/Pages/Dashboard.css": {
     "file": "assets/Dashboard.29ae51e2.css",
     "src": "resources/js/Pages/Dashboard.css"
@@ -1589,6 +1585,10 @@
   "tippy.css": {
     "file": "assets/tippy.a1ae07b3.css",
     "src": "tippy.css"
+  },
+  "carousel.css": {
+    "file": "assets/carousel.bea71dee.css",
+    "src": "carousel.css"
   },
   "resources/js/app.css": {
     "file": "assets/app.2d867e18.css",

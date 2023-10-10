@@ -32,7 +32,7 @@ class LandingController extends Controller
     public function welcome(): Response
     {
         $course = Course::latest()->get();
-        $course = auth()->user()->attachSubscriptionStatus($course);
+        auth()->user() ? $course = auth()->user()->attachSubscriptionStatus($course) : '' ;
 
         return Inertia::render('Landing/Welcome', [
             'course' =>  Inertia::lazy(fn () => $course),
@@ -50,7 +50,7 @@ class LandingController extends Controller
     {
 
         $course = Course::latest()->get();
-        $course = auth()->user()->attachSubscriptionStatus($course);
+        auth()->user() ? $course = auth()->user()->attachSubscriptionStatus($course) : '' ;
 
 //        dd($course->toArray());
         return Inertia::render('Landing/Course', [

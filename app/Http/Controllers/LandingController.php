@@ -10,6 +10,7 @@ use App\Models\PageCta;
 use App\Models\PageFeature;
 use App\Models\PageFeatureDetail;
 use App\Models\PageHero;
+use App\Models\Project;
 use App\Models\Trip;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -30,9 +31,11 @@ class LandingController extends Controller
      */
     public function welcome(): Response
     {
-//        dd(Blog::latest()->take(6)->get());
+        $course = Course::latest()->get();
+        $course = auth()->user()->attachSubscriptionStatus($course);
+
         return Inertia::render('Landing/Welcome', [
-            'course' =>  Inertia::lazy(fn () => Course::latest()->get()->take(8)),
+            'course' =>  Inertia::lazy(fn () => $course),
             'blog' =>  Inertia::lazy(fn () => Blog::latest()->get()->take(6)),
         ]);
 //        return Redirect::route('dashboard');
@@ -45,8 +48,25 @@ class LandingController extends Controller
      */
     public function course(): Response
     {
+
+        $course = Course::latest()->get();
+        $course = auth()->user()->attachSubscriptionStatus($course);
+
+//        dd($course->toArray());
         return Inertia::render('Landing/Course', [
-            'course' =>  Inertia::lazy(fn () => Course::latest()->get()),
+            'course' =>  Inertia::lazy(fn () => $course),
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function project(): Response
+    {
+        return Inertia::render('Landing/Project', [
+            'project' =>  Inertia::lazy(fn () => Project::latest()->get()),
         ]);
     }
 

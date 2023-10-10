@@ -23,11 +23,9 @@ class BlogCategory extends Model
 
     const ACTIVE = 1;
     const NONACTIVE = 2;
-    const DRAFT = 3;
     const STATUS = [
         self::ACTIVE => 'Aktif',
         self::NONACTIVE => 'Nonaktif',
-        self::DRAFT => 'Draft',
     ];
 
     /**

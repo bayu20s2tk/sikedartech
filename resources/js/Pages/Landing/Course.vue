@@ -61,7 +61,14 @@ function formattedDate(value) {
                   <div class="py-3 px-5 items-end">
                     <h3 class="text-lg font-semibold text-gray-900">{{ item.name }}</h3>
                     <p class="mt-1 text-sm text-gray-500">{{ item.desc }}</p>
-                    <p class="mt-1 text-sm font-semibold text-gray-700">Rp {{ formatPrice(item.price) }}</p>
+                    <p class="mt-1 text-sm font-semibold text-gray-700">
+                        <template v-if="item.has_subscribed">
+                            <i class="fa-duotone fa-circle-check text-green-600 mr-1" /> Akses selamanya
+                        </template>
+                        <template v-else>
+                            Rp {{ formatPrice(item.price) }}
+                        </template>
+                    </p>
                   </div>
                 </div>
               </Link>

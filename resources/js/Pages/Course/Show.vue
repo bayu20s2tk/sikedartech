@@ -203,14 +203,14 @@ function formattedDate(value) {
                             >
                                 Komentar
                             </button>
-                            <button @click="tab=3"
-                                    :class="[tab==3 ?
-                                    'border-primary-500 text-primary-600' :
-                                    'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
-                                    'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm']"
-                            >
-                                Review
-                            </button>
+<!--                            <button @click="tab=3"-->
+<!--                                    :class="[tab==3 ?-->
+<!--                                    'border-primary-500 text-primary-600' :-->
+<!--                                    'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',-->
+<!--                                    'whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm']"-->
+<!--                            >-->
+<!--                                Review-->
+<!--                            </button>-->
                         </nav>
 
                         <div class="my-5 prose prose-sm">
@@ -250,17 +250,17 @@ function formattedDate(value) {
                                     </template>
                                 </div>
                             </template>
-                            <template v-else-if="tab==3">
-                                <!-- Stats section -->
-                                <div class="mt-10">
-                                    <dl class="grid grid-cols-2 gap-x-4 gap-y-8">
-                                        <div class="pt-6">
-                                            <dt class="text-base font-medium text-gray-500">Hahahaha</dt>
-                                            <dd class="text-3xl font-extrabold tracking-tight text-gray-900">Lorem ipsum</dd>
-                                        </div>
-                                    </dl>
-                                </div>
-                            </template>
+<!--                            <template v-else-if="tab==3">-->
+<!--                                &lt;!&ndash; Stats section &ndash;&gt;-->
+<!--                                <div class="mt-10">-->
+<!--                                    <dl class="grid grid-cols-2 gap-x-4 gap-y-8">-->
+<!--                                        <div class="pt-6">-->
+<!--                                            <dt class="text-base font-medium text-gray-500">Hahahaha</dt>-->
+<!--                                            <dd class="text-3xl font-extrabold tracking-tight text-gray-900">Lorem ipsum</dd>-->
+<!--                                        </div>-->
+<!--                                    </dl>-->
+<!--                                </div>-->
+<!--                            </template>-->
                         </div>
                     </div>
 

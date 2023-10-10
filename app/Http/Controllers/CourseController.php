@@ -7,7 +7,6 @@ use App\Models\BlogCategory;
 use App\Models\Course;
 use App\Models\CourseCategory;
 use App\Models\Gallery;
-use App\Models\UserCourse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;

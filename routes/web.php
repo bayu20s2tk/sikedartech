@@ -13,6 +13,8 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\InformationController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectCategoryController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -31,6 +33,7 @@ use Inertia\Inertia;
 Route::get('/', [LandingController::class, 'welcome'])->name('landing.welcome');
 
 Route::get('/kelas', [LandingController::class, 'course'])->name('landing.course');
+Route::get('/proyek', [LandingController::class, 'project'])->name('landing.project');
 
 Route::get('/artikel', [LandingController::class, 'blog'])->name('landing.blog');
 Route::get('/artikel/{blog}', [BlogController::class, 'show'])->name('blog.show');
@@ -39,10 +42,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('/course', CourseController::class)->names('course')->except('show');
-    Route::post('course/subscribe/{course}', [CourseController::class, 'subscribe'])->name('course.subscribe');
-    Route::post('course/add-hero', [CourseController::class, 'addHero'])->name('course.addHero');
-    Route::delete('course/delete-hero/{id}', [CourseController::class, 'deleteHero'])->name('course.deleteHero');
-
+    Route::post('/course/subscribe/{course}', [CourseController::class, 'subscribe'])->name('course.subscribe');
+    Route::post('/course/add-hero', [CourseController::class, 'addHero'])->name('course.addHero');
+    Route::delete('/course/delete-hero/{id}', [CourseController::class, 'deleteHero'])->name('course.deleteHero');
     Route::get('/kelas/{course}', [CourseController::class, 'show'])->name('course.show');
 
     Route::resource('/course-item', CourseItemController::class)->names('courseItem');
@@ -50,6 +52,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::resource('/course-comment', CourseCommentController::class)->names('courseComment');
     Route::post('/course-comment/like/{courseComment}', [CourseCommentController::class, 'like'])->name('courseComment.like');
     Route::post('/course-comment/dislike/{courseComment}', [CourseCommentController::class, 'dislike'])->name('courseComment.dislike');
+
+    Route::resource('/project', ProjectController::class)->names('project')->except('show');
+    Route::resource('/project-category', ProjectCategoryController::class)->names('projectCategory');
+    Route::get('/proyek/{project}', [ProjectController::class, 'show'])->name('project.show');
 
     Route::resource('/blog', BlogController::class)->names('blog')->except('show');
     Route::post('/blog-comment/like/{blogComment}', [BlogCommentController::class, 'like'])->name('blogComment.like');

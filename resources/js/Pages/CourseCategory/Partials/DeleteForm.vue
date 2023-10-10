@@ -32,21 +32,21 @@ const deletePage = () => {
 <template>
     <ActionSection>
         <template #title>
-            Hapus Kategori Blog
+            Hapus Kategori Kelas
         </template>
 
         <template #description>
-            Hapus kategori blog secara permanen
+            Hapus kategori kelas secara permanen
         </template>
 
         <template #content>
             <div class="max-w-xl text-sm text-gray-600">
-                Setelah kategori blog dihapus, semua sumber daya dan datanya akan dihapus secara permanen.
+                Setelah kategori kelas dihapus, semua sumber daya dan datanya akan dihapus secara permanen.
             </div>
 
             <div class="mt-5">
                 <DangerButton class="" @click="deletePage">
-                    Hapus kategori blog
+                    Hapus kategori kelas
                 </DangerButton>
             </div>
 

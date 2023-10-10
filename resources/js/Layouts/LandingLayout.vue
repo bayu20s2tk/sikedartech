@@ -103,6 +103,13 @@ onMounted(() => {
                 </NavLink>
 
                 <NavLink
+                    :href="route('landing.project')"
+                    :active="$page.url.startsWith('/proyek')"
+                >
+                  Proyek
+                </NavLink>
+
+                <NavLink
                     :href="route('landing.blog')"
                     :active="$page.url.startsWith('/artikel')"
                 >

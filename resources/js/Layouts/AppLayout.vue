@@ -42,8 +42,8 @@ watch(darkMode, (newDarkMode) => {
 
 const showingNavigationDropdown = ref(false);
 
-const hasAction = computed(() => !! useSlots().action);
-const hasPrevious = computed(() => !! useSlots().previous);
+const hasAction = computed(() => !!useSlots().action);
+const hasPrevious = computed(() => !!useSlots().previous);
 
 const split = props.name.split(" ");
 
@@ -54,17 +54,23 @@ const setting = [
         href: '/setting',
         icon: 'fa-screwdriver-wrench',
     },
-  {
-    name: 'Kategori Kelas',
-    desc: 'Measure actions your users take',
-    href: '/course-category',
-    icon: 'fa-user-doctor',
-  },
     {
-        name: 'Kategori Blog',
+        name: 'Kategori Proyek',
+        desc: 'Measure actions your users take',
+        href: '/project-category',
+        icon: 'fa-umbrella-beach',
+    },
+    {
+        name: 'Kategori Kelas',
+        desc: 'Measure actions your users take',
+        href: '/course-category',
+        icon: 'fa-book',
+    },
+    {
+        name: 'Kategori Artikel',
         desc: 'Measure actions your users take',
         href: '/blog-category',
-        icon: 'fa-user-doctor',
+        icon: 'fa-blog',
     },
 
 ]
@@ -85,30 +91,31 @@ const logout = () => {
         </template>
 
         <div class="sticky top-0 z-50">
-        <Banner/>
+            <Banner/>
         </div>
 
         <div class="min-h-screen bg-gray-100 bg-glass bg-fixed ">
-<!--           pb-24  bg-gradient-to-r from-primary-800 to-primary-400-->
+            <!--           pb-24  bg-gradient-to-r from-primary-800 to-primary-400-->
             <Popover as="header" class="" v-slot="{ open }">
                 <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8">
                     <div class="relative flex flex-wrap items-center justify-center lg:justify-between">
                         <!-- Logo -->
                         <div class="absolute left-0 py-5 flex-shrink-0 lg:static flex items-center">
                             <template v-if="hasPrevious">
-                                <slot name="previous" />
+                                <slot name="previous"/>
                             </template>
 
                             <template v-else>
                                 <div class="sm:flex sm:space-x-5">
-<!--                                    <div class="">-->
-<!--                                        <img v-if="props.avatar" class="mx-auto h-20 w-20 object-cover rounded-full"-->
-<!--                                             :src="props.avatar" :alt="props.avatar"/>-->
-<!--                                    </div>-->
-<!--                                    <i class="fa-duotone fa-wallet text-primary-600 text-5xl" />-->
+                                    <!--                                    <div class="">-->
+                                    <!--                                        <img v-if="props.avatar" class="mx-auto h-20 w-20 object-cover rounded-full"-->
+                                    <!--                                             :src="props.avatar" :alt="props.avatar"/>-->
+                                    <!--                                    </div>-->
+                                    <!--                                    <i class="fa-duotone fa-wallet text-primary-600 text-5xl" />-->
                                     <div class="mt-4 sm:mt-0 sm:pt-1 text-left">
-<!--                                        <p class="text-sm font-medium text-gray-600">{{ props.greeting }}</p>-->
-                                        <p class="text-2xl font-bold text-gray-900 sm:text-2xl capitalize" v-if="props.greeting">
+                                        <!--                                        <p class="text-sm font-medium text-gray-600">{{ props.greeting }}</p>-->
+                                        <p class="text-2xl font-bold text-gray-900 sm:text-2xl capitalize"
+                                           v-if="props.greeting">
                                             <span class="font-medium text-gray-600">Halo,</span> {{ split[0] }}.
                                         </p>
                                         <p class="text-2xl font-bold text-gray-900 sm:text-2xl capitalize" v-else>
@@ -118,11 +125,11 @@ const logout = () => {
                                     </div>
                                 </div>
 
-<!--                                <ApplicationMark class="block h-10 w-auto" />-->
-<!--                                <div class="ml-2 nightwind-prevent-block" v-if="$page.props.appSetting">-->
-<!--                                    <h1 class="text-white capitalize font-semibold">{{ $page.props.appSetting.name }}</h1>-->
-<!--                                    <p class="text-gray-100 font-light text-sm">{{ $page.props.appSetting.desc }}</p>-->
-<!--                                </div>-->
+                                <!--                                <ApplicationMark class="block h-10 w-auto" />-->
+                                <!--                                <div class="ml-2 nightwind-prevent-block" v-if="$page.props.appSetting">-->
+                                <!--                                    <h1 class="text-white capitalize font-semibold">{{ $page.props.appSetting.name }}</h1>-->
+                                <!--                                    <p class="text-gray-100 font-light text-sm">{{ $page.props.appSetting.desc }}</p>-->
+                                <!--                                </div>-->
                             </template>
                         </div>
 
@@ -169,10 +176,10 @@ const logout = () => {
                                             Profil
                                         </DropdownLink>
 
-<!--                                        <DropdownLink v-if="$page.props.jetstream.hasApiFeatures"-->
-<!--                                                      :href="route('api-tokens.index')">-->
-<!--                                            API Tokens-->
-<!--                                        </DropdownLink>-->
+                                        <!--                                        <DropdownLink v-if="$page.props.jetstream.hasApiFeatures"-->
+                                        <!--                                                      :href="route('api-tokens.index')">-->
+                                        <!--                                            API Tokens-->
+                                        <!--                                        </DropdownLink>-->
 
                                         <div class="border-t border-gray-100"/>
 
@@ -200,21 +207,30 @@ const logout = () => {
                                             Dasbor
                                         </NavLinkAlt>
 
-<!--                                        <NavLinkAlt-->
-<!--                                            :href="route('information.index')"-->
-<!--                                            :active="$page.component.startsWith('Information')"-->
-<!--                                            icon="fa-circle-info"-->
-<!--                                        >-->
-<!--                                            Informasi-->
-<!--                                        </NavLinkAlt>-->
+                                        <!--                                        <NavLinkAlt-->
+                                        <!--                                            :href="route('information.index')"-->
+                                        <!--                                            :active="$page.component.startsWith('Information')"-->
+                                        <!--                                            icon="fa-circle-info"-->
+                                        <!--                                        >-->
+                                        <!--                                            Informasi-->
+                                        <!--                                        </NavLinkAlt>-->
 
                                         <NavLinkAlt
                                             :href="route('course.index')"
                                             :active="$page.component.startsWith('Course')"
-                                            icon="fa-users"
+                                            icon="fa-book"
                                             v-if="$page.props.user.role_id==1"
                                         >
-                                          Kelas
+                                            Kelas
+                                        </NavLinkAlt>
+
+                                        <NavLinkAlt
+                                            :href="route('project.index')"
+                                            :active="$page.component.startsWith('Project')"
+                                            icon="fa-umbrella-beach"
+                                            v-if="$page.props.user.role_id==1"
+                                        >
+                                            Proyek
                                         </NavLinkAlt>
 
                                         <NavLinkAlt
@@ -226,15 +242,15 @@ const logout = () => {
                                             Artikel
                                         </NavLinkAlt>
 
-                                      <NavLinkAlt
-                                          :href="route('gallery.index')"
-                                          :active="$page.component.startsWith('Gallery')"
-                                          icon="fa-image"
-                                          v-if="$page.props.user.role_id==1"
+                                        <NavLinkAlt
+                                            :href="route('gallery.index')"
+                                            :active="$page.component.startsWith('Gallery')"
+                                            icon="fa-image"
+                                            v-if="$page.props.user.role_id==1"
 
-                                      >
-                                        Galeri
-                                      </NavLinkAlt>
+                                        >
+                                            Galeri
+                                        </NavLinkAlt>
 
                                         <NavLinkAlt
                                             :href="route('user.index')"
@@ -300,34 +316,34 @@ const logout = () => {
                         <div class="absolute right-0 flex-shrink-0 lg:hidden ">
 
                             <!-- Mobile menu button -->
-<!--                            <PopoverButton-->
-<!--                                class="bg-transparent p-2 rounded-3xl inline-flex items-center justify-center text-primary-200 hover:text-white hover:bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white">-->
-<!--                                <button-->
-<!--                                    class="inline-flex items-center justify-center rounded-3xl text-gray-600 dark:text-primary-500 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition"-->
-<!--                                    @click="showingNavigationDropdown = ! showingNavigationDropdown">-->
-<!--                                    <svg-->
-<!--                                        class="h-6 w-6"-->
-<!--                                        stroke="currentColor"-->
-<!--                                        fill="none"-->
-<!--                                        viewBox="0 0 24 24"-->
-<!--                                    >-->
-<!--                                        <path-->
-<!--                                            :class="{'hidden': showingNavigationDropdown, 'inline-flex': ! showingNavigationDropdown }"-->
-<!--                                            stroke-linecap="round"-->
-<!--                                            stroke-linejoin="round"-->
-<!--                                            stroke-width="2"-->
-<!--                                            d="M4 6h16M4 12h16M4 18h16"-->
-<!--                                        />-->
-<!--                                        <path-->
-<!--                                            :class="{'hidden': ! showingNavigationDropdown, 'inline-flex': showingNavigationDropdown }"-->
-<!--                                            stroke-linecap="round"-->
-<!--                                            stroke-linejoin="round"-->
-<!--                                            stroke-width="2"-->
-<!--                                            d="M6 18L18 6M6 6l12 12"-->
-<!--                                        />-->
-<!--                                    </svg>-->
-<!--                                </button>-->
-<!--                            </PopoverButton>-->
+                            <!--                            <PopoverButton-->
+                            <!--                                class="bg-transparent p-2 rounded-3xl inline-flex items-center justify-center text-primary-200 hover:text-white hover:bg-white hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-white">-->
+                            <!--                                <button-->
+                            <!--                                    class="inline-flex items-center justify-center rounded-3xl text-gray-600 dark:text-primary-500 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition"-->
+                            <!--                                    @click="showingNavigationDropdown = ! showingNavigationDropdown">-->
+                            <!--                                    <svg-->
+                            <!--                                        class="h-6 w-6"-->
+                            <!--                                        stroke="currentColor"-->
+                            <!--                                        fill="none"-->
+                            <!--                                        viewBox="0 0 24 24"-->
+                            <!--                                    >-->
+                            <!--                                        <path-->
+                            <!--                                            :class="{'hidden': showingNavigationDropdown, 'inline-flex': ! showingNavigationDropdown }"-->
+                            <!--                                            stroke-linecap="round"-->
+                            <!--                                            stroke-linejoin="round"-->
+                            <!--                                            stroke-width="2"-->
+                            <!--                                            d="M4 6h16M4 12h16M4 18h16"-->
+                            <!--                                        />-->
+                            <!--                                        <path-->
+                            <!--                                            :class="{'hidden': ! showingNavigationDropdown, 'inline-flex': showingNavigationDropdown }"-->
+                            <!--                                            stroke-linecap="round"-->
+                            <!--                                            stroke-linejoin="round"-->
+                            <!--                                            stroke-width="2"-->
+                            <!--                                            d="M6 18L18 6M6 6l12 12"-->
+                            <!--                                        />-->
+                            <!--                                    </svg>-->
+                            <!--                                </button>-->
+                            <!--                            </PopoverButton>-->
                         </div>
                     </div>
                 </div>
@@ -350,9 +366,9 @@ const logout = () => {
                                     <div class="pt-3 pb-2">
                                         <div class="flex items-center justify-between px-4">
                                             <div>
-<!--                                                <Link :href="route('dashboard')">-->
-<!--                                                    <ApplicationMark class="block h-9 w-auto"/>-->
-<!--                                                </Link>-->
+                                                <!--                                                <Link :href="route('dashboard')">-->
+                                                <!--                                                    <ApplicationMark class="block h-9 w-auto"/>-->
+                                                <!--                                                </Link>-->
                                                 <DarkmodeToggle :darkMode="darkMode" @click="darkMode = ! darkMode"/>
                                             </div>
 
@@ -388,22 +404,22 @@ const logout = () => {
                                             </div>
                                         </div>
                                         <div class="mt-3 px-2 space-y-1">
-<!--                                            <ResponsiveNavLink :href="route('dashboard')"-->
-<!--                                                               :active="route().current('dashboard')">-->
-<!--                                                Dasbor-->
-<!--                                            </ResponsiveNavLink>-->
+                                            <!--                                            <ResponsiveNavLink :href="route('dashboard')"-->
+                                            <!--                                                               :active="route().current('dashboard')">-->
+                                            <!--                                                Dasbor-->
+                                            <!--                                            </ResponsiveNavLink>-->
 
-<!--                                            <ResponsiveNavLink :href="route('user.index')"-->
-<!--                                                               :active="$page.url.startsWith('/user')"-->
-<!--                                                               v-if="$page.props.user.role_id==1">-->
-<!--                                                Pengguna-->
-<!--                                            </ResponsiveNavLink>-->
+                                            <!--                                            <ResponsiveNavLink :href="route('user.index')"-->
+                                            <!--                                                               :active="$page.url.startsWith('/user')"-->
+                                            <!--                                                               v-if="$page.props.user.role_id==1">-->
+                                            <!--                                                Pengguna-->
+                                            <!--                                            </ResponsiveNavLink>-->
 
-<!--                                            <ResponsiveNavLink :href="route('setting.index')"-->
-<!--                                                               :active="$page.url.startsWith('/setting')"-->
-<!--                                                               v-if="$page.props.user.role_id==1">-->
-<!--                                                Pengaturan-->
-<!--                                            </ResponsiveNavLink>-->
+                                            <!--                                            <ResponsiveNavLink :href="route('setting.index')"-->
+                                            <!--                                                               :active="$page.url.startsWith('/setting')"-->
+                                            <!--                                                               v-if="$page.props.user.role_id==1">-->
+                                            <!--                                                Pengaturan-->
+                                            <!--                                            </ResponsiveNavLink>-->
 
                                         </div>
                                     </div>
@@ -425,21 +441,21 @@ const logout = () => {
                                         </div>
                                         <div class="mt-3 px-2 space-y-1">
 
-<!--                                            <ResponsiveNavLink :href="route('landing.welcome')"-->
-<!--                                                               :active="route().current('landing.welcome')">-->
-<!--                                                Beranda-->
-<!--                                            </ResponsiveNavLink>-->
+                                            <!--                                            <ResponsiveNavLink :href="route('landing.welcome')"-->
+                                            <!--                                                               :active="route().current('landing.welcome')">-->
+                                            <!--                                                Beranda-->
+                                            <!--                                            </ResponsiveNavLink>-->
 
                                             <ResponsiveNavLink :href="route('profile.show')"
                                                                :active="route().current('profile.show')">
                                                 Profil
                                             </ResponsiveNavLink>
 
-<!--                                            <ResponsiveNavLink v-if="$page.props.jetstream.hasApiFeatures"-->
-<!--                                                               :href="route('api-tokens.index')"-->
-<!--                                                               :active="route().current('api-tokens.index')">-->
-<!--                                                API Tokens-->
-<!--                                            </ResponsiveNavLink>-->
+                                            <!--                                            <ResponsiveNavLink v-if="$page.props.jetstream.hasApiFeatures"-->
+                                            <!--                                                               :href="route('api-tokens.index')"-->
+                                            <!--                                                               :active="route().current('api-tokens.index')">-->
+                                            <!--                                                API Tokens-->
+                                            <!--                                            </ResponsiveNavLink>-->
 
                                             <!-- Authentication -->
                                             <form method="POST" @submit.prevent="logout">
@@ -455,51 +471,51 @@ const logout = () => {
                     </div>
                 </TransitionRoot>
             </Popover>
-<!--            -mt-24 -->
+            <!--            -mt-24 -->
             <main class=" ">
                 <div class="max-w-3xl lg:max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <!-- Left column -->
                     <div class="">
 
-<!--                         Welcome panel -->
-<!--                        <section class="">-->
-<!--                            <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">-->
-<!--                                <div class="p-6">-->
-<!--                                    <div class="sm:flex sm:items-center sm:justify-between">-->
-<!--                                        <div class="sm:flex sm:space-x-5">-->
-<!--                                            <div class="flex-shrink-0">-->
-<!--                                                <img v-if="props.avatar" class="mx-auto h-20 w-20 object-cover rounded-full"-->
-<!--                                                     :src="props.avatar" :alt="props.avatar"/>-->
-<!--                                            </div>-->
-<!--                                            <div class="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">-->
-<!--                                                <p class="text-sm font-medium text-gray-600">{{ props.greeting }}</p>-->
-<!--                                                <p class="text-xl font-bold text-gray-900 sm:text-2xl capitalize">-->
-<!--                                                    {{ props.name }}</p>-->
-<!--                                                <p class="text-sm font-medium text-gray-600">{{ props.desc }}</p>-->
-<!--                                            </div>-->
+                        <!--                         Welcome panel -->
+                        <!--                        <section class="">-->
+                        <!--                            <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">-->
+                        <!--                                <div class="p-6">-->
+                        <!--                                    <div class="sm:flex sm:items-center sm:justify-between">-->
+                        <!--                                        <div class="sm:flex sm:space-x-5">-->
+                        <!--                                            <div class="flex-shrink-0">-->
+                        <!--                                                <img v-if="props.avatar" class="mx-auto h-20 w-20 object-cover rounded-full"-->
+                        <!--                                                     :src="props.avatar" :alt="props.avatar"/>-->
+                        <!--                                            </div>-->
+                        <!--                                            <div class="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">-->
+                        <!--                                                <p class="text-sm font-medium text-gray-600">{{ props.greeting }}</p>-->
+                        <!--                                                <p class="text-xl font-bold text-gray-900 sm:text-2xl capitalize">-->
+                        <!--                                                    {{ props.name }}</p>-->
+                        <!--                                                <p class="text-sm font-medium text-gray-600">{{ props.desc }}</p>-->
+                        <!--                                            </div>-->
 
-<!--&lt;!&ndash;                                            <div class="mt-3 relative shadow-sm" >&ndash;&gt;-->
-<!--&lt;!&ndash;                                                <slot name="action" />&ndash;&gt;-->
-<!--&lt;!&ndash;                                            </div>&ndash;&gt;-->
-<!--                                        </div>-->
-<!--                                        <div class="mt-3 grid justify-center sm:mt-0" v-if="hasAction">-->
-<!--                                            <slot name="action" />-->
-<!--                                        </div>-->
-<!--&lt;!&ndash;                                        <div class="mt-5 flex justify-center sm:mt-0" v-if="props.action">&ndash;&gt;-->
-<!--&lt;!&ndash;                                            <Link :href="props.href">&ndash;&gt;-->
-<!--&lt;!&ndash;                                                <SecondaryButton>&ndash;&gt;-->
-<!--&lt;!&ndash;                                                    {{ props.action }}&ndash;&gt;-->
-<!--&lt;!&ndash;                                                </SecondaryButton>&ndash;&gt;-->
-<!--&lt;!&ndash;                                            </Link>&ndash;&gt;-->
-<!--&lt;!&ndash;                                        </div>&ndash;&gt;-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </section>-->
+                        <!--&lt;!&ndash;                                            <div class="mt-3 relative shadow-sm" >&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                                <slot name="action" />&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            </div>&ndash;&gt;-->
+                        <!--                                        </div>-->
+                        <!--                                        <div class="mt-3 grid justify-center sm:mt-0" v-if="hasAction">-->
+                        <!--                                            <slot name="action" />-->
+                        <!--                                        </div>-->
+                        <!--&lt;!&ndash;                                        <div class="mt-5 flex justify-center sm:mt-0" v-if="props.action">&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            <Link :href="props.href">&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                                <SecondaryButton>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                                    {{ props.action }}&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                                </SecondaryButton>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                            </Link>&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                        </div>&ndash;&gt;-->
+                        <!--                                    </div>-->
+                        <!--                                </div>-->
+                        <!--                            </div>-->
+                        <!--                        </section>-->
 
                         <!-- Page Content -->
                         <main class="max-w-7xl mx-auto py-5 space-y-5 relative">
-                            <slot />
+                            <slot/>
                         </main>
 
                     </div>
@@ -510,7 +526,8 @@ const logout = () => {
                     <div class="py-10 block lg:hidden">
 
                     </div>
-                    <div class="border-t border-gray-300 py-5 text-sm text-gray-500 text-center sm:text-left hidden lg:block" >
+                    <div
+                        class="border-t border-gray-300 py-5 text-sm text-gray-500 text-center sm:text-left hidden lg:block">
                         <span class="block sm:inline capitalize">&copy; 2023 {{ $page.props.appSetting?.name }}. </span>
                         <span class="block sm:inline">All rights reserved.</span>
                     </div>

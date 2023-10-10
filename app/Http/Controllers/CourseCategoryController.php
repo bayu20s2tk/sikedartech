@@ -80,6 +80,6 @@ class CourseCategoryController extends Controller
     {
         $courseCategory->delete();
 
-        return Redirect::route('CourseCategory.index');
+        return Redirect::route('courseCategory.index');
     }
 }

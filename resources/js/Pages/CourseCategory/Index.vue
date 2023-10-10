@@ -36,8 +36,8 @@ const gridColumnsCategory = [
 </script>
 
 <template>
-    <AppLayout title="Kategori Kursus"
-               name="Kategori Kursus"
+    <AppLayout title="Kategori Kelas"
+               name="Kategori Kelas"
                desc="lorem ipsum"
                >
 

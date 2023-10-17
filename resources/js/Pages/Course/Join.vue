@@ -223,6 +223,21 @@ function formatPrice(value) {
                 </div>
             </template>
 
+            <template #footer>
+                <div class="flex justify-between items-center">
+                    Sudah bayar?
+                    <PrimaryButton
+                        class="ml-3"
+                        :class="{ 'opacity-25': form.processing }"
+                        :disabled="form.processing"
+                        @click="showBill=false;showForm=true"
+                    >
+                        Isi form bukti pembayaran
+                    </PrimaryButton>
+                </div>
+
+            </template>
+
         </DialogModal>
 
         <DialogModal :show="showForm" @close="closeModal">

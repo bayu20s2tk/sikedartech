@@ -60,6 +60,7 @@ const dislikeComment = (item) => {
 };
 
 const show = ref(false)
+const childShow = ref(false)
 function formattedDate(value) {
     return moment(value).format('DD MMM Y HH:mm')
 }
@@ -133,10 +134,19 @@ function formattedDate(value) {
 
     <template v-for="(child, childIdx ) in props.comment.child">
         <CommentChildSection
+            v-if="childShow"
             :course_id="props.course_id"
             :comment="props.comment"
             :child="child"
             :child_idx="childIdx"
         />
     </template>
+
+    <button
+        class="ml-12 font-medium text-primary-600"
+        v-if="props.comment.child.length && !childShow"
+        @click="childShow=!childShow"
+    >
+        <i class="fa-regular fa-angle-down mr-2" /> {{ props.comment.child.length }} balasan
+    </button>
 </template>

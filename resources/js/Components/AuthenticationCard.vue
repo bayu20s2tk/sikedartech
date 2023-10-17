@@ -129,7 +129,7 @@ watch(darkMode, (newDarkMode) => {
             </div>
         </div>
         <div class="hidden lg:block relative w-0 flex-1 ">
-            <img class="absolute inset-0 h-full w-full object-cover" src="/img/minion.jpg" alt="" />
+            <img class="absolute inset-0 h-full w-full object-cover" src="/img/auth.png" alt="" />
         </div>
     </div>
     </div>

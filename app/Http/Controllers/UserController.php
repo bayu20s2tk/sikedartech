@@ -64,7 +64,7 @@ class UserController extends Controller
 
         $request['password'] = bcrypt(12345678);
 
-        $request['email_verified_at'] = Carbon::now(); //just for development
+//        $request['email_verified_at'] = Carbon::now(); //just for development
 
         return Redirect::route('user.index', [
             'users' => User::create($request->all()),

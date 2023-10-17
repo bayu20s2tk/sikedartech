@@ -81,9 +81,9 @@ onMounted(() => {
             <div class="flex">
               <!-- Logo -->
               <div class="shrink-0 flex items-center">
-                <!--                                <Link :href="route('welcome')">-->
-                <ApplicationMark class="block h-10 w-auto"/>
-                <!--                                </Link>-->
+<!--                <Link :href="route('welcome')">-->
+                    <ApplicationMark class="block h-10 w-auto"/>
+<!--                </Link>-->
               </div>
 
               <!-- Navigation Links -->
@@ -304,23 +304,23 @@ onMounted(() => {
         <slot/>
       </main>
 
-      <div class="fixed inset-x-0 bottom-0 nightwind-prevent-block">
-        <div class="bg-primary-600 bg-opacity-50 backdrop-blur">
-          <div class="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between flex-wrap">
-              <div class="w-0 flex-1 flex items-center">
-                                <span class="flex p-2 rounded-lg bg-primary-800">
-                                    <i class="fa-regular fa-bullhorn text-white"/>
-                                </span>
-                <p class="ml-3 font-medium text-white truncate">
-                  <span class="md:hidden">Website dalam tahap pengembangan! </span>
-                  <span class="hidden md:inline">Website ini masih dalam tahap pengembangan. </span>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+<!--      <div class="fixed inset-x-0 bottom-0 nightwind-prevent-block">-->
+<!--        <div class="bg-primary-600 bg-opacity-50 backdrop-blur">-->
+<!--          <div class="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">-->
+<!--            <div class="flex items-center justify-between flex-wrap">-->
+<!--              <div class="w-0 flex-1 flex items-center">-->
+<!--                                <span class="flex p-2 rounded-lg bg-primary-800">-->
+<!--                                    <i class="fa-regular fa-bullhorn text-white"/>-->
+<!--                                </span>-->
+<!--                <p class="ml-3 font-medium text-white truncate">-->
+<!--                  <span class="md:hidden">Website dalam tahap pengembangan! </span>-->
+<!--                  <span class="hidden md:inline">Website ini masih dalam tahap pengembangan. </span>-->
+<!--                </p>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
 
       <Footer/>
     </div>

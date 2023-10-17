@@ -141,9 +141,9 @@ class CourseController extends Controller
      * @param Course $course
      * @return void
      */
-    public function subscribe(Course $course)
+    public function subscribe(Request $request, Course $course)
     {
-//        dd($course);
+        dd($request->all(), $course);
 //        Validator::make($request->toArray(), [
 //            'photo' => ['required'],
 //        ])->validateWithBag('storeInformation');

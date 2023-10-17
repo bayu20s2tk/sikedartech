@@ -4,25 +4,6 @@ import {computed, ref, useSlots, watch} from 'vue';
 import {router, Head, Link} from '@inertiajs/vue3';
 import ApplicationMark from '@/Components/ApplicationMark.vue';
 import Banner from '@/Components/Banner.vue';
-import Dropdown from '@/Components/Dropdown.vue';
-import DropdownLink from '@/Components/DropdownLink.vue';
-import NavLinkAlt from '@/Components/NavLinkAlt.vue';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
-import DarkmodeToggle from "@/Components/DarkmodeToggle.vue";
-import FlyoutMenu from "@/Components/FlyoutMenu.vue";
-import SecondaryButton from "@/Components/SecondaryButton.vue";
-import {
-    Menu,
-    MenuButton,
-    MenuItem,
-    MenuItems,
-    Popover,
-    PopoverButton,
-    PopoverOverlay,
-    PopoverPanel,
-    TransitionChild,
-    TransitionRoot,
-} from '@headlessui/vue'
 
 const props = defineProps({
     title: String,

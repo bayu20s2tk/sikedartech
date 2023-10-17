@@ -16,6 +16,8 @@ import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "../../Components/PrimaryButton.vue";
 import CommentSection from "./Partials/CommentSection.vue";
 import Heading from "../../Components/Heading.vue";
+import BlankLayout from "../../Layouts/BlankLayout.vue";
+import CourseLayout from "../../Layouts/CourseLayout.vue";
 
 const props = defineProps({
     course: Object,
@@ -90,9 +92,9 @@ function formattedDate(value) {
 
 <template>
 
-    <LandingLayout :title="props.course.name">
+    <CourseLayout :title="props.course.name">
 
-        <div class="relative pb-10 pt-32">
+        <div class="relative">
             <div class="lg:mx-auto lg:max-w-7xl lg:px-8 lg:items-start">
                 <div class="px-4 sm:px-6 lg:px-0">
                     <Heading >
@@ -284,6 +286,6 @@ function formattedDate(value) {
         </div>
 
 
-    </LandingLayout>
+    </CourseLayout>
 
 </template>

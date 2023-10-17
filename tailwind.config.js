@@ -39,7 +39,8 @@ module.exports = {
             backgroundImage: {
                 'glass': "url('/img/glass.png')",
                 'camp': "url('/img/camp.jpg')",
-                'minion': "url('/img/minion.jpg')"
+                'minion': "url('/img/minion.jpg')",
+                'auth': "url('/img/auth.png')",
             },
         },
         nightwind: {

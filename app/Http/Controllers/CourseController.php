@@ -22,18 +22,26 @@ class CourseController extends Controller
      */
     public function index()
     {
-//        if (auth()->user()->role_id == User::ADMIN){
-//            $course = Course::latest()->get();
-//        } elseif (auth()->user()->role_id == User::MENTOR){
-//            $course = Course::where('user_id', auth()->user()->id)->get();
-//        }
+//        $course = match (auth()->user()->role_id) {
+//            User::ADMIN => Course::latest()->get(),
+//            User::MENTOR => Course::where('user_id', auth()->user()->id)->get(),
+//            User::USER => Course::subscribedBy(auth()->user())->get(),
+//            default => dd('error'),
+//        };
 
-        $course = match (auth()->user()->role_id) {
-            User::ADMIN => Course::latest()->get(),
-            User::MENTOR => Course::where('user_id', auth()->user()->id)->get(),
-            User::USER => Course::subscribedBy(auth()->user())->get(),
-            default => dd('error'),
-        };
+        switch(auth()->user()->role_id) {
+            case(User::ADMIN):
+                $course = Course::latest()->get();
+                break;
+            case(User::MENTOR):
+                $course = Course::where('user_id', auth()->user()->id)->get();
+                break;
+            case(User::USER):
+                $course = Course::subscribedBy(auth()->user())->get();
+                break;
+            default:
+                dd('error');
+        }
 
         return Inertia::render('Course/Index', [
 //            'course' => Course::latest()->paginate(20),

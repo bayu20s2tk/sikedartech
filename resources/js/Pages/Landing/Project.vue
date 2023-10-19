@@ -1,12 +1,17 @@
 <script setup>
-import {Link, router} from "@inertiajs/vue3";
+import {Link, router, useForm} from "@inertiajs/vue3";
+import {onMounted, ref} from "vue";
 import moment from "moment";
 import LandingLayout from "@/Layouts/LandingLayout.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
-import SecondaryButton from "../../Components/SecondaryButton.vue";
-import Heading from "../../Components/Heading.vue";
-import {onMounted, ref} from "vue";
-import CommentSection from "../Course/Partials/CommentSection.vue";
+import SecondaryButton from "@/Components/SecondaryButton.vue";
+import Heading from "@/Components/Heading.vue";
+import Badge from "@/Components/Badge.vue";
+import InputLabel from "@/Components/InputLabel.vue";
+import DialogModal from "@/Components/DialogModal.vue";
+import InputError from "@/Components/InputError.vue";
+import TextInput from "@/Components/TextInput.vue";
+import TextAreaInput from "@/Components/TextAreaInput.vue";
 
 const props = defineProps({
     project: undefined,
@@ -27,12 +32,41 @@ function formattedDate(value) {
 const projectTab = ref(0)
 const tab = ref(1)
 
-const metrics = [
-    { id: 1, stat: '8K+', emphasis: 'Companies', rest: 'use laoreet amet lacus nibh integer quis.' },
-    { id: 2, stat: '25K+', emphasis: 'Countries around the globe', rest: 'lacus nibh integer quis.' },
-    { id: 3, stat: '98%', emphasis: 'Customer satisfaction', rest: 'laoreet amet lacus nibh integer quis.' },
-    { id: 4, stat: '12M+', emphasis: 'Issues resolved', rest: 'lacus nibh integer quis.' },
-]
+const form = useForm({
+    project_id: null,
+    desc: null,
+    price: null
+});
+
+const storeInformation = () => {
+    console.log(form.desc)
+    form.project_id = showForm
+
+    form.post(route('projectBid.store', props.project), {
+        errorBag: 'storeInformation',
+        preserveScroll: true,
+        onSuccess: () => {
+            closeModal()
+            console.log('2')
+        },
+        onError: () => {
+            console.log('3')
+        },
+        onFinish: () => {
+            // form.reset()
+            console.log('5')
+            router.reload({only: ['project']})
+        }
+    });
+
+    // router.reload({only: ['project']})
+};
+
+const showForm = ref(null);
+const closeModal = () => {
+    showForm.value = null;
+    form.reset();
+};
 
 </script>
 
@@ -54,41 +88,97 @@ const metrics = [
 
                 <div class="relative mx-auto grid lg:grid-cols-6 gap-10 px-4 sm:px-6 lg:px-0">
                     <!-- Content area -->
-                    <div class="lg:col-span-2">
-                        <div class="mt-3 text-gray-500 space-y-6">
-                            <div class="bg-white bg-opacity-50 border border-gray-300 rounded-3xl shadow-lg">
-                                <div class="px-3 py-5 grid gap-3 ">
-                                    <h3 class="font-semibold text-gray-900 ml-2">
-                                        {{ props.project?.length ?? '0' }} Proyek
-                                    </h3>
+                    <div class="lg:col-span-2 ">
+                        <div class="mt-3 bg-white bg-opacity-50 border border-gray-300 rounded-3xl shadow-lg">
+                            <div class="px-3 py-5 grid gap-3 ">
+                                <h3 class="font-semibold text-gray-900 ml-2">
+                                    {{ props.project?.length ?? '0' }} Proyek
+                                </h3>
 
-                                    <template v-for="(list, listIdx) in props.project" :key="list.id">
-                                        <button @click="projectTab=listIdx">
-                                            <div
-                                                class="rounded-3xl py-3 px-5 text-left"
-                                                :class="projectTab==listIdx ? 'bg-gray-900 text-white' : 'bg-gray-200 text-gray-900' "
-                                            >
+                                <template v-for="(list, listIdx) in props.project" :key="list.id">
+                                    <button @click="projectTab=listIdx">
+                                        <div
+                                            class="rounded-3xl py-3 px-5 text-left "
+                                            :class="projectTab==listIdx ? 'bg-gray-900 text-white' : 'bg-gray-200 text-gray-900' "
+                                        >
 <!--                                                <i class="fa-solid fa-play mr-1"/>-->
-                                                {{ list.name }}
-                                            </div>
-                                        </button>
-                                    </template>
+                                            {{ list.name }}
+                                        </div>
+                                    </button>
+                                </template>
 
-                                </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="lg:col-span-4 py-3">
                         <template v-for="(item, itemIdx) in props.project">
-                            <template v-if="projectTab==itemIdx" class="">
-                                <h3 class="text-gray-900 font-semibold text-2xl" v-html="item.name" />
+                            <div v-if="projectTab==itemIdx" class="">
+                                <Badge :name="item.status" :class="item.color" />
+                                <h3 class="mt-1 text-gray-900 font-semibold text-2xl" v-html="item.name" />
                                 <p class="mt-1 mb-5 text-primary-500 font-semibold">
                                     <i class="fa-regular mr-1" :class="item.category.icon"/>
                                     {{ item.category.name }}
                                 </p>
 
                                 <p class="prose prose-sm lg:prose-lg xl:prose-2xl" v-html="item.desc" />
+
+                                <div class="mt-10 py-10 px-10 bg-gray-200 bg-opacity-50 rounded-3xl border border-gray-300">
+                                    <div class="grid grid-cols-1 gap-y-12 gap-x-6 sm:grid-cols-2">
+                                        <p>
+                                            <span class="block text-xl font-bold text-gray-900">Rp {{ formatPrice(item.budget_from) }}</span>
+                                            <span class="mt-1 block text-sm text-gray-600">
+                                              <span class="font-medium text-gray-900">Published Budget</span> alalla
+                                            </span>
+                                        </p>
+
+                                        <p>
+                                            <span class="block text-xl font-bold text-gray-900">{{ formattedDate(item.created_at) }}</span>
+                                            <span class="mt-1 block text-sm text-gray-600">
+                                              <span class="font-medium text-gray-900">Published Date</span> alalla
+                                            </span>
+                                        </p>
+
+                                        <p>
+                                            <span class="block text-xl font-bold text-gray-900">{{ item.status }}</span>
+                                            <span class="mt-1 block text-sm text-gray-600">
+                                              <span class="font-medium text-gray-900">Project Status</span> alalla
+                                            </span>
+                                        </p>
+
+                                        <p>
+                                            <span class="block text-xl font-bold text-gray-900">{{ item.bid.length }}</span>
+                                            <span class="mt-1 block text-sm text-gray-600">
+                                              <span class="font-medium text-gray-900">Bid Count</span> alalla
+                                            </span>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="mt-10 grid gap-10">
+                                    <div class="">
+                                        <PrimaryButton @click="showForm=item.id" v-if="item.status_id==1">
+                                            <i class="fa-duotone fa-paper-plane mr-2" />
+                                            Place new bid
+                                        </PrimaryButton>
+                                    </div>
+
+                                    <div class="space-y-8 sm:space-y-12">
+                                        <ul role="list" class="mx-auto gap-x-4 gap-y-4 flex">
+                                            <li v-for="bid in item.bid" :key="bid.id">
+                                                <div class="space-y-4">
+                                                    <img class="mx-auto h-10 w-10 rounded-full lg:h-16 lg:w-16" :src="bid.user.profile_photo_url" alt="" />
+                                                    <div class="space-y-2">
+                                                        <div class="text-center text-xs font-medium lg:text-sm">
+                                                            <h3>{{ bid.user.name }}</h3>
+<!--                                                            <p class="text-primary-600">{{ bid.user.email }}</p>-->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
 
                                 <div class="mt-10 pt-10 border-t border-gray-300 flex justify-between items-start gap-10">
                                     <div class="flex items-center flex-none">
@@ -107,19 +197,8 @@ const metrics = [
                                         </div>
                                     </div>
 
-<!--                                    <div class="">-->
-<!--                                        <div class="grid grid-cols-1 gap-y-12 gap-x-6 sm:grid-cols-2">-->
-<!--                                            <p v-for="item in metrics" :key="item.id">-->
-<!--                                                <span class="block text-2xl font-bold text-gray-900">{{ item.stat }}</span>-->
-<!--                                                <span class="mt-1 block text-base text-gray-600">-->
-<!--                                                  <span class="font-medium text-gray-900">{{ item.emphasis }}</span> {{ item.rest }}-->
-<!--                                                </span>-->
-<!--                                            </p>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-
                                 </div>
-                            </template>
+                            </div>
                         </template>
                     </div>
 
@@ -127,6 +206,57 @@ const metrics = [
 
             </div>
         </div>
+
+        <DialogModal :show="showForm!=null" @close="closeModal">
+            <template #title>
+                Lorem ipsum dolor sit amet
+            </template>
+
+            <template #content>
+                <div class="grid grid-cols-6 justify-between gap-5">
+                    <div class="col-span-6 sm:col-span-6">
+                        <InputLabel for="desc" value="Deskripsi"/>
+                        <TextAreaInput
+                            id="desc"
+                            v-model="form.desc"
+                            class="mt-1 block w-full"
+                            rows="4"
+                            required
+                        />
+                        <InputError :message="form.errors.desc" class="mt-2"/>
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3">
+                        <InputLabel for="price" value="Harga" />
+                        <div class="flex">
+                            <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">
+                                Rp
+                            </span>
+                            <TextInput
+                                id="price"
+                                v-model="form.price"
+                                type="number"
+                                class="mt-1 block w-full rounded-l-none"
+                                required
+                            />
+                        </div>
+                        <InputError :message="form.errors.price" class="mt-2" />
+                    </div>
+                </div>
+
+            </template>
+
+            <template #footer>
+                <PrimaryButton
+                    class="ml-3"
+                    :class="{ 'opacity-25': form.processing }"
+                    :disabled="form.processing"
+                    @click="storeInformation"
+                >
+                    Simpan
+                </PrimaryButton>
+            </template>
+        </DialogModal>
 
     </LandingLayout>
 

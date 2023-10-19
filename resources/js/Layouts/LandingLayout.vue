@@ -74,7 +74,7 @@ onMounted(() => {
     <Banner/>
 
     <div class="min-h-screen bg-gray-100 bg-glass bg-fixed">
-      <nav class="px-3 mb-3 pt-3 w-full z-50 fixed top-0">
+      <nav class="px-3 mb-3 pt-3 w-full z-50 sticky top-0">
         <!-- Primary Navigation Menu -->
         <div class="px-3 max-w-screen-xl mx-auto" ref="headRef">
           <div class="flex justify-between h-16">

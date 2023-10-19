@@ -59,10 +59,10 @@ class BlogController extends Controller
     public function show(Blog $blog)
     {
 //        dd(auth()->user()->attachVoteStatus($blog->comment));
-        return Inertia::render('Blog/Show', [
-            'blog' => $blog,
-            'comment' => auth()->user()->attachVoteStatus($blog->comment)
-        ]);
+//        return Inertia::render('Blog/Show', [
+//            'blog' => $blog,
+//            'comment' => auth()->user()->attachVoteStatus($blog->comment)
+//        ]);
     }
 
     /**

@@ -14,7 +14,7 @@ import InputError from "@/Components/InputError.vue";
 import TextAreaInput from "@/Components/TextAreaInput.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "../../Components/PrimaryButton.vue";
-import CommentSection from "./Partials/CommentSection.vue";
+import CommentSection from "@/Components/CommentSection.vue";
 import Heading from "../../Components/Heading.vue";
 import BlankLayout from "../../Layouts/BlankLayout.vue";
 import CourseLayout from "../../Layouts/CourseLayout.vue";

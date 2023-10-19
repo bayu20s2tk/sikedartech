@@ -217,16 +217,24 @@ const logout = () => {
 
                                         <NavLinkAlt
                                             :href="route('course.index')"
-                                            :active="$page.component.startsWith('Course')"
+                                            :active="$page.component.startsWith('Course/')"
                                             icon="fa-book"
-                                            v-if="$page.props.user.role_id==1"
                                         >
                                             Kelas
                                         </NavLinkAlt>
 
                                         <NavLinkAlt
+                                            :href="route('courseSubscribe.index')"
+                                            :active="$page.component.startsWith('CourseSubscribe')"
+                                            icon="fa-book"
+                                            v-if="$page.props.user.role_id==1"
+                                        >
+                                            Subscribe
+                                        </NavLinkAlt>
+
+                                        <NavLinkAlt
                                             :href="route('project.index')"
-                                            :active="$page.component.startsWith('Project')"
+                                            :active="$page.component.startsWith('Project/')"
                                             icon="fa-umbrella-beach"
                                             v-if="$page.props.user.role_id==1"
                                         >
@@ -235,7 +243,7 @@ const logout = () => {
 
                                         <NavLinkAlt
                                             :href="route('blog.index')"
-                                            :active="$page.component.startsWith('Blog')"
+                                            :active="$page.component.startsWith('Blog/')"
                                             icon="fa-blog"
                                             v-if="$page.props.user.role_id==1"
                                         >

@@ -13,8 +13,8 @@ import moment from "moment";
 import InputError from "@/Components/InputError.vue";
 import TextAreaInput from "@/Components/TextAreaInput.vue";
 import InputLabel from "@/Components/InputLabel.vue";
-import PrimaryButton from "../../Components/PrimaryButton.vue";
-import CommentSection from "./Partials/CommentSection.vue";
+import PrimaryButton from "@/Components/PrimaryButton.vue";
+import CommentSection from "@/Components/CommentSection.vue";
 
 const props = defineProps({
     blog: Object,

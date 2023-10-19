@@ -41,14 +41,14 @@ function formattedDate(value) {
           <div class="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 xl:gap-x-8">
             <div v-for="blog in props.blog" :key="blog.name">
               <div>
-                <Link :href="route('blog.show', blog)" class="inline-block">
+                <Link :href="route('landing.blog.show', blog)" class="inline-block">
                 <span
                     :class="['bg-primary-300 text-primary-900', 'inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium']">
                   {{ blog.category.name }}
                 </span>
                 </Link>
               </div>
-              <Link :href="route('blog.show', blog)" class="mt-4 block">
+              <Link :href="route('landing.blog.show', blog)" class="mt-4 block">
                 <p class="text-xl font-semibold text-gray-900">{{ blog.name }}</p>
                 <p class="mt-3 text-base text-gray-500">{{ blog.desc }}</p>
               </Link>

@@ -8,11 +8,13 @@ use App\Http\Controllers\CourseCategoryController;
 use App\Http\Controllers\CourseCommentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\CourseItemController;
+use App\Http\Controllers\CourseSubscribeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\InformationController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectBidController;
 use App\Http\Controllers\ProjectCategoryController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
@@ -36,28 +38,31 @@ Route::get('/kelas', [LandingController::class, 'course'])->name('landing.course
 Route::get('/proyek', [LandingController::class, 'project'])->name('landing.project');
 
 Route::get('/artikel', [LandingController::class, 'blog'])->name('landing.blog');
-Route::get('/artikel/{blog}', [BlogController::class, 'show'])->name('blog.show');
 
 Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::resource('/course', CourseController::class)->names('course')->except('show');
+    Route::get('/kelas/{course}', [LandingController::class, 'courseShow'])->name('landing.course.show');
+    Route::get('/proyek/{project}', [LandingController::class, 'projectShow'])->name('landing.project.show');
+    Route::get('/artikel/{blog}', [LandingController::class, 'blogShow'])->name('landing.blog.show');
+
+    Route::resource('/course', CourseController::class)->names('course');
     Route::post('/course/subscribe/{course}', [CourseController::class, 'subscribe'])->name('course.subscribe');
     Route::post('/course/add-hero', [CourseController::class, 'addHero'])->name('course.addHero');
     Route::delete('/course/delete-hero/{id}', [CourseController::class, 'deleteHero'])->name('course.deleteHero');
-    Route::get('/kelas/{course}', [CourseController::class, 'show'])->name('course.show');
 
+    Route::resource('/course-subscribe', CourseSubscribeController::class)->names('courseSubscribe');
     Route::resource('/course-item', CourseItemController::class)->names('courseItem');
     Route::resource('/course-category', CourseCategoryController::class)->names('courseCategory');
     Route::resource('/course-comment', CourseCommentController::class)->names('courseComment');
     Route::post('/course-comment/like/{courseComment}', [CourseCommentController::class, 'like'])->name('courseComment.like');
     Route::post('/course-comment/dislike/{courseComment}', [CourseCommentController::class, 'dislike'])->name('courseComment.dislike');
 
-    Route::resource('/project', ProjectController::class)->names('project')->except('show');
+    Route::resource('/project', ProjectController::class)->names('project');
     Route::resource('/project-category', ProjectCategoryController::class)->names('projectCategory');
-    Route::get('/proyek/{project}', [ProjectController::class, 'show'])->name('project.show');
+    Route::resource('/project-bid', ProjectBidController::class)->names('projectBid');
 
-    Route::resource('/blog', BlogController::class)->names('blog')->except('show');
+    Route::resource('/blog', BlogController::class)->names('blog');
     Route::post('/blog-comment/like/{blogComment}', [BlogCommentController::class, 'like'])->name('blogComment.like');
     Route::post('/blog-comment/dislike/{blogComment}', [BlogCommentController::class, 'dislike'])->name('blogComment.dislike');
 

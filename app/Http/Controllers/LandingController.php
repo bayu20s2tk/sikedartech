@@ -59,14 +59,46 @@ class LandingController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     */
+    public function courseShow(Course $course)
+    {
+//        $comment = auth()->user()->attachLikeStatus($course->comment);
+        $comment = auth()->user()->attachVoteStatus($course->comment);
+//        $comment = $comment->toArray();
+//        dd($comment);
+        if (auth()->user()->hasSubscribed($course)) {
+            return Inertia::render('Landing/CourseShow', [
+                'course' => $course,
+                'comment' => $comment
+            ]);
+        } else {
+            return Inertia::render('Course/Join', [
+                'course' => $course
+            ]);
+        }
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return Response
      */
     public function project(): Response
     {
+//        dd(Project::latest()->get()->toArray());
         return Inertia::render('Landing/Project', [
-            'project' =>  Inertia::lazy(fn () => Project::latest()->get()),
+            'project' =>  Inertia::lazy(fn () => Project::where('status_id', Project::OPEN)->latest()->get()),
+        ]);
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function projectShow(Project $project)
+    {
+        return Inertia::render('Landing/ProjectShow', [
+            'project' => $project,
         ]);
     }
 
@@ -79,6 +111,18 @@ class LandingController extends Controller
     {
         return Inertia::render('Landing/Blog', [
             'blog' =>  Inertia::lazy(fn () => Blog::latest()->get()),
+        ]);
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function blogShow(Blog $blog)
+    {
+//        dd(auth()->user()->attachVoteStatus($blog->comment));
+        return Inertia::render('Landing/BlogShow', [
+            'blog' => $blog,
+            'comment' => auth()->user()->attachVoteStatus($blog->comment)
         ]);
     }
 }

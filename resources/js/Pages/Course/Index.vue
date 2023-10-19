@@ -55,14 +55,14 @@ const gridColumns = [
                 </form>
             </div>
 
-            <div class="">
+            <div class="" v-if="$page.props.user.role_id !== 3">
                 <PrimaryButton as="a" :href="route('course.create')" >Tambah</PrimaryButton>
             </div>
         </div>
 
         <div class="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
             <div v-for="item in props.course" :key="item.id">
-                <Link :href="route('course.edit', item)">
+                <Link :href="$page.props.user.role_id !== 3 ? route('course.edit', item) : route('landing.course.show', item)">
                     <div class="bg-white bg-opacity-50 h-full border border-gray-300 rounded-3xl shadow-lg">
                         <div class="h-52 w-full overflow-hidden rounded-t-3xl">
                             <img :src="item.media[0]?.original_url" :alt="item.name"
@@ -71,7 +71,14 @@ const gridColumns = [
                         <div class="py-3 px-5 items-end">
                             <h3 class="text-lg font-semibold text-gray-900">{{ item.name }}</h3>
                             <p class="mt-1 text-sm text-gray-500">{{ item.desc }}</p>
-                            <p class="mt-1 text-sm font-semibold text-gray-700">Rp {{ formatPrice(item.price) }}</p>
+<!--                            <p class="mt-1 text-sm font-semibold text-gray-700">-->
+<!--                                <template v-if="item.has_subscribed">-->
+<!--                                    <i class="fa-duotone fa-circle-check text-green-600 mr-1" /> Akses selamanya-->
+<!--                                </template>-->
+<!--                                <template v-else>-->
+<!--                                    Rp {{ formatPrice(item.price) }}-->
+<!--                                </template>-->
+<!--                            </p>-->
                         </div>
                     </div>
                 </Link>

@@ -7,6 +7,7 @@ use App\Models\BlogCategory;
 use App\Models\Course;
 use App\Models\CourseCategory;
 use App\Models\Gallery;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -21,9 +22,22 @@ class CourseController extends Controller
      */
     public function index()
     {
+//        if (auth()->user()->role_id == User::ADMIN){
+//            $course = Course::latest()->get();
+//        } elseif (auth()->user()->role_id == User::MENTOR){
+//            $course = Course::where('user_id', auth()->user()->id)->get();
+//        }
+
+        $course = match (auth()->user()->role_id) {
+            User::ADMIN => Course::latest()->get(),
+            User::MENTOR => Course::where('user_id', auth()->user()->id)->get(),
+            User::USER => Course::subscribedBy(auth()->user())->get(),
+            default => dd('error'),
+        };
+
         return Inertia::render('Course/Index', [
 //            'course' => Course::latest()->paginate(20),
-            'course' =>  Inertia::lazy(fn () => Course::latest()->get()),
+            'course' =>  Inertia::lazy(fn () => $course),
         ]);
     }
 
@@ -60,20 +74,20 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-//        $comment = auth()->user()->attachLikeStatus($course->comment);
-        $comment = auth()->user()->attachVoteStatus($course->comment);
-//        $comment = $comment->toArray();
-//        dd($comment);
-        if (auth()->user()->hasSubscribed($course)) {
-            return Inertia::render('Course/Show', [
-                'course' => $course,
-                'comment' => $comment
-            ]);
-        } else {
-            return Inertia::render('Course/Join', [
-                'course' => $course
-            ]);
-        }
+////        $comment = auth()->user()->attachLikeStatus($course->comment);
+//        $comment = auth()->user()->attachVoteStatus($course->comment);
+////        $comment = $comment->toArray();
+////        dd($comment);
+//        if (auth()->user()->hasSubscribed($course)) {
+//            return Inertia::render('Course/Show', [
+//                'course' => $course,
+//                'comment' => $comment
+//            ]);
+//        } else {
+//            return Inertia::render('Course/Join', [
+//                'course' => $course
+//            ]);
+//        }
     }
 
     /**
@@ -143,10 +157,11 @@ class CourseController extends Controller
      */
     public function subscribe(Request $request, Course $course)
     {
+        Validator::make($request->toArray(), [
+            'photo' => ['required'],
+        ])->validateWithBag('storeInformation');
+
         dd($request->all(), $course);
-//        Validator::make($request->toArray(), [
-//            'photo' => ['required'],
-//        ])->validateWithBag('storeInformation');
 //        auth()->user()->follow($course);
         auth()->user()->subscribe($course);
     }

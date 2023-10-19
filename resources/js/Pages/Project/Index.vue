@@ -63,31 +63,39 @@ const gridColumns = [
         <div class="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
             <div v-for="item in props.project" :key="item.name">
                 <div>
-                    <Link :href="route('project.edit', item)" class="inline-block">
-                        <span :class="['bg-primary-300 text-primary-900', 'inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium']">
-                          {{ item.category.name }}
+                    <Link :href="route('project.show', item)" class="inline-block">
+                        <span
+                            class="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium"
+                            :class="item.color"
+                        >
+                          {{ item.status }}
                         </span>
                     </Link>
                 </div>
-                <Link :href="route('project.edit', item)" class="mt-4 block">
+                <Link :href="route('project.show', item)" class="mt-4 block">
                     <p class="text-xl font-semibold text-gray-900">{{ item.name }}</p>
 <!--                    <p class="mt-3 text-base text-gray-500">{{ blog.desc }}</p>-->
                 </Link>
-                <div class="mt-6 flex items-center">
-                    <div class="flex-shrink-0">
-                        <Link :href="route('user.show', item.user)">
-                            <img class="h-10 w-10 rounded-full" :src="item.user.profile_photo_url" alt=""/>
-                        </Link>
-                    </div>
-                    <div class="ml-3">
-                        <p class="text-sm font-medium text-gray-900">
-                            <Link :href="route('user.show', item.user)">{{ item.user.name }}</Link>
-                        </p>
-                        <div class="flex space-x-1 text-sm text-gray-500">
-                            <time :datetime="formattedDate(item.created_at)">{{ formattedDate(item.created_at) }}</time>
-                        </div>
-                    </div>
-                </div>
+
+                <p class="mt-2 text-sm font-medium text-gray-500">
+                    {{ item.bid.length }} Bid
+                </p>
+
+<!--                <div class="mt-6 flex items-center">-->
+<!--                    <div class="flex-shrink-0">-->
+<!--                        <Link :href="route('user.show', item.user)">-->
+<!--                            <img class="h-10 w-10 rounded-full" :src="item.user.profile_photo_url" alt=""/>-->
+<!--                        </Link>-->
+<!--                    </div>-->
+<!--                    <div class="ml-3">-->
+<!--                        <p class="text-sm font-medium text-gray-900">-->
+<!--                            <Link :href="route('user.show', item.user)">{{ item.user.name }}</Link>-->
+<!--                        </p>-->
+<!--                        <div class="flex space-x-1 text-sm text-gray-500">-->
+<!--                            <time :datetime="formattedDate(item.created_at)">{{ formattedDate(item.created_at) }}</time>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
         </div>
 

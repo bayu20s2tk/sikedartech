@@ -30,15 +30,22 @@ class Project extends Model implements HasMedia
         'user_id',
     ];
 
-    const ACTIVE = 1;
+    const OPEN = 1;
     const NONACTIVE = 2;
     const ONGOING = 3;
     const FINISH = 4;
     const STATUS = [
-        self::ACTIVE => 'Terbuka',
+        self::OPEN => 'Terbuka',
         self::NONACTIVE => 'Nonaktif',
         self::ONGOING => 'Sedang Berlangsung',
         self::FINISH => 'Selesai'
+    ];
+
+    const COLOR = [
+        self::OPEN => 'bg-primary-100 text-primary-800',
+        self::NONACTIVE => 'bg-red-100 text-red-800',
+        self::ONGOING => 'bg-amber-100 text-amber-800',
+        self::FINISH => 'bg-green-100 text-green-800'
     ];
 
     /**
@@ -47,13 +54,15 @@ class Project extends Model implements HasMedia
      * @var array
      */
     protected $appends = [
-        'status'
+        'status',
+        'color'
     ];
 
     protected $with = [
         'media',
         'user',
         'category',
+        'bid'
     ];
 
     public function getRouteKeyName(): string
@@ -64,6 +73,10 @@ class Project extends Model implements HasMedia
     {
         return self::STATUS[$this->status_id];
     }
+    public function getColorAttribute(): string
+    {
+        return self::COLOR[$this->status_id];
+    }
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
@@ -71,5 +84,9 @@ class Project extends Model implements HasMedia
     public function category(): BelongsTo
     {
         return $this->belongsTo(ProjectCategory::class, 'category_id', 'id');
+    }
+    public function bid(): hasMany
+    {
+        return $this->hasMany(ProjectBid::class, 'project_id', 'id');
     }
 }

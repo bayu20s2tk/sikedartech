@@ -21,7 +21,6 @@ const props = defineProps({
 
 const form = useForm({
     course_id: props.course.id,
-    desc: null,
     photo: null,
 });
 
@@ -29,7 +28,7 @@ const storeInformation = () => {
     if (photoInput.value) {
         form.photo = photoInput.value.files[0];
     }
-    form.post(route('course.subscribe', props.course), {
+    form.post(route('courseSubscribe.store', props.course), {
         errorBag: 'storeInformation',
         preserveScroll: true,
         onSuccess: () => {
@@ -37,7 +36,10 @@ const storeInformation = () => {
             clearPhotoFileInput()
         },
         // onError: () => passwordInput.value.focus(),
-        onFinish: () => form.reset(),
+        onFinish: () => {
+            form.reset()
+            photoPreview.value=null
+        }
     });
 };
 
@@ -58,7 +60,7 @@ const confirmForm = () => {
 const closeModal = () => {
     showBill.value = false;
     showForm.value = false;
-
+    photoPreview.value = null;
     form.reset();
 };
 const selectNewPhoto = () => {
@@ -282,18 +284,18 @@ function formatPrice(value) {
                         <InputError :message="form.errors.photo" class="mt-2" />
                     </div>
 
-                    <div class="col-span-6 sm:col-span-6">
-                        <InputLabel for="name" value="Keterangan"/>
-                        <TextInput
-                            id="name"
-                            v-model="form.desc"
-                            type="text"
-                            class="mt-1 block w-full"
-                            autocomplete="name"
-                            required
-                        />
-                        <InputError :message="form.errors.desc" class="mt-2"/>
-                    </div>
+<!--                    <div class="col-span-6 sm:col-span-6">-->
+<!--                        <InputLabel for="name" value="Keterangan"/>-->
+<!--                        <TextInput-->
+<!--                            id="desc"-->
+<!--                            v-model="form.desc"-->
+<!--                            type="text"-->
+<!--                            class="mt-1 block w-full"-->
+<!--                            autocomplete="desc"-->
+<!--                            required-->
+<!--                        />-->
+<!--                        <InputError :message="form.errors.desc" class="mt-2"/>-->
+<!--                    </div>-->
                 </div>
 
             </template>

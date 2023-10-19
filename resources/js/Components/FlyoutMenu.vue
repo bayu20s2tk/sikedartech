@@ -29,7 +29,7 @@ const props = defineProps({
             leave-to-class="translate-y-1 opacity-0"
         >
             <PopoverPanel
-                class="absolute left-52 z-10 mt-5 w-screen max-w-sm -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl"
+                class="absolute left-0 z-10 mt-5 w-screen max-w-sm -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl"
             >
                 <div
                     class="overflow-hidden rounded-3xl shadow-lg border border-gray-300"

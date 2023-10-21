@@ -62,7 +62,7 @@ const gridColumns = [
 
         <div class="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
             <div v-for="item in props.course" :key="item.id">
-                <Link :href="$page.props.user.role_id !== 3 ? route('course.edit', item) : route('landing.course.show', item)">
+                <Link :href="$page.props.user.role_id !== 3 ? route('course.show', item) : route('landing.course.show', item)">
                     <div class="bg-white bg-opacity-50 h-full border border-gray-300 rounded-3xl shadow-lg">
                         <div class="h-52 w-full overflow-hidden rounded-t-3xl">
                             <img :src="item.media[0]?.original_url" :alt="item.name"

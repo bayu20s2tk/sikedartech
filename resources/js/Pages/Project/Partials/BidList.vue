@@ -43,9 +43,13 @@ function formattedDate(value) {
     <li>
         <button @click="show=!show" class="flex w-full justify-between px-6 py-4">
             <div class="">
-                <p class="font-medium text-gray-900"># {{ props.bid.user.name }}</p>
+                <p class="font-medium text-gray-900 flex items-center">
+                    <img :src="props.bid.user.profile_photo_url"
+                         class="h-10 w-10 rounded-full object-cover mr-2">
+                    {{ props.bid.user.name }}
+                </p>
             </div>
-            <div class="">
+            <div class="flex items-center">
                 <Badge :name="props.bid.status" class="mr-5" :class="props.bid.color" />
                 <i class="fa-regular text-gray-900 w-5" :class="show ? 'fa-angle-down' : 'fa-angle-right' " />
             </div>

@@ -52,22 +52,22 @@ function formattedDate(value) {
             </div>
         </main>
 
-        <div class="">
-            <div class="max-w-7xl mx-auto px-4">
-                <div class="flex flex-wrap space-x-10">
-                    <div class="mt-4 ml-8 flex flex-grow flex-shrink-0 justify-center lg:flex-grow-0 lg:ml-4">
-                        <img class="h-12" src="https://tailwindui.com/img/logos/workcation-logo-indigo-900.svg"
-                             alt="Workcation"/>
-                    </div>
-                    <div class="mt-4 ml-8 flex flex-grow flex-shrink-0 justify-center lg:flex-grow-0 lg:ml-4">
-                        <img class="h-12" src="https://tailwindui.com/img/logos/tuple-logo-indigo-900.svg" alt="Tuple"/>
-                    </div>
-                    <div class="mt-4 ml-8 flex flex-grow flex-shrink-0 justify-center lg:flex-grow-0 lg:ml-4">
-                        <img class="h-12" src="https://tailwindui.com/img/logos/level-logo-indigo-900.svg" alt="Level"/>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!--        <div class="">-->
+<!--            <div class="max-w-7xl mx-auto px-4">-->
+<!--                <div class="flex flex-wrap space-x-10">-->
+<!--                    <div class="mt-4 ml-8 flex flex-grow flex-shrink-0 justify-center lg:flex-grow-0 lg:ml-4">-->
+<!--                        <img class="h-12" src="https://tailwindui.com/img/logos/workcation-logo-indigo-900.svg"-->
+<!--                             alt="Workcation"/>-->
+<!--                    </div>-->
+<!--                    <div class="mt-4 ml-8 flex flex-grow flex-shrink-0 justify-center lg:flex-grow-0 lg:ml-4">-->
+<!--                        <img class="h-12" src="https://tailwindui.com/img/logos/tuple-logo-indigo-900.svg" alt="Tuple"/>-->
+<!--                    </div>-->
+<!--                    <div class="mt-4 ml-8 flex flex-grow flex-shrink-0 justify-center lg:flex-grow-0 lg:ml-4">-->
+<!--                        <img class="h-12" src="https://tailwindui.com/img/logos/level-logo-indigo-900.svg" alt="Level"/>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 
     </LandingLayout>
 

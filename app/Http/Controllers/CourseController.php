@@ -82,20 +82,9 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-////        $comment = auth()->user()->attachLikeStatus($course->comment);
-//        $comment = auth()->user()->attachVoteStatus($course->comment);
-////        $comment = $comment->toArray();
-////        dd($comment);
-//        if (auth()->user()->hasSubscribed($course)) {
-//            return Inertia::render('Course/Show', [
-//                'course' => $course,
-//                'comment' => $comment
-//            ]);
-//        } else {
-//            return Inertia::render('Course/Join', [
-//                'course' => $course
-//            ]);
-//        }
+        return Inertia::render('Course/Show', [
+            'course' => $course,
+        ]);
     }
 
     /**

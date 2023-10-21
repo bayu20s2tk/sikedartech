@@ -42,7 +42,10 @@ function formattedDate(value) {
     <li>
         <button @click="show=!show" class="flex w-full justify-between px-6 py-4">
             <div class="">
-                <p class="font-medium text-primary-600">#{{ props.item.id }}</p>
+                <p class="font-medium text-gray-900">
+                    <i class="fa-regular fa-book mr-2" />
+                    {{ props.item.course.name }}
+                </p>
             </div>
             <div class="">
                 <Badge :name="props.item.status" class="mr-5" :class="props.item.color" />

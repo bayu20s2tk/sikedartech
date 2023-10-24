@@ -7,6 +7,7 @@ use App\Models\CourseCategory;
 use App\Models\Gallery;
 use App\Models\Project;
 use App\Models\ProjectCategory;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -20,8 +21,26 @@ class ProjectController extends Controller
      */
     public function index()
     {
+        switch(auth()->user()->role_id) {
+            case(User::ADMIN):
+                $project = Project::latest()->get();
+                $projectMe = Project::where('user_id', auth()->user()->id)->get();
+                break;
+            case(User::MENTOR):
+                $project = Project::where('worker_id', auth()->user()->id)->get();
+                $projectMe = Project::where('user_id', auth()->user()->id)->get();
+                break;
+            case(User::USER):
+                $project = Project::where('worker_id', auth()->user()->id)->get();
+                $projectMe = Project::where('user_id', auth()->user()->id)->get();
+                break;
+            default:
+                dd('error');
+        }
+
         return Inertia::render('Project/Index', [
-            'project' =>  Inertia::lazy(fn () => Project::latest()->get()),
+            'project' =>  Inertia::lazy(fn () => $project),
+            'projectMe' => Inertia::lazy(fn () => $projectMe),
         ]);
     }
 
@@ -32,6 +51,7 @@ class ProjectController extends Controller
     {
         return Inertia::render('Project/CreateEdit', [
             'gallery' => Gallery::all(),
+            'selectDay' => Project::DAY,
             'selectCategory' => ProjectCategory::all()->pluck('name', 'id'),
         ]);
     }
@@ -49,9 +69,8 @@ class ProjectController extends Controller
         $request['status'] = true;
         $request['slug'] = Str::slug($request['name'], '-');
 
-        return Redirect::route('project.edit', [
-            'project' => Project::create($request->all())
-        ]);
+        Project::create($request->all());
+        return Redirect::route('project.index');
     }
 
     /**
@@ -72,6 +91,7 @@ class ProjectController extends Controller
         return Inertia::render('Project/CreateEdit', [
             'project' => $project,
             'gallery' => Gallery::all(),
+            'selectDay' => Project::DAY,
             'selectCategory' => ProjectCategory::all()->pluck('name', 'id')
         ]);
     }
@@ -81,6 +101,7 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
+//        dd($request->all(), $project);
         $project->update($request->all());
     }
 

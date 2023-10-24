@@ -9,13 +9,11 @@ const props = defineProps({
 })
 
 const form = useForm({
-    project_id: null,
-    user_id: null,
-    status_id: null
+    worker_id: props.bid.user.id,
+    status_id: 2
 });
 
-const storeInformation = (status) => {
-    form.status_id = status == true;
+const storeInformation = () => {
 
     form.patch(route('projectBid.update', props.bid), {
         errorBag: 'storeInformation',
@@ -83,7 +81,7 @@ function formattedDate(value) {
                                         <span class="ml-2 w-0 flex-1 truncate">Lorem ipsum</span>
                                     </div>
                                     <div class="ml-4 flex-shrink-0">
-                                        <button class="font-medium text-primary-600">Pilih</button>
+                                        <button @click="storeInformation" class="font-medium text-green-600">Pilih Worker</button>
                                     </div>
                                 </li>
 <!--                                <li class="flex items-center justify-between py-3 pl-3 pr-4 text-sm">-->

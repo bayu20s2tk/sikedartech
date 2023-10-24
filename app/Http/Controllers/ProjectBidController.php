@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use App\Models\ProjectBid;
 use App\Models\ProjectCategory;
 use Illuminate\Http\Request;
@@ -69,7 +70,15 @@ class ProjectBidController extends Controller
      */
     public function update(Request $request, ProjectBid $projectBid)
     {
-        dd($request->all(), $projectBid->toArray());
+//        dd($request->all(), $projectBid->toArray());
+        ProjectBid::where('project_id', $projectBid->project_id)
+            ->update(['status_id' => ProjectBid::NOTSELECTED]);
+
+        $projectBid->update(['status_id' => ProjectBid::SELECTED]);
+//        dd($projectBid);
+
+        $project = Project::find($projectBid->project_id);
+        $project->update($request->all());
     }
 
     /**

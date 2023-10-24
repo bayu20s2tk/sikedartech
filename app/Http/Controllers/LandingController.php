@@ -86,9 +86,9 @@ class LandingController extends Controller
      */
     public function project(): Response
     {
-//        dd(Project::latest()->get()->toArray());
+//        dd(Project::latest()->paginate(10)->toArray());
         return Inertia::render('Landing/Project', [
-            'project' =>  Inertia::lazy(fn () => Project::where('status_id', Project::OPEN)->latest()->get()),
+            'project' =>  Inertia::lazy(fn () => Project::where('status_id', Project::OPEN)->latest()->paginate(10)),
         ]);
     }
 

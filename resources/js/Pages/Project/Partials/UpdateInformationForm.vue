@@ -23,6 +23,7 @@ const form = useForm({
     budget_from: props.project.budget_from ?? null,
     budget_to: props.project.budget_to ?? null,
     category_id: props.project.category_id ?? null,
+    finish_day: props.project.finish_day ?? null
 });
 
 const storeInformation = () => {
@@ -113,6 +114,18 @@ const showPage = () => {
                     required
                 />
                 <InputError :message="form.errors.category_id" class="mt-2"/>
+            </div>
+
+            <div class="col-span-6 sm:col-span-2">
+                <InputLabel for="deadline" value="Deadline"/>
+                <SelectInput
+                    id="deadline"
+                    v-model:model-value.number="form.finish_day"
+                    :option="$page.props.selectDay"
+                    class="mt-1 block w-full"
+                    required
+                />
+                <InputError :message="form.errors.finish_day" class="mt-2"/>
             </div>
         </template>
 

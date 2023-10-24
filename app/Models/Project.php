@@ -27,25 +27,42 @@ class Project extends Model implements HasMedia
         'budget_to',
         'status_id',
         'category_id',
+        'worker_id',
         'user_id',
+        'finish_day',
+        'deadline_date'
     ];
 
+    const NONACTIVE = 0;
     const OPEN = 1;
-    const NONACTIVE = 2;
+    const SELECTED = 2;
     const ONGOING = 3;
     const FINISH = 4;
     const STATUS = [
-        self::OPEN => 'Terbuka',
         self::NONACTIVE => 'Nonaktif',
+        self::OPEN => 'Terbuka',
+        self::SELECTED => 'Terpilih',
         self::ONGOING => 'Sedang Berlangsung',
         self::FINISH => 'Selesai'
     ];
 
     const COLOR = [
-        self::OPEN => 'bg-primary-100 text-primary-800',
         self::NONACTIVE => 'bg-red-100 text-red-800',
+        self::OPEN => 'bg-primary-100 text-primary-800',
+        self::SELECTED => 'bg-primary-100 text-primary-800',
         self::ONGOING => 'bg-amber-100 text-amber-800',
         self::FINISH => 'bg-green-100 text-green-800'
+    ];
+
+    const TIGAHARI = 3;
+    const SEMINGGU = 7;
+    const DUAMINGGU = 14;
+    const SEBULAN = 30;
+    const DAY = [
+        self::TIGAHARI => '3 Hari',
+        self::SEMINGGU => '7 Hari',
+        self::DUAMINGGU => '14 Hari',
+        self::SEBULAN => '30 Hari'
     ];
 
     /**
@@ -61,6 +78,7 @@ class Project extends Model implements HasMedia
     protected $with = [
         'media',
         'user',
+        'worker',
         'category',
         'bid'
     ];
@@ -80,6 +98,10 @@ class Project extends Model implements HasMedia
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+    public function worker(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'worker_id', 'id');
     }
     public function category(): BelongsTo
     {

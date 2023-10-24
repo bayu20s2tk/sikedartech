@@ -3,13 +3,13 @@ import { computed } from 'vue';
 import { Link } from '@inertiajs/vue3';
 
 const props = defineProps({
-    href: String,
+    href: String | undefined,
     active: Boolean,
     icon: String,
-    flyout: {
-        type: Boolean,
-        default: false
-    }
+    // flyout: {
+    //     type: Boolean,
+    //     default: false
+    // }
 });
 
 // const classes = computed(() => {
@@ -26,15 +26,16 @@ const classes = computed(() => {
 </script>
 
 <template>
-    <button v-if="flyout" :class="classes">
-        <div class="flex items-center gap-2">
-            <i class="fa-duotone" :class="icon" /> <slot />
-        </div>
+    <button v-if="href==undefined" :class="classes">
+        <span class="flex items-center gap-2 truncate">
+            <i class="fa-duotone" :class="icon" />
+            <slot />
+        </span>
     </button>
 
     <Link v-else :href="href" :class="classes">
-        <div class="flex items-center gap-2">
+        <span class="flex items-center gap-2 truncate">
             <i class="fa-duotone" :class="icon" /> <slot />
-        </div>
+        </span>
     </Link>
 </template>

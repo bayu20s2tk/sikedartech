@@ -55,6 +55,18 @@ const setting = [
         icon: 'fa-screwdriver-wrench',
     },
     {
+        name: 'Pengguna',
+        desc: 'Measure actions your users take',
+        href: '/user',
+        icon: 'fa-users',
+    },
+    {
+        name: 'Galeri',
+        desc: 'Measure actions your users take',
+        href: '/gallery',
+        icon: 'fa-image',
+    },
+    {
         name: 'Kategori Proyek',
         desc: 'Measure actions your users take',
         href: '/project-category',
@@ -236,7 +248,6 @@ const logout = () => {
                                             :href="route('project.index')"
                                             :active="$page.component.startsWith('Project/')"
                                             icon="fa-umbrella-beach"
-                                            v-if="$page.props.user.role_id==1"
                                         >
                                             Proyek
                                         </NavLinkAlt>
@@ -250,45 +261,23 @@ const logout = () => {
                                             Artikel
                                         </NavLinkAlt>
 
-                                        <NavLinkAlt
-                                            :href="route('gallery.index')"
-                                            :active="$page.component.startsWith('Gallery')"
-                                            icon="fa-image"
-                                            v-if="$page.props.user.role_id==1"
-
-                                        >
-                                            Galeri
-                                        </NavLinkAlt>
-
-                                        <NavLinkAlt
-                                            :href="route('user.index')"
-                                            :active="$page.component.startsWith('User')"
-                                            icon="fa-person"
-                                            v-if="$page.props.user.role_id==1"
-
-                                        >
-                                            Pengguna
-                                        </NavLinkAlt>
-
-
-                                        <NavLinkAlt
-                                            href="#"
-                                            :active="$page.url.startsWith('/setting')"
-                                            icon="fa-gear"
-                                            v-if="$page.props.user.role_id==1"
-                                        >
-                                            <FlyoutMenu
-                                                title="Pengaturan"
-                                                :data="setting"
-                                            />
-                                        </NavLinkAlt>
+<!--                                        <NavLinkAlt-->
+<!--                                            :active="$page.url.startsWith('/setting')"-->
+<!--                                            icon="fa-gear"-->
+<!--                                            v-if="$page.props.user.role_id==1"-->
+<!--                                        >-->
+<!--                                            <FlyoutMenu-->
+<!--                                                title="Pengaturan"-->
+<!--                                                :data="setting"-->
+<!--                                            />-->
+<!--                                        </NavLinkAlt>-->
 
                                         <NavLinkAlt
                                             :href="route('profile.index')"
                                             :active="$page.component.startsWith('Profile')"
                                             icon="fa-user"
                                         >
-                                            Saya
+                                            Pengaturan
                                         </NavLinkAlt>
 
                                         <!--                                        <NavLinkAlt-->

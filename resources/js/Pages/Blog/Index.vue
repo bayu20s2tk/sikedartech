@@ -7,6 +7,7 @@ import TextInput from '@/Components/TextInput.vue';
 import Table from "@/Components/Table.vue";
 import {onMounted, ref} from "vue";
 import moment from "moment";
+import MobileMenu from "@/Components/MobileMenu.vue";
 
 const props = defineProps({
     blog: undefined,
@@ -104,6 +105,7 @@ const gridColumns = [
 <!--            :edit=true-->
 <!--        />-->
 
+        <MobileMenu />
     </AppLayout>
 
 

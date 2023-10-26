@@ -40,7 +40,7 @@ function formattedDate(value) {
                     magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat
                     veniam
                     occaecat fugiat aliqua.</p>
-                <div class="mt-5 max-w-md mx-auto sm:flex sm:justify-center md:mt-8 gap-5">
+                <div class="mt-5 max-w-md mx-auto flex justify-center md:mt-8 gap-3">
                     <PrimaryButton as="a" :href="route('dashboard')">
                         Dasbor
                     </PrimaryButton>

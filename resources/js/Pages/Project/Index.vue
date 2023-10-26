@@ -9,6 +9,7 @@ import {onMounted, ref, watch} from "vue";
 import moment from "moment/moment";
 import Heading from "../../Components/Heading.vue";
 import Badge from "../../Components/Badge.vue";
+import MobileMenu from "@/Components/MobileMenu.vue";
 
 const props = defineProps({
     project: undefined,
@@ -222,6 +223,7 @@ watch(tabProject, (newTabProject) => {
 <!--            :view=true-->
 <!--            :edit=true-->
 <!--        />-->
+        <MobileMenu />
 
     </AppLayout>
 

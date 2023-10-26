@@ -177,25 +177,49 @@ const closeModal = () => {
 </script>
 
 <template>
-    <GroupButton>
-        <GroupButtonLink @click="editor.chain().focus().toggleHeading({ level: 1 }).run()" class="rounded-l-3xl">H1</GroupButtonLink>
-        <GroupButtonLink @click="editor.chain().focus().toggleHeading({ level: 2 }).run()" >H2</GroupButtonLink>
-        <GroupButtonLink @click="editor.chain().focus().toggleHeading({ level: 3 }).run()" >H3</GroupButtonLink>
-        <GroupButtonLink @click="editor.chain().focus().toggleHeading({ level: 4 }).run()" >H4</GroupButtonLink>
-        <GroupButtonLink @click="editor.chain().focus().toggleHeading({ level: 5 }).run()" >H5</GroupButtonLink>
-        <GroupButtonLink @click="editor.chain().focus().setParagraph().run()" class="rounded-r-3xl mr-2" >P</GroupButtonLink>
+<!--    <GroupButton>-->
+<!--        <GroupButtonLink @click="editor.chain().focus().toggleHeading({ level: 1 }).run()" class="rounded-l-3xl">H1</GroupButtonLink>-->
+<!--        <GroupButtonLink @click="editor.chain().focus().toggleHeading({ level: 2 }).run()" >H2</GroupButtonLink>-->
+<!--        <GroupButtonLink @click="editor.chain().focus().toggleHeading({ level: 3 }).run()" >H3</GroupButtonLink>-->
+<!--        <GroupButtonLink @click="editor.chain().focus().toggleHeading({ level: 4 }).run()" >H4</GroupButtonLink>-->
+<!--        <GroupButtonLink @click="editor.chain().focus().toggleHeading({ level: 5 }).run()" >H5</GroupButtonLink>-->
+<!--        <GroupButtonLink @click="editor.chain().focus().setParagraph().run()" class="rounded-r-3xl mr-2" >P</GroupButtonLink>-->
 
-        <GroupButtonLink @click="galleryModal=true" class="rounded-l-3xl rounded">Image</GroupButtonLink>
-        <GroupButtonLink @click="addYoutube">Youtube</GroupButtonLink>
-        <GroupButtonLink @click="editor.chain().focus().toggleCodeBlock().run()" class="rounded-r-3xl mr-2">Code</GroupButtonLink>
+<!--        <GroupButtonLink @click="galleryModal=true" class="rounded-l-3xl rounded">Image</GroupButtonLink>-->
+<!--        <GroupButtonLink @click="addYoutube">Youtube</GroupButtonLink>-->
+<!--        <GroupButtonLink @click="editor.chain().focus().toggleCodeBlock().run()" class="rounded-r-3xl mr-2">Code</GroupButtonLink>-->
 
-        <GroupButtonLink @click="editor.chain().focus().toggleItalic().run()" class="rounded-l-3xl"><i>Italic</i></GroupButtonLink>
-        <GroupButtonLink @click="editor.chain().focus().toggleBold().run()"><b>Bold</b></GroupButtonLink>
-        <GroupButtonLink @click="editor.chain().focus().toggleBulletList().run()" class="rounded-r-3xl mr-2">List</GroupButtonLink>
+<!--        <GroupButtonLink @click="editor.chain().focus().toggleItalic().run()" class="rounded-l-3xl"><i>Italic</i></GroupButtonLink>-->
+<!--        <GroupButtonLink @click="editor.chain().focus().toggleBold().run()"><b>Bold</b></GroupButtonLink>-->
+<!--        <GroupButtonLink @click="editor.chain().focus().toggleBulletList().run()" class="rounded-r-3xl mr-2">List</GroupButtonLink>-->
 
-        <!--        <GroupButtonLink @click="editor.chain().focus().undo().run()" class="rounded-l-2xl" :disabled="!editor.can().chain().focus().undo().run()">undo</GroupButtonLink>-->
-        <!--        <GroupButtonLink @click="editor.chain().focus().redo().run()" class="rounded&#45;&#45;2xl" :disabled="!editor.can().chain().focus().redo().run()">redo</GroupButtonLink>-->
-    </GroupButton>
+<!--        &lt;!&ndash;        <GroupButtonLink @click="editor.chain().focus().undo().run()" class="rounded-l-2xl" :disabled="!editor.can().chain().focus().undo().run()">undo</GroupButtonLink>&ndash;&gt;-->
+<!--        &lt;!&ndash;        <GroupButtonLink @click="editor.chain().focus().redo().run()" class="rounded&#45;&#45;2xl" :disabled="!editor.can().chain().focus().redo().run()">redo</GroupButtonLink>&ndash;&gt;-->
+<!--    </GroupButton>-->
+
+    <div class="space-y-3">
+        <GroupButton>
+            <GroupButtonLink @click="editor.chain().focus().toggleHeading({ level: 1 }).run()" class="rounded-l-3xl">H1</GroupButtonLink>
+            <GroupButtonLink @click="editor.chain().focus().toggleHeading({ level: 2 }).run()" >H2</GroupButtonLink>
+            <GroupButtonLink @click="editor.chain().focus().toggleHeading({ level: 3 }).run()" >H3</GroupButtonLink>
+            <GroupButtonLink @click="editor.chain().focus().toggleHeading({ level: 4 }).run()" >H4</GroupButtonLink>
+            <GroupButtonLink @click="editor.chain().focus().toggleHeading({ level: 5 }).run()" >H5</GroupButtonLink>
+            <GroupButtonLink @click="editor.chain().focus().setParagraph().run()" class="rounded-r-3xl mr-2" >P</GroupButtonLink>
+        </GroupButton>
+
+        <GroupButton>
+            <GroupButtonLink @click="galleryModal=true" class="rounded-l-3xl rounded">Image</GroupButtonLink>
+            <GroupButtonLink @click="addYoutube">Youtube</GroupButtonLink>
+            <GroupButtonLink @click="editor.chain().focus().toggleCodeBlock().run()" class="rounded-r-3xl mr-2">Code</GroupButtonLink>
+        </GroupButton>
+
+        <GroupButton>
+            <GroupButtonLink @click="editor.chain().focus().toggleItalic().run()" class="rounded-l-3xl"><i>Italic</i></GroupButtonLink>
+            <GroupButtonLink @click="editor.chain().focus().toggleBold().run()"><b>Bold</b></GroupButtonLink>
+            <GroupButtonLink @click="editor.chain().focus().toggleBulletList().run()" class="rounded-r-3xl mr-2">List</GroupButtonLink>
+        </GroupButton>
+    </div>
+
 
     <EditorContent
         ref="input"

@@ -1,5 +1,4 @@
 <script setup>
-
 import {Link} from "@inertiajs/vue3";
 </script>
 
@@ -17,25 +16,45 @@ import {Link} from "@inertiajs/vue3";
                     </h3>
                 </Link>
 
-<!--                <Link :href="route('history.index')" class="group text-center">-->
-<!--                    <i class="fa-files text-xl text-gray-700"-->
-<!--                       :class="$page.component.startsWith('History') ? 'fa-solid text-primary-700' : 'fa-regular' "-->
-<!--                    />-->
-<!--                    <h3 class="text-sm text-gray-700"-->
-<!--                        :class="$page.component.startsWith('History') ? 'font-semibold text-primary-700' : '' " >-->
-<!--                        Riwayat-->
-<!--                    </h3>-->
-<!--                </Link>-->
-
-                <Link :href="route('information.index')" class="group text-center">
-                    <i class="fa-circle-info text-xl text-gray-700"
-                       :class="$page.component.startsWith('Information') ? 'fa-solid text-primary-700' : 'fa-regular' "
+                <Link :href="route('course.index')" class="group text-center">
+                    <i class="fa-book text-xl text-gray-700"
+                       :class="$page.component.startsWith('Course/') ? 'fa-solid text-primary-700' : 'fa-regular' "
                     />
                     <h3 class="text-sm text-gray-700"
-                        :class="$page.component.startsWith('Information') ? 'font-semibold text-primary-700' : '' ">
-                        Informasi
+                        :class="$page.component.startsWith('Course/') ? 'font-semibold text-primary-700' : '' " >
+                        Kelas
                     </h3>
                 </Link>
+
+                <Link :href="route('project.index')" class="group text-center">
+                    <i class="fa-umbrella-beach text-xl text-gray-700"
+                       :class="$page.component.startsWith('Project/') ? 'fa-solid text-primary-700' : 'fa-regular' "
+                    />
+                    <h3 class="text-sm text-gray-700"
+                        :class="$page.component.startsWith('Project/') ? 'font-semibold text-primary-700' : '' " >
+                        Proyek
+                    </h3>
+                </Link>
+
+                <Link :href="route('blog.index')" class="group text-center" v-if="$page.props.user.role_id==1">
+                    <i class="fa-blog text-xl text-gray-700"
+                       :class="$page.component.startsWith('Blog/') ? 'fa-solid text-primary-700' : 'fa-regular' "
+                    />
+                    <h3 class="text-sm text-gray-700"
+                        :class="$page.component.startsWith('Blog/') ? 'font-semibold text-primary-700' : '' " >
+                        Artikel
+                    </h3>
+                </Link>
+
+<!--                <Link :href="route('information.index')" class="group text-center">-->
+<!--                    <i class="fa-circle-info text-xl text-gray-700"-->
+<!--                       :class="$page.component.startsWith('Information') ? 'fa-solid text-primary-700' : 'fa-regular' "-->
+<!--                    />-->
+<!--                    <h3 class="text-sm text-gray-700"-->
+<!--                        :class="$page.component.startsWith('Information') ? 'font-semibold text-primary-700' : '' ">-->
+<!--                        Informasi-->
+<!--                    </h3>-->
+<!--                </Link>-->
 
                 <Link :href="route('profile.index')" class="group text-center">
                     <i class="fa-user text-xl text-gray-700"

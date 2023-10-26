@@ -75,18 +75,16 @@ const closeModal = () => {
 
         <div class="pt-10">
             <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 lg:items-start">
-                <div class="px-4 sm:px-6 lg:px-0">
-                    <Heading >
-                        <template #header>
-                            Proyek
-                        </template>
-                        <template #desc>
-                            Lorem ipsum dolor sit amet
-                        </template>
-                    </Heading>
-                </div>
+                <Heading >
+                    <template #header>
+                        Proyek
+                    </template>
+                    <template #desc>
+                        Lorem ipsum dolor sit amet
+                    </template>
+                </Heading>
 
-                <div class="relative mx-auto grid lg:grid-cols-6 gap-10 px-4 sm:px-6 lg:px-0">
+                <div class="relative mx-auto grid lg:grid-cols-6 gap-10">
                     <!-- Content area -->
                     <div class="lg:col-span-2 ">
                         <div class="mt-3 bg-white bg-opacity-50 border border-gray-300 rounded-3xl shadow-lg">

@@ -127,9 +127,9 @@ watch(tabProject, (newTabProject) => {
     <!--                    <p class="mt-3 text-base text-gray-500">{{ blog.desc }}</p>-->
                     </Link>
 
-                    <p class="mt-2 text-sm font-medium text-gray-500">
-                        {{ item.bid.length }} Bid
-                    </p>
+<!--                    <p class="mt-2 text-sm font-medium text-gray-500">-->
+<!--                        {{ item.bid.length }} Bid-->
+<!--                    </p>-->
 
                     <div class="mt-6 flex items-center">
                         <div class="flex-shrink-0">
@@ -186,10 +186,10 @@ watch(tabProject, (newTabProject) => {
                         <!--                    <p class="mt-3 text-base text-gray-500">{{ blog.desc }}</p>-->
                     </Link>
 
-                    <div class="mt-2 text-sm font-medium text-gray-500">
+<!--                    <div class="mt-2 text-sm font-medium text-gray-500">-->
 <!--                        <p>{{ item.bid.price }}</p>-->
-                        <p>{{ item.bid.length }} Bid</p>
-                    </div>
+<!--                        <p>{{ item.bid.length }} Bid</p>-->
+<!--                    </div>-->
 
                     <div class="mt-6 flex items-center">
                         <div class="flex-shrink-0">

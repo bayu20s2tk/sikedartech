@@ -21,6 +21,11 @@ function formattedDate(value) {
     return moment(value).format('DD MMM Y HH:mm')
 }
 
+const stats = [
+    { name: 'Status', stat: props.course.status, previousStat: '' },
+    { name: 'Member', stat: props.subscriber, previousStat: '' },
+    { name: 'Owner', stat: props.course.user.name, previousStat: '' },
+]
 </script>
 
 <template>
@@ -46,34 +51,18 @@ function formattedDate(value) {
             </div>
 
             <div>
-                <!--                <h3 class="text-lg font-medium leading-6 text-gray-900">Last 30 days</h3>-->
-                <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-3">
-                    <div class="overflow-hidden rounded-3xl bg-white bg-opacity-50 px-4 py-5 shadow-lg border border-gray-300">
-                        <dt class="truncate text-sm font-medium text-gray-500">Status</dt>
-                        <dd class="mt-1 text-xl font-semibold tracking-tight text-gray-900">{{ props.course.status }}</dd>
-                    </div>
-                    <div class="overflow-hidden rounded-3xl bg-white bg-opacity-50 px-4 py-5 shadow-lg border border-gray-300">
-                        <dt class="truncate text-sm font-medium text-gray-500">Total Member</dt>
-                        <dd class="mt-1 text-xl font-semibold tracking-tight text-gray-900">{{ props.subscriber }}</dd>
-                    </div>
-                    <div class="overflow-hidden rounded-3xl bg-white bg-opacity-50 px-4 py-5 shadow-lg border border-gray-300">
-                        <dt class="truncate text-sm font-medium text-gray-500">Author</dt>
-                        <dd class="mt-1 text-xl font-semibold tracking-tight text-gray-900 flex items-center">
-<!--                            <img :src="props.course.user.profile_photo_url" class="h-10 w-10 rounded-full object-cover mr-2" />-->
-                            {{ props.course.user.name }}
+                <dl class="mt-5 grid grid-cols-1 divide-y divide-gray-300 dark:divide-gray-600 border border-gray-300 overflow-hidden rounded-3xl bg-white bg-opacity-50 shadow-lg md:grid-cols-3 md:divide-y-0 md:divide-x">
+                    <div v-for="item in stats" :key="item.name" class="px-4 py-5 sm:p-6">
+                        <dt class="text-base font-normal text-gray-900">{{ item.name }}</dt>
+                        <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
+                            <div class="flex items-baseline text-2xl font-semibold text-primary-600">
+                                {{ item.stat }}
+                                <span class="ml-2 text-sm font-medium text-gray-500">{{ item.previousStat }}</span>
+                            </div>
                         </dd>
                     </div>
                 </dl>
             </div>
-
-<!--            <div class="mt-10 rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">-->
-<!--                <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">-->
-<!--                    <template v-for="bid in props.course.bid">-->
-<!--                        <BidList :bid="bid" />-->
-<!--                    </template>-->
-
-<!--                </ul>-->
-<!--            </div>-->
         </div>
 
 

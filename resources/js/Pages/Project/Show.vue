@@ -56,6 +56,12 @@ const tabProjectShow = ref(1)
 //     localStorage.setItem('tabProjectShow', JSON.stringify(newTabProjectShow))
 // })
 
+const stats = [
+    { name: 'Status', stat: props.project.status, previousStat: '' },
+    { name: 'Deadline', stat: props.project.finish_day + ' Hari', previousStat: ' / ' + formattedDate(props.project?.deadline_date) },
+    { name: 'Worker', stat: props.project.worker?.name ?? '-', previousStat: '' },
+    { name: 'Owner', stat: props.project.user.name, previousStat: '' },
+]
 </script>
 
 <template>
@@ -96,38 +102,14 @@ const tabProjectShow = ref(1)
             </div>
 
             <div>
-                <dl class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-5">
-                    <div class="overflow-hidden rounded-3xl bg-white bg-opacity-50 px-4 py-5 shadow-lg border border-gray-300">
-                        <dt class="truncate text-sm font-medium text-gray-500">Status</dt>
-                        <dd class="mt-1 text-xl font-semibold tracking-tight text-gray-900">{{ props.project.status }}</dd>
-                    </div>
-                    <div class="overflow-hidden rounded-3xl bg-white bg-opacity-50 px-4 py-5 shadow-lg border border-gray-300">
-                        <dt class="truncate text-sm font-medium text-gray-500">Total Bid</dt>
-                        <dd class="mt-1 text-xl font-semibold tracking-tight text-gray-900">{{ props.project.bid.length }}</dd>
-                    </div>
-                    <div class="overflow-hidden rounded-3xl bg-white bg-opacity-50 px-4 py-5 shadow-lg border border-gray-300">
-                        <dt class="truncate text-sm font-medium text-gray-500">Deadline</dt>
-                        <dd class="mt-1 text-xl font-semibold tracking-tight text-gray-900 flex items-center">
-                            {{ props.project.deadline_date ? formattedDate(props.project.deadline_date) : props.project.finish_day + ' Hari' }}
-                        </dd>
-                    </div>
-                    <div class="overflow-hidden rounded-3xl bg-white bg-opacity-50 px-4 py-5 shadow-lg border border-gray-300">
-                        <dt class="truncate text-sm font-medium text-gray-500">Worker</dt>
-                        <dd class="mt-1 text-xl font-semibold tracking-tight text-gray-900 flex items-center">
-                            <template v-if="props.project.worker">
-<!--                                <img :src="props.project.worker.profile_photo_url" class="h-10 w-10 rounded-full object-cover mr-2" />-->
-                                {{ props.project.worker.name }}
-                            </template>
-                            <template v-else>
-                                Belum ada
-                            </template>
-                        </dd>
-                    </div>
-                    <div class="overflow-hidden rounded-3xl bg-white bg-opacity-50 px-4 py-5 shadow-lg border border-gray-300">
-                        <dt class="truncate text-sm font-medium text-gray-500">Author</dt>
-                        <dd class="mt-1 text-xl font-semibold tracking-tight text-gray-900 flex items-center">
-<!--                            <img :src="props.project.user.profile_photo_url" class="h-10 w-10 rounded-full object-cover mr-2" />-->
-                            {{ props.project.user.name }}
+                <dl class="mt-5 grid grid-cols-1 divide-y divide-gray-300 dark:divide-gray-600 border border-gray-300 overflow-hidden rounded-3xl bg-white bg-opacity-50 shadow-lg md:grid-cols-4 md:divide-y-0 md:divide-x">
+                    <div v-for="item in stats" :key="item.name" class="px-4 py-5 sm:p-6">
+                        <dt class="text-base font-normal text-gray-900">{{ item.name }}</dt>
+                        <dd class="mt-1 flex items-baseline justify-between md:block lg:flex">
+                            <div class="flex items-baseline text-2xl font-semibold text-primary-600">
+                                {{ item.stat }}
+                                <span class="ml-2 text-sm font-medium text-gray-500">{{ item.previousStat }}</span>
+                            </div>
                         </dd>
                     </div>
                 </dl>

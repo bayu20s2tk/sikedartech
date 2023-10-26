@@ -186,25 +186,26 @@ watch(tabProject, (newTabProject) => {
                         <!--                    <p class="mt-3 text-base text-gray-500">{{ blog.desc }}</p>-->
                     </Link>
 
-                    <p class="mt-2 text-sm font-medium text-gray-500">
-                        {{ item.bid.length }} Bid
-                    </p>
+                    <div class="mt-2 text-sm font-medium text-gray-500">
+<!--                        <p>{{ item.bid.price }}</p>-->
+                        <p>{{ item.bid.length }} Bid</p>
+                    </div>
 
-                    <!--                <div class="mt-6 flex items-center">-->
-                    <!--                    <div class="flex-shrink-0">-->
-                    <!--                        <Link :href="route('user.show', item.user)">-->
-                    <!--                            <img class="h-10 w-10 rounded-full" :src="item.user.profile_photo_url" alt=""/>-->
-                    <!--                        </Link>-->
-                    <!--                    </div>-->
-                    <!--                    <div class="ml-3">-->
-                    <!--                        <p class="text-sm font-medium text-gray-900">-->
-                    <!--                            <Link :href="route('user.show', item.user)">{{ item.user.name }}</Link>-->
-                    <!--                        </p>-->
-                    <!--                        <div class="flex space-x-1 text-sm text-gray-500">-->
-                    <!--                            <time :datetime="formattedDate(item.created_at)">{{ formattedDate(item.created_at) }}</time>-->
-                    <!--                        </div>-->
-                    <!--                    </div>-->
-                    <!--                </div>-->
+                    <div class="mt-6 flex items-center">
+                        <div class="flex-shrink-0">
+                            <Link :href="route('user.show', item.user)">
+                                <img class="h-10 w-10 rounded-full" :src="item.user.profile_photo_url" alt=""/>
+                            </Link>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm font-medium text-gray-900">
+                                <Link :href="route('user.show', item.user)">{{ item.user.name }}</Link>
+                            </p>
+                            <div class="flex space-x-1 text-sm text-gray-500">
+                                <time :datetime="formattedDate(item.created_at)">{{ formattedDate(item.created_at) }}</time>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

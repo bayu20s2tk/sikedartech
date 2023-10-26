@@ -7,6 +7,7 @@ use App\Models\CourseCategory;
 use App\Models\Gallery;
 use App\Models\Project;
 use App\Models\ProjectCategory;
+use App\Models\ProjectChat;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -78,8 +79,10 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
+//        dd($project);
         return Inertia::render('Project/Show', [
             'project' => $project,
+            'chat' => ProjectChat::where('project_id', $project->id)->get()
         ]);
     }
 

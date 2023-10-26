@@ -42,14 +42,14 @@ class Project extends Model implements HasMedia
         self::NONACTIVE => 'Nonaktif',
         self::OPEN => 'Terbuka',
         self::SELECTED => 'Terpilih',
-        self::ONGOING => 'Sedang Berlangsung',
+        self::ONGOING => 'Berlangsung',
         self::FINISH => 'Selesai'
     ];
 
     const COLOR = [
         self::NONACTIVE => 'bg-red-100 text-red-800',
         self::OPEN => 'bg-primary-100 text-primary-800',
-        self::SELECTED => 'bg-primary-100 text-primary-800',
+        self::SELECTED => 'bg-teal-100 text-teal-800',
         self::ONGOING => 'bg-amber-100 text-amber-800',
         self::FINISH => 'bg-green-100 text-green-800'
     ];
@@ -80,7 +80,8 @@ class Project extends Model implements HasMedia
         'user',
         'worker',
         'category',
-        'bid'
+        'bid',
+//        'chat'
     ];
 
     public function getRouteKeyName(): string
@@ -110,5 +111,9 @@ class Project extends Model implements HasMedia
     public function bid(): hasMany
     {
         return $this->hasMany(ProjectBid::class, 'project_id', 'id');
+    }
+    public function chat(): hasMany
+    {
+        return $this->hasMany(ProjectChat::class, 'project_id', 'id');
     }
 }

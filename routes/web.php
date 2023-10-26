@@ -16,6 +16,7 @@ use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectBidController;
 use App\Http\Controllers\ProjectCategoryController;
+use App\Http\Controllers\ProjectChatController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -59,6 +60,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::post('/course-comment/dislike/{courseComment}', [CourseCommentController::class, 'dislike'])->name('courseComment.dislike');
 
     Route::resource('/project', ProjectController::class)->names('project');
+    Route::resource('/project/chat', ProjectChatController::class)->names('projectChat');
     Route::resource('/project-category', ProjectCategoryController::class)->names('projectCategory');
     Route::resource('/project-bid', ProjectBidController::class)->names('projectBid');
 

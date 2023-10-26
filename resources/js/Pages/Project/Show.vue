@@ -28,7 +28,7 @@ const form = useForm({
 const storeInformation = () => {
     if (props.project.status_id==2) {
         form.status_id=3
-        form.deadline_date=moment().add(props.project.finish_day, 'days').format();
+        form.deadline_date=moment().add(Number(props.project.finish_day), 'days').format();
     }
 
     form.patch(route('project.update', props.project), {

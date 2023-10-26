@@ -55,7 +55,7 @@ const gridColumns = [
                 </form>
             </div>
 
-            <div class="" v-if="$page.props.user.role_id !== 3">
+            <div class="" v-if="$page.props.user.role_id != 3">
                 <PrimaryButton as="a" :href="route('course.create')" >Tambah</PrimaryButton>
             </div>
         </div>

@@ -84,6 +84,15 @@ class Project extends Model implements HasMedia
 //        'chat'
     ];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'deadline_date' => 'datetime',
+    ];
+
     public function getRouteKeyName(): string
     {
         return 'slug';

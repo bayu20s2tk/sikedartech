@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('projects', function (Blueprint $table) {
             $table->unsignedBigInteger('worker_id')->nullable()->after('user_id');
             $table->integer('finish_day');
-            $table->date('deadline_date')->nullable();
+            $table->dateTime('deadline_date')->nullable();
 
             $table->foreign('worker_id')->on('users')->references('id')->restrictOnDelete();
         });

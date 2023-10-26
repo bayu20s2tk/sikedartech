@@ -175,27 +175,27 @@ const tabProjectShow = ref(1)
                         </button>
                     </nav>
                 </div>
+
+                <template v-if="tabProjectShow==1">
+                    <p class="prose prose-sm lg:prose-lg xl:prose-2xl" v-html="props.project.desc" />
+                </template>
+
+                <!--            <template v-else-if="tabProjectShow==2">-->
+                <!--                <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">-->
+                <!--                    <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">-->
+                <!--                        <template v-for="bid in props.project.bid">-->
+                <!--                            <BidList :bid="bid" />-->
+                <!--                        </template>-->
+                <!--                    </ul>-->
+                <!--                </div>-->
+                <!--            </template>-->
+
+                <ChatSection
+                    v-else-if="tabProjectShow==3"
+                    :project="props.project"
+                    :chat="props.chat"
+                />
             </div>
-
-            <template v-if="tabProjectShow==1">
-                <p class="prose prose-sm lg:prose-lg xl:prose-2xl" v-html="props.project.desc" />
-            </template>
-
-<!--            <template v-else-if="tabProjectShow==2">-->
-<!--                <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">-->
-<!--                    <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">-->
-<!--                        <template v-for="bid in props.project.bid">-->
-<!--                            <BidList :bid="bid" />-->
-<!--                        </template>-->
-<!--                    </ul>-->
-<!--                </div>-->
-<!--            </template>-->
-
-           <ChatSection
-               v-else-if="tabProjectShow==3"
-               :project="props.project"
-               :chat="props.chat"
-           />
 
 
         </div>

@@ -148,20 +148,20 @@ class CourseController extends Controller
         $model->deleteMedia($media->id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param Course $course
-     * @return void
-     */
-    public function subscribe(Request $request, Course $course)
-    {
-        Validator::make($request->toArray(), [
-            'photo' => ['required'],
-        ])->validateWithBag('storeInformation');
-
-        dd($request->all(), $course);
-//        auth()->user()->follow($course);
-        auth()->user()->subscribe($course);
-    }
+//    /**
+//     * Remove the specified resource from storage.
+//     *
+//     * @param Course $course
+//     * @return void
+//     */
+//    public function subscribe(Request $request, Course $course)
+//    {
+//        Validator::make($request->toArray(), [
+//            'photo' => ['required'],
+//        ])->validateWithBag('storeInformation');
+//
+//        dd($request->all(), $course);
+////        auth()->user()->follow($course);
+//        auth()->user()->subscribe($course);
+//    }
 }

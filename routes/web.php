@@ -48,7 +48,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/artikel/{blog}', [LandingController::class, 'blogShow'])->name('landing.blog.show');
 
     Route::resource('/course', CourseController::class)->names('course');
-    Route::post('/course/subscribe/{course}', [CourseController::class, 'subscribe'])->name('course.subscribe');
+//    Route::post('/course/subscribe/{course}', [CourseController::class, 'subscribe'])->name('course.subscribe');
     Route::post('/course/add-hero', [CourseController::class, 'addHero'])->name('course.addHero');
     Route::delete('/course/delete-hero/{id}', [CourseController::class, 'deleteHero'])->name('course.deleteHero');
 
@@ -60,6 +60,9 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::post('/course-comment/dislike/{courseComment}', [CourseCommentController::class, 'dislike'])->name('courseComment.dislike');
 
     Route::resource('/project', ProjectController::class)->names('project');
+    Route::post('project/add-media', [ProjectController::class, 'addMedia'])->name('project.addMedia');
+    Route::delete('project/delete-media/{id}', [ProjectController::class, 'deleteMedia'])->name('project.deleteMedia');
+
     Route::resource('/project/chat', ProjectChatController::class)->names('projectChat');
     Route::resource('/project-category', ProjectCategoryController::class)->names('projectCategory');
     Route::resource('/project-bid', ProjectBidController::class)->names('projectBid');

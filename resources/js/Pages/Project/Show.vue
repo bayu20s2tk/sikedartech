@@ -14,6 +14,7 @@ import InputLabel from "../../Components/InputLabel.vue";
 import TextInput from "../../Components/TextInput.vue";
 import InputError from "../../Components/InputError.vue";
 import ChatSection from "./Partials/ChatSection.vue";
+import MediaSection from "./Partials/MediaSection.vue";
 
 const props = defineProps({
     project: Object,
@@ -157,7 +158,7 @@ const tabProjectShow = ref(1)
                                 :class="tabProjectShow==2 ? 'border-cyan-600 text-cyan-600' : 'text-gray-500 border-gray-300 ' "
                                 @click="tabProjectShow=2"
                         >
-                            Lorem
+                            Resources
                         </button>
 
                         <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
@@ -189,6 +190,11 @@ const tabProjectShow = ref(1)
                 <!--                    </ul>-->
                 <!--                </div>-->
                 <!--            </template>-->
+
+                <MediaSection
+                    v-else-if="tabProjectShow==2"
+                    :project="props.project"
+                />
 
                 <ChatSection
                     v-else-if="tabProjectShow==3"

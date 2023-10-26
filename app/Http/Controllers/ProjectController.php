@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ProjectController extends Controller
 {
@@ -79,7 +80,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-//        dd($project);
+//        dd($project->toArray());
         return Inertia::render('Project/Show', [
             'project' => $project,
             'chat' => ProjectChat::where('project_id', $project->id)->get()
@@ -115,5 +116,32 @@ class ProjectController extends Controller
     {
         $project->delete();
         return Redirect::route('project.index');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Request $request
+     * @return void
+     */
+    public function addMedia(Request $request)
+    {
+//        dd($request->all());
+
+        $project = Project::find($request['id']);
+        $project->addMedia($request['media'])->toMediaCollection('media');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param $id
+     * @return void
+     */
+    public function deleteMedia($id)
+    {
+        $media = Media::find($id);
+        $model = Project::find($media->model_id);
+        $model->deleteMedia($media->id);
     }
 }

@@ -89,7 +89,6 @@ function formattedDate(value) {
     <div class="mt-2 flex justify-between">
         <div class="w-full mr-2">
             <TextInput
-                id="name"
                 v-model="form.message"
                 type="text"
                 class="block w-full"

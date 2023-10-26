@@ -143,7 +143,7 @@ const tabProjectShow = ref(1)
             </template>
 
             <div v-else class="my-10">
-                <div class="sticky top-0 z-40 backdrop-blur border-b border-gray-200">
+                <div class="sticky top-0 z-40 backdrop-blur border-b border-gray-200 mb-10">
                     <nav class="-mb-px flex" aria-label="Tabs">
 
                         <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"

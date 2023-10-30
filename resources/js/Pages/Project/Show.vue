@@ -28,16 +28,23 @@ const form = useForm({
 });
 
 const storeInformation = () => {
-    switch(props.project.status_id) {
-        case 2:
-            form.status_id=3
-            form.deadline_date=moment().add(props.project.finish_day, 'days').format();
-            break;
-        case 3:
-            form.status_id=4
-            break;
-        default:
-        // code block
+    // switch(props.project.status_id) {
+    //     case 2:
+    //         form.status_id=3
+    //         form.deadline_date=moment().add(props.project.finish_day, 'days').format();
+    //         break;
+    //     case 3:
+    //         form.status_id=4
+    //         break;
+    //     default:
+    //     // code block
+    // }
+
+    if (props.project.status_id==2) {
+        form.status_id=3
+        form.deadline_date=moment().add(props.project.finish_day, 'days').format();
+    } else if (props.project.status_id==3) {
+        form.status_id=4
     }
 
     form.patch(route('project.update', props.project), {

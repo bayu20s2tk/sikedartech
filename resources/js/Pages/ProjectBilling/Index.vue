@@ -6,9 +6,10 @@ import SecondaryButton from '@/Components/SecondaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import Table from "@/Components/Table.vue";
 import {ref} from "vue";
+import BillingList from "./Partials/BillingList.vue";
 
 const props = defineProps({
-    category: Object | String
+    project: Object | String
 });
 
 const searchQuery = ref('')
@@ -21,23 +22,11 @@ const gridColumns = [
     'desc',
 ]
 
-const searchQueryCategory = ref('')
-const gridTitleCategory = [
-    'Nama',
-    'Keterangan',
-    'status'
-]
-const gridColumnsCategory = [
-    'name',
-    'desc',
-    'status'
-]
-
 </script>
 
 <template>
-    <AppLayout title="Kategori Proyek"
-               name="Kategori Proyek"
+    <AppLayout title="Billing Proyek"
+               name="Billing Proyek"
                desc="lorem ipsum"
                >
 
@@ -55,21 +44,30 @@ const gridColumnsCategory = [
             </div>
 
             <div class="">
-                <PrimaryButton as="a" :href="route('projectCategory.create')" >Tambah</PrimaryButton>
+<!--                <PrimaryButton as="a" :href="route('courseCategory.create')" >Tambah</PrimaryButton>-->
             </div>
         </div>
 
-        <Table
-            :title="gridTitle"
-            :data="props.category.data"
-            :paginate="props.category"
-            :columns="gridColumns"
-            :filter-key="searchQuery"
-            routes="projectCategory"
-            :slug=false
-            :view=false
-            :edit=true
-        />
+<!--        <Table-->
+<!--            :title="gridTitle"-->
+<!--            :data="props.subscribe.data"-->
+<!--            :paginate="props.subscribe"-->
+<!--            :columns="gridColumns"-->
+<!--            :filter-key="searchQuery"-->
+<!--            routes="courseSubscribe"-->
+<!--            :slug=false-->
+<!--            :view=false-->
+<!--            :edit=false-->
+<!--        />-->
+
+        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">
+            <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
+                <template v-for="item in props.project">
+                    <BillingList :item="item" />
+                </template>
+
+            </ul>
+        </div>
 
     </AppLayout>
 

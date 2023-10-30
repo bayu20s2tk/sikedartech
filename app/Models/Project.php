@@ -38,12 +38,14 @@ class Project extends Model implements HasMedia
     const SELECTED = 2;
     const ONGOING = 3;
     const FINISH = 4;
+    const PAID = 5;
     const STATUS = [
         self::NONACTIVE => 'Batal',
         self::OPEN => 'Terbuka',
         self::SELECTED => 'Terpilih',
         self::ONGOING => 'Berlangsung',
-        self::FINISH => 'Selesai'
+        self::FINISH => 'Selesai',
+        self::PAID => 'Selesai',
     ];
 
     const COLOR = [
@@ -51,7 +53,17 @@ class Project extends Model implements HasMedia
         self::OPEN => 'bg-primary-100 text-primary-800',
         self::SELECTED => 'bg-primary-100 text-primary-800',
         self::ONGOING => 'bg-primary-100 text-primary-800',
-        self::FINISH => 'bg-green-100 text-green-800'
+        self::FINISH => 'bg-green-100 text-green-800',
+        self::PAID => 'bg-green-100 text-green-800'
+    ];
+
+    const BILLING = [
+        self::NONACTIVE => '',
+        self::OPEN => '',
+        self::SELECTED => '',
+        self::ONGOING => '',
+        self::FINISH => 'Belum dibayar',
+        self::PAID => 'Sudah dibayar'
     ];
 
     const TIGAHARI = 3;
@@ -72,7 +84,8 @@ class Project extends Model implements HasMedia
      */
     protected $appends = [
         'status',
-        'color'
+        'color',
+        'billing'
     ];
 
     protected $with = [
@@ -104,6 +117,10 @@ class Project extends Model implements HasMedia
     public function getColorAttribute(): string
     {
         return self::COLOR[$this->status_id];
+    }
+    public function getBillingAttribute(): string
+    {
+        return self::BILLING[$this->status_id];
     }
     public function user(): BelongsTo
     {

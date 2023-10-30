@@ -15,6 +15,7 @@ use App\Http\Controllers\InformationController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectBidController;
+use App\Http\Controllers\ProjectBillingController;
 use App\Http\Controllers\ProjectCategoryController;
 use App\Http\Controllers\ProjectChatController;
 use App\Http\Controllers\ProjectController;
@@ -63,9 +64,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::post('project/add-media', [ProjectController::class, 'addMedia'])->name('project.addMedia');
     Route::delete('project/delete-media/{id}', [ProjectController::class, 'deleteMedia'])->name('project.deleteMedia');
 
-    Route::resource('/project/chat', ProjectChatController::class)->names('projectChat');
+    Route::resource('/project-chat', ProjectChatController::class)->names('projectChat');
     Route::resource('/project-category', ProjectCategoryController::class)->names('projectCategory');
     Route::resource('/project-bid', ProjectBidController::class)->names('projectBid');
+    Route::resource('/project-billing', ProjectBillingController::class)->names('projectBilling');
 
     Route::resource('/blog', BlogController::class)->names('blog');
     Route::post('/blog-comment/like/{blogComment}', [BlogCommentController::class, 'like'])->name('blogComment.like');

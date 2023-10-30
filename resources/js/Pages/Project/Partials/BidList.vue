@@ -61,10 +61,10 @@ function formattedDate(value) {
                         <dt class="text-sm font-medium text-gray-500">User</dt>
                         <dd class="mt-1 text-sm text-gray-900">{{ props.bid.user.name }}</dd>
                     </div>
-                    <div class="sm:col-span-1">
-                        <dt class="text-sm font-medium text-gray-500">Salary expectation</dt>
-                        <dd class="mt-1 text-sm text-gray-900">Rp {{ formatPrice(props.bid.price) }}</dd>
-                    </div>
+<!--                    <div class="sm:col-span-1">-->
+<!--                        <dt class="text-sm font-medium text-gray-500">Salary expectation</dt>-->
+<!--                        <dd class="mt-1 text-sm text-gray-900">Rp {{ formatPrice(props.bid.price) }}</dd>-->
+<!--                    </div>-->
                     <div class="sm:col-span-2">
                         <dt class="text-sm font-medium text-gray-500">About</dt>
                         <dd class="mt-1 text-sm text-gray-900" v-html="props.bid.desc" />

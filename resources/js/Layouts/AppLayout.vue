@@ -253,6 +253,14 @@ const logout = () => {
                                         </NavLinkAlt>
 
                                         <NavLinkAlt
+                                            :href="route('projectBilling.index')"
+                                            :active="$page.component.startsWith('ProjectBilling')"
+                                            icon="fa-umbrella-beach"
+                                        >
+                                            Billing
+                                        </NavLinkAlt>
+
+                                        <NavLinkAlt
                                             :href="route('blog.index')"
                                             :active="$page.component.startsWith('Blog/')"
                                             icon="fa-blog"

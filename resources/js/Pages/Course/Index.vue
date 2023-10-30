@@ -86,6 +86,10 @@ const gridColumns = [
             </div>
         </div>
 
+        <div class="mt-10">
+            <p class="text-sm text-gray-900">Cari kelas baru untukmu <Link class="font-semibold text-primary-600 underline" :href="route('landing.course')">disini</Link></p>
+        </div>
+
 <!--        <Table-->
 <!--            :title="gridTitle"-->
 <!--            :data="props.course.data"-->

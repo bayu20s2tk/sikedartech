@@ -149,6 +149,10 @@ watch(tabProject, (newTabProject) => {
                     </div>
                 </div>
             </div>
+
+            <div class="mt-10">
+                <p class="text-sm text-gray-900">Cari proyek baru untukmu <Link class="font-semibold text-primary-600 underline" :href="route('landing.project')">disini</Link></p>
+            </div>
         </div>
 
         <div v-else-if="tabProject==2" class="">

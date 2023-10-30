@@ -8,11 +8,13 @@ import Heading from "@/Components/Heading.vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import PreviousButton from "../../Components/PreviousButton.vue";
 import Badge from "../../Components/Badge.vue";
+import BidList from "../Project/Partials/BidList.vue";
+import MemberList from "./Partials/MemberList.vue";
 // import BidList from "./Partials/BidList.vue";
 
 const props = defineProps({
     course: Object,
-    subscriber: Number
+    subscriber: Object
 });
 
 const tab = ref(null)
@@ -23,7 +25,7 @@ function formattedDate(value) {
 
 const stats = [
     { name: 'Status', stat: props.course.status, previousStat: '' },
-    { name: 'Member', stat: props.subscriber, previousStat: '' },
+    { name: 'Member', stat: props.subscriber.length, previousStat: '' },
     { name: 'Owner', stat: props.course.user.name, previousStat: '' },
 ]
 </script>
@@ -62,6 +64,15 @@ const stats = [
                         </dd>
                     </div>
                 </dl>
+            </div>
+
+            <h1 class="mt-10 text-sm font-medium leading-6 text-gray-900">Total member {{ props.subscriber.length }}</h1>
+            <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">
+                <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
+                    <template v-for="sub in props.subscriber">
+                        <MemberList :member="sub" />
+                    </template>
+                </ul>
             </div>
         </div>
 

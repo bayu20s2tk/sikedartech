@@ -39,7 +39,7 @@ class Project extends Model implements HasMedia
     const ONGOING = 3;
     const FINISH = 4;
     const STATUS = [
-        self::NONACTIVE => 'Nonaktif',
+        self::NONACTIVE => 'Batal',
         self::OPEN => 'Terbuka',
         self::SELECTED => 'Terpilih',
         self::ONGOING => 'Berlangsung',
@@ -49,8 +49,8 @@ class Project extends Model implements HasMedia
     const COLOR = [
         self::NONACTIVE => 'bg-red-100 text-red-800',
         self::OPEN => 'bg-primary-100 text-primary-800',
-        self::SELECTED => 'bg-teal-100 text-teal-800',
-        self::ONGOING => 'bg-amber-100 text-amber-800',
+        self::SELECTED => 'bg-primary-100 text-primary-800',
+        self::ONGOING => 'bg-primary-100 text-primary-800',
         self::FINISH => 'bg-green-100 text-green-800'
     ];
 

@@ -38,11 +38,12 @@ class ProjectBidController extends Controller
             Validator::make($request->toArray(), [
                 'project_id' => ['required'],
                 'desc' => ['required', 'string'],
-                'price' => ['required', 'numeric'],
+//                'price' => ['required', 'numeric'],
             ])->validateWithBag('storeInformation');
 
             $request['user_id'] = auth()->user()->id;
             $request['status_id'] = ProjectBid::NOTSELECTED;
+            $request['price'] = 0;
 
             ProjectBid::create($request->all());
             session()->flash('flash.banner', 'Ok!');

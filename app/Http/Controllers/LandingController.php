@@ -12,6 +12,7 @@ use App\Models\PageFeatureDetail;
 use App\Models\PageHero;
 use App\Models\Project;
 use App\Models\Trip;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -67,7 +68,9 @@ class LandingController extends Controller
         $comment = auth()->user()->attachVoteStatus($course->comment);
 //        $comment = $comment->toArray();
 //        dd($comment);
-        if (auth()->user()->hasSubscribed($course)) {
+        if (auth()->user()->hasSubscribed($course) or
+            auth()->user()->id == $course->user_id or
+            auth()->user()->id == User::ADMIN) {
             return Inertia::render('Landing/CourseShow', [
                 'course' => $course,
                 'comment' => $comment

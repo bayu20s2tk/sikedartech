@@ -82,10 +82,10 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-//        dd($course);
+//        dd($course->toArray(), $course->subscribers->toArray());
         return Inertia::render('Course/Show', [
             'course' => $course,
-            'subscriber' => $course->subscribers()->count()
+            'subscriber' => $course->subscribers
         ]);
     }
 

@@ -195,11 +195,15 @@ const closeModal = () => {
                                 </div>
 
                                 <div class="mt-10 grid gap-10">
-                                    <div class="">
+                                    <div class="" v-if="$page.props.user">
                                         <PrimaryButton @click="showForm=item.id" v-if="item.status_id==1">
                                             <i class="fa-duotone fa-paper-plane mr-2" />
                                             Place new bid
                                         </PrimaryButton>
+                                    </div>
+
+                                    <div v-else>
+                                        <p>Silakan <Link class="text-primary-600 font-semibold underline" :href="route('login')">login</Link> untuk buat bid</p>
                                     </div>
 
                                     <div class="space-y-8 sm:space-y-12">
@@ -260,27 +264,28 @@ const closeModal = () => {
                             v-model="form.desc"
                             class="mt-1 block w-full"
                             rows="4"
+                            placeholder="Masukkan deskripsi singkat tentang kemampuan kamu dan portofolio disini"
                             required
                         />
                         <InputError :message="form.errors.desc" class="mt-2"/>
                     </div>
 
-                    <div class="col-span-6 sm:col-span-3">
-                        <InputLabel for="price" value="Harga" />
-                        <div class="flex">
-                            <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">
-                                Rp
-                            </span>
-                            <TextInput
-                                id="price"
-                                v-model="form.price"
-                                type="number"
-                                class="mt-1 block w-full rounded-l-none"
-                                required
-                            />
-                        </div>
-                        <InputError :message="form.errors.price" class="mt-2" />
-                    </div>
+<!--                    <div class="col-span-6 sm:col-span-3">-->
+<!--                        <InputLabel for="price" value="Harga" />-->
+<!--                        <div class="flex">-->
+<!--                            <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">-->
+<!--                                Rp-->
+<!--                            </span>-->
+<!--                            <TextInput-->
+<!--                                id="price"-->
+<!--                                v-model="form.price"-->
+<!--                                type="number"-->
+<!--                                class="mt-1 block w-full rounded-l-none"-->
+<!--                                required-->
+<!--                            />-->
+<!--                        </div>-->
+<!--                        <InputError :message="form.errors.price" class="mt-2" />-->
+<!--                    </div>-->
                 </div>
 
             </template>

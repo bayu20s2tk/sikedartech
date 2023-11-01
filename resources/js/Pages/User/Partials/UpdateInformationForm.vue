@@ -108,7 +108,7 @@ const formReset = () => {
                 <InputError :message="form.errors.phone" class="mt-2"/>
             </div>
 
-            <div class="col-span-6 sm:col-span-2">
+            <div class="col-span-6 sm:col-span-2" v-if="props.users">
                 <InputLabel value="Status" />
                 <SelectInput
                     v-model:model-value.number="form.status_id"

@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request as Req;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -29,9 +30,22 @@ class UserController extends Controller
     public function index()
     {
 //        dd(User::latest()->get());
-        return Inertia::render('User/Index', [
-            'users' => User::latest()->paginate(20),
-        ]);
+//        return Inertia::render('User/Index', [
+//            'users' => User::latest()->get(),
+//        ]);
+
+        return Inertia::render(
+            'User/Index',
+            [
+                'users' => User::query()
+                    ->latest()
+                    ->when(Req::input('search'), function ($query, $search) {
+                        $query->where('name', 'like', '%' . $search . '%')
+                            ->OrWhere('email', 'like', '%' . $search . '%');
+                    })->paginate(8)
+                    ->withQueryString(),
+            ]
+        );
     }
 
     /**
@@ -62,6 +76,7 @@ class UserController extends Controller
             'phone' => ['required', 'unique:users'],
         ])->validateWithBag('storeInformation');
 
+        $request['status_id'] = User::ACTIVE;
         $request['password'] = bcrypt(12345678);
 
 //        $request['email_verified_at'] = Carbon::now(); //just for development

@@ -90,7 +90,7 @@ const closeModal = () => {
                         <div class="mt-3 bg-white bg-opacity-50 border border-gray-300 rounded-3xl shadow-lg">
                             <div class="px-3 py-5 grid gap-3 ">
                                 <h3 class="font-semibold text-gray-900 ml-2">
-                                    {{ props.project?.data.length ?? '0' }} Proyek
+                                    {{ props.project?.data.length ?? '0' }} Proyek Terbuka
                                 </h3>
 
                                 <template v-for="(list, listIdx) in props.project?.data" :key="list.id">
@@ -167,28 +167,28 @@ const closeModal = () => {
                                         <p>
                                             <span class="block text-xl font-bold text-gray-900">Rp {{ formatPrice(item.budget_from) }}</span>
                                             <span class="mt-1 block text-sm text-gray-600">
-                                              <span class="font-medium text-gray-900">Published Budget</span> alalla
+                                              <span class="font-medium text-gray-900">Published Budget</span>
                                             </span>
                                         </p>
 
                                         <p>
                                             <span class="block text-xl font-bold text-gray-900">{{ formattedDate(item.created_at) }}</span>
                                             <span class="mt-1 block text-sm text-gray-600">
-                                              <span class="font-medium text-gray-900">Published Date</span> alalla
+                                              <span class="font-medium text-gray-900">Published Date</span>
                                             </span>
                                         </p>
 
                                         <p>
                                             <span class="block text-xl font-bold text-gray-900">{{ item.status }}</span>
                                             <span class="mt-1 block text-sm text-gray-600">
-                                              <span class="font-medium text-gray-900">Project Status</span> alalla
+                                              <span class="font-medium text-gray-900">Project Status</span>
                                             </span>
                                         </p>
 
                                         <p>
                                             <span class="block text-xl font-bold text-gray-900">{{ item.bid.length }}</span>
                                             <span class="mt-1 block text-sm text-gray-600">
-                                              <span class="font-medium text-gray-900">Bid Count</span> alalla
+                                              <span class="font-medium text-gray-900">Bid Count</span>
                                             </span>
                                         </p>
                                     </div>

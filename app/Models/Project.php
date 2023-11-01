@@ -54,7 +54,7 @@ class Project extends Model implements HasMedia
         self::SELECTED => 'bg-primary-100 text-primary-800',
         self::ONGOING => 'bg-primary-100 text-primary-800',
         self::FINISH => 'bg-green-100 text-green-800',
-        self::PAID => 'bg-green-100 text-green-800'
+        self::PAID => 'bg-indigo-100 text-indigo-800'
     ];
 
     const BILLING = [

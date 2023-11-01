@@ -67,6 +67,12 @@ class User extends Authenticatable implements Wallet, MustVerifyEmail
         self::BANNED => 'Blokir',
     ];
 
+    const COLOR = [
+        self::ACTIVE => 'bg-green-100 text-green-800',
+        self::NONACTIVE => 'bg-amber-100 text-amber-800',
+        self::BANNED => 'bg-red-100 text-red-800',
+    ];
+
     const ADMIN = 1;
     const MENTOR = 2;
     const USER = 3;
@@ -95,7 +101,8 @@ class User extends Authenticatable implements Wallet, MustVerifyEmail
         'profile_photo_url',
         'created',
         'role',
-        'status'
+        'color',
+        'status',
     ];
 
     public function getCreatedAttribute()
@@ -106,8 +113,13 @@ class User extends Authenticatable implements Wallet, MustVerifyEmail
     {
         return self::STATUS[$this->status_id];
     }
+    public function getColorAttribute(): string
+    {
+        return self::COLOR[$this->status_id];
+    }
     public function getRoleAttribute(): string
     {
         return self::ROLE[$this->role_id];
     }
+
 }

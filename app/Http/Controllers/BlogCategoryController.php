@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request as Req;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -18,7 +19,13 @@ class BlogCategoryController extends Controller
     public function index()
     {
         return Inertia::render('BlogCategory/Index', [
-           'category' => BlogCategory::latest()->paginate(20)
+//           'category' => BlogCategory::latest()->paginate(20)
+            'category' => BlogCategory::query()
+                ->latest()
+                ->when(Req::input('search'), function ($query, $search) {
+                    $query->where('name', 'like', '%' . $search . '%');
+                })->paginate(8)
+                ->withQueryString(),
         ]);
     }
 

@@ -10,7 +10,6 @@ import PreviousButton from "../../Components/PreviousButton.vue";
 import Badge from "../../Components/Badge.vue";
 import BidList from "../Project/Partials/BidList.vue";
 import MemberList from "./Partials/MemberList.vue";
-// import BidList from "./Partials/BidList.vue";
 
 const props = defineProps({
     course: Object,
@@ -48,6 +47,14 @@ const stats = [
                 </div>
 
                 <div class="">
+                    <a
+                        class="text-primary-600 font-semibold mr-5"
+                        target="_blank"
+                        :href="route('landing.course.show', props.course)"
+                    >
+                        <i class="fa-duotone fa-arrow-up-right-from-square mr-1"></i>
+                        Lihat
+                    </a>
                     <PrimaryButton as="a" :href="route('course.edit', props.course)" >Ubah Data</PrimaryButton>
                 </div>
             </div>

@@ -23,9 +23,9 @@ import PreviousButton from "@/Components/PreviousButton.vue";
 
         <UpdateInformationForm :users="$page.props.users ?? '' " />
 
-        <SectionBorder />
-
         <template v-if="$page.props.users">
+            <SectionBorder />
+
             <PasswordResetForm :users="$page.props.users" />
 
             <SectionBorder />

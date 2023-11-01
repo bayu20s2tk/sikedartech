@@ -10,15 +10,44 @@ import moment from "moment/moment";
 import Heading from "../../Components/Heading.vue";
 import Badge from "../../Components/Badge.vue";
 import MobileMenu from "@/Components/MobileMenu.vue";
+import Pagination from "../../Components/Pagination.vue";
 
 const props = defineProps({
-    project: undefined,
-    projectMe: undefined,
+    project: {
+        type: Object,
+        default: () => ({}),
+    },
+    projectMe: {
+        type: Object,
+        default: () => ({}),
+    }
 });
 
-onMounted(() => {
-    router.reload({only: ['project', 'projectMe']})
-})
+// onMounted(() => {
+//     router.reload({only: ['project', 'projectMe']})
+// })
+
+let search = ref('');
+watch(search, (value) => {
+    router.get(
+        route('project.index'),
+        { search: value },
+        {
+            preserveState: true,
+        }
+    );
+});
+
+let searchMe = ref('');
+watch(searchMe, (value) => {
+    router.get(
+        route('project.index'),
+        { searchMe: value },
+        {
+            preserveState: true,
+        }
+    );
+});
 
 function formatPrice(value) {
     return value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
@@ -27,16 +56,6 @@ function formatPrice(value) {
 function formattedDate(value) {
     return moment(value).format('DD MMM Y HH:mm')
 }
-
-const searchQuery = ref('')
-const gridTitle = [
-    'Nama',
-    'Keterangan',
-]
-const gridColumns = [
-    'name',
-    'desc',
-]
 
 const tabProject = ref(JSON.parse(localStorage.getItem('tabProject')) ?? 1)
 
@@ -98,21 +117,36 @@ watch(tabProject, (newTabProject) => {
                         :class="tabProject==1 ? 'border-primary-600 text-primary-600' : 'text-gray-500 border-gray-300' "
                         @click="tabProject=1"
                 >
-                    {{ $page.props.user.role_id==1 ? 'Semua Project' : 'Project for me' }} <Badge class="ml-1 bg-primary-600 text-white" :name="props.project?.length ?? 0" />
+                    {{ $page.props.user.role_id==1 ? 'Semua Project' : 'Project for me' }} <Badge class="ml-1 bg-primary-600 text-white" :name="props.project?.data.length ?? 0" />
                 </button>
 
                 <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
                         :class="tabProject==2 ? 'border-green-600 text-green-600' : 'text-gray-500 border-gray-300 ' "
                         @click="tabProject=2"
                 >
-                    Project by me <Badge class="ml-1 bg-green-600 text-white" :name="props.projectMe?.length ?? 0" />
+                    Project by me <Badge class="ml-1 bg-green-600 text-white" :name="props.projectMe?.data.length ?? 0" />
                 </button>
             </nav>
         </div>
 
         <div v-if="tabProject==1" class="">
+            <div class="flex justify-between gap-3">
+                <div class="">
+                    <TextInput
+                        type="text"
+                        v-model="search"
+                        placeholder="Cari disini"
+                        class="block w-full lg:w-96 mb-5 shadow"
+                    />
+                </div>
+
+                <div class="">
+<!--                    <PrimaryButton as="a" :href="route('project.create')" >Tambah</PrimaryButton>-->
+                </div>
+            </div>
+
             <div class="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
-                <div v-for="item in props.project" :key="item.name">
+                <div v-for="item in props.project.data" :key="item.name">
                     <div>
                         <Link :href="route('project.show', item)" class="inline-block">
                             <span
@@ -127,11 +161,6 @@ watch(tabProject, (newTabProject) => {
                         <p class="text-xl font-semibold text-gray-900">{{ item.name }}</p>
     <!--                    <p class="mt-3 text-base text-gray-500">{{ blog.desc }}</p>-->
                     </Link>
-
-<!--                    <p class="mt-2 text-sm font-medium text-gray-500">-->
-<!--                        {{ item.bid.length }} Bid-->
-<!--                    </p>-->
-
                     <div class="mt-6 flex items-center">
                         <div class="flex-shrink-0">
                             <Link :href="route('user.show', item.user)">
@@ -150,23 +179,22 @@ watch(tabProject, (newTabProject) => {
                 </div>
             </div>
 
+            <Pagination :pagination="props.project" />
+
             <div class="mt-10">
                 <p class="text-sm text-gray-900">Cari proyek baru untukmu <Link class="font-semibold text-primary-600 underline" :href="route('landing.project')">disini</Link></p>
             </div>
         </div>
 
-        <div v-else-if="tabProject==2" class="">
+        <div v-if="tabProject==2" class="">
             <div class="flex justify-between gap-3">
                 <div class="">
-<!--                    <form id="search">-->
-<!--                        <TextInput-->
-<!--                            name="query"-->
-<!--                            v-model="searchQuery"-->
-<!--                            type="text"-->
-<!--                            class="block w-full lg:w-96 mb-5 shadow"-->
-<!--                            placeholder="Cari disini"-->
-<!--                        />-->
-<!--                    </form>-->
+                    <TextInput
+                        type="text"
+                        v-model="searchMe"
+                        placeholder="Cari disini"
+                        class="block w-full lg:w-96 mb-5 shadow"
+                    />
                 </div>
 
                 <div class="">
@@ -175,7 +203,7 @@ watch(tabProject, (newTabProject) => {
             </div>
 
             <div class="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
-                <div v-for="item in props.projectMe" :key="item.name">
+                <div v-for="item in props.projectMe.data" :key="item.name">
                     <div>
                         <Link :href="route('project.show', item)" class="inline-block">
                             <span

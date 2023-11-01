@@ -61,6 +61,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::post('/course-comment/dislike/{courseComment}', [CourseCommentController::class, 'dislike'])->name('courseComment.dislike');
 
     Route::resource('/project', ProjectController::class)->names('project');
+    Route::get('/project-me', [ProjectController::class, 'indexMe'])->name('project.indexMe');
     Route::post('project/add-media', [ProjectController::class, 'addMedia'])->name('project.addMedia');
     Route::delete('project/delete-media/{id}', [ProjectController::class, 'deleteMedia'])->name('project.deleteMedia');
 

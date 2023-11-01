@@ -6,6 +6,7 @@ use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\Gallery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request as Req;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -21,7 +22,13 @@ class BlogController extends Controller
     {
         return Inertia::render('Blog/Index', [
 //            'blog' => Blog::latest()->paginate(20),
-            'blog' => Inertia::lazy(fn () => Blog::latest()->get())
+//            'blog' => Inertia::lazy(fn () => Blog::latest()->get())
+            'blog' => Blog::query()
+                ->latest()
+                ->when(Req::input('search'), function ($query, $search) {
+                    $query->where('name', 'like', '%' . $search . '%');
+                })->paginate(8)
+                ->withQueryString(),
         ]);
     }
 

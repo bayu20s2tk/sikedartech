@@ -256,6 +256,7 @@ const logout = () => {
                                             :href="route('projectBilling.index')"
                                             :active="$page.component.startsWith('ProjectBilling')"
                                             icon="fa-umbrella-beach"
+                                            v-if="$page.props.user.role_id==1"
                                         >
                                             Billing
                                         </NavLinkAlt>

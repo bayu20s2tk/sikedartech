@@ -9,6 +9,7 @@ use App\Models\CourseCategory;
 use App\Models\Gallery;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request as Req;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -31,21 +32,26 @@ class CourseController extends Controller
 
         switch(auth()->user()->role_id) {
             case(User::ADMIN):
-                $course = Course::latest()->get();
+                $course = Course::query();
                 break;
             case(User::MENTOR):
-                $course = Course::where('user_id', auth()->user()->id)->get();
+                $course = Course::query()->where('user_id', auth()->user()->id);
                 break;
             case(User::USER):
-                $course = Course::subscribedBy(auth()->user())->get();
+                $course = Course::query()->subscribedBy(auth()->user());
                 break;
             default:
                 dd('error');
         }
 
         return Inertia::render('Course/Index', [
-//            'course' => Course::latest()->paginate(20),
-            'course' =>  Inertia::lazy(fn () => $course),
+//            'course' =>  Inertia::lazy(fn () => $course),
+            'course' => $course
+                ->latest()
+                ->when(Req::input('search'), function ($query, $search) {
+                    $query->where('name', 'like', '%' . $search . '%');
+                })->paginate(8)
+                ->withQueryString(),
         ]);
     }
 

@@ -103,11 +103,19 @@ const tabProjectShow = ref(1)
                 </div>
 
                 <div class="" v-if="props.project.user_id==$page.props.user.id">
-                    <div class="flex gap-2" v-if="props.project.status_id==1">
+                    <div class="flex items-center gap-2" v-if="props.project.status_id==1">
+<!--                        <a-->
+<!--                            class="text-primary-600 font-semibold"-->
+<!--                            target="_blank"-->
+<!--                            :href="route('landing.project.show', props.project)"-->
+<!--                        >-->
+<!--                            <i class="fa-duotone fa-arrow-up-right-from-square mr-1"></i>-->
+<!--                            Lihat-->
+<!--                        </a>-->
                         <DangerButton
                             @click="cancelInformation"
                         >
-                            Batal
+                            Cancel
                         </DangerButton>
                         <PrimaryButton
                             as="a"

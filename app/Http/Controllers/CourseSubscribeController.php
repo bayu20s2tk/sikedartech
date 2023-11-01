@@ -7,6 +7,7 @@ use App\Models\CourseCategory;
 use App\Models\CourseSubscribe;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request as Req;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
@@ -20,7 +21,12 @@ class CourseSubscribeController extends Controller
     {
 //        dd(CourseSubscribe::latest()->get());
         return Inertia::render('CourseSubscribe/Index', [
-            'subscribe' => CourseSubscribe::latest()->get()
+            'subscribe' => CourseSubscribe::query()->with('user')
+                ->latest()
+                ->when(Req::input('search'), function ($query, $search) {
+                    $query->where('user.name', 'like', '%' . $search . '%');
+                })->paginate(8)
+                ->withQueryString(),
         ]);
     }
 

@@ -5,17 +5,32 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import Table from "@/Components/Table.vue";
-import {onMounted, ref} from "vue";
+import {onMounted, ref, watch} from "vue";
 import moment from "moment";
 import MobileMenu from "@/Components/MobileMenu.vue";
+import Pagination from "../../Components/Pagination.vue";
 
 const props = defineProps({
-    blog: undefined,
+    blog: {
+        type: Object,
+        default: () => ({}),
+    },
 });
 
-onMounted(() => {
-    router.reload({only: ['blog']})
-})
+// onMounted(() => {
+//     router.reload({only: ['blog']})
+// })
+
+let search = ref('');
+watch(search, (value) => {
+    router.get(
+        route('blog.index'),
+        { search: value },
+        {
+            preserveState: true,
+        }
+    );
+});
 
 function formatPrice(value) {
     return value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
@@ -24,16 +39,6 @@ function formatPrice(value) {
 function formattedDate(value) {
     return moment(value).format('DD MMM Y HH:mm')
 }
-
-const searchQuery = ref('')
-const gridTitle = [
-    'Nama',
-    'Keterangan',
-]
-const gridColumns = [
-    'name',
-    'desc',
-]
 
 </script>
 
@@ -45,15 +50,12 @@ const gridColumns = [
 
         <div class="flex justify-between gap-3">
             <div class="">
-                <form id="search">
-                    <TextInput
-                        name="query"
-                        v-model="searchQuery"
-                        type="text"
-                        class="block w-full lg:w-96 mb-5 shadow"
-                        placeholder="Cari disini"
-                    />
-                </form>
+                <TextInput
+                    type="text"
+                    v-model="search"
+                    placeholder="Cari disini"
+                    class="block w-full lg:w-96 mb-5 shadow"
+                />
             </div>
 
             <div class="">
@@ -62,7 +64,7 @@ const gridColumns = [
         </div>
 
         <div class="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
-            <div v-for="blog in props.blog" :key="blog.name">
+            <div v-for="blog in props.blog.data" :key="blog.name">
                 <div>
                     <Link :href="route('blog.edit', blog)" class="inline-block">
                 <span
@@ -92,6 +94,8 @@ const gridColumns = [
                 </div>
             </div>
         </div>
+
+        <Pagination :pagination="props.blog" />
 
 <!--        <Table-->
 <!--            :title="gridTitle"-->

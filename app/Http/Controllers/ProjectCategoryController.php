@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CourseCategory;
 use App\Models\ProjectCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request as Req;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
@@ -17,7 +18,13 @@ class ProjectCategoryController extends Controller
     public function index()
     {
         return Inertia::render('ProjectCategory/Index', [
-            'category' => ProjectCategory::latest()->paginate(20)
+//            'category' => ProjectCategory::latest()->paginate(20)
+            'category' => ProjectCategory::query()
+                ->latest()
+                ->when(Req::input('search'), function ($query, $search) {
+                    $query->where('name', 'like', '%' . $search . '%');
+                })->paginate(8)
+                ->withQueryString(),
         ]);
     }
 

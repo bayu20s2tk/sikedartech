@@ -1,37 +1,35 @@
 <script setup>
-import {Head, Link, useForm} from '@inertiajs/vue3';
+import {Head, Link, router, useForm} from '@inertiajs/vue3';
 import AppLayout from "@/Layouts/AppLayout.vue";
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import Table from "@/Components/Table.vue";
-import {ref} from "vue";
+import {ref, watch} from "vue";
+import Pagination from "../../Components/Pagination.vue";
+import moment from "moment";
 
 const props = defineProps({
-    category: Object | String
+    category: {
+        type: Object,
+        default: () => ({}),
+    },
 });
 
-const searchQuery = ref('')
-const gridTitle = [
-    'Nama',
-    'Keterangan',
-]
-const gridColumns = [
-    'name',
-    'desc',
-]
+let search = ref('');
+watch(search, (value) => {
+    router.get(
+        route('courseCategory.index'),
+        { search: value },
+        {
+            preserveState: true,
+        }
+    );
+});
 
-const searchQueryCategory = ref('')
-const gridTitleCategory = [
-    'Nama',
-    'Keterangan',
-    'status'
-]
-const gridColumnsCategory = [
-    'name',
-    'desc',
-    'status'
-]
+function formattedDate(value) {
+    return moment(value).format('DD MMM Y HH:mm')
+}
 
 </script>
 
@@ -43,15 +41,12 @@ const gridColumnsCategory = [
 
         <div class="flex justify-between gap-3">
             <div class="">
-                <form id="search">
-                    <TextInput
-                        name="query"
-                        v-model="searchQuery"
-                        type="text"
-                        class="block w-full lg:w-96 mb-5 shadow"
-                        placeholder="Cari disini"
-                    />
-                </form>
+                <TextInput
+                    type="text"
+                    v-model="search"
+                    placeholder="Cari disini"
+                    class="block w-full lg:w-96 mb-5 shadow"
+                />
             </div>
 
             <div class="">
@@ -59,17 +54,56 @@ const gridColumnsCategory = [
             </div>
         </div>
 
-        <Table
-            :title="gridTitle"
-            :data="props.category.data"
-            :paginate="props.category"
-            :columns="gridColumns"
-            :filter-key="searchQuery"
-            routes="courseCategory"
-            :slug=false
-            :view=false
-            :edit=true
-        />
+        <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl overflow-hidden shadow-lg border border-gray-300">
+            <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
+                <template v-for="item in props.category.data" :key="item.id">
+                    <li>
+                        <Link preserve-scroll :href="route('courseCategory.edit', item)" class="flex items-center hover:bg-primary-50" >
+                            <div class="pl-4 sm:pl-6">
+                                <i class="fa-duotone text-primary-600 text-2xl" :class="item.icon" />
+                            </div>
+                            <div class="px-4 py-4 sm:px-6 grow">
+                                <div class="flex items-center justify-between">
+                                    <p class="font-medium truncate capitalize text-gray-900">
+                                        {{ item.name }}
+                                    </p>
+                                    <div class="ml-2 flex-shrink-0 flex">
+                                        <p class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-gray-900">
+                                            {{ item.status }}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between">
+                                    <div class="flex">
+                                        <p class="flex items-center text-sm text-gray-600" >
+                                            {{ item.desc }}
+                                        </p>
+                                    </div>
+                                    <div class="flex items-center text-sm text-gray-600" >
+                                        <!--                                        <i class="fa-regular fa-calendar pr-2" />-->
+                                        {{ formattedDate(item.updated_at) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </Link>
+                    </li>
+                </template>
+            </ul>
+        </div>
+
+        <Pagination :pagination="props.category" />
+
+<!--        <Table-->
+<!--            :title="gridTitle"-->
+<!--            :data="props.category.data"-->
+<!--            :paginate="props.category"-->
+<!--            :columns="gridColumns"-->
+<!--            :filter-key="searchQuery"-->
+<!--            routes="courseCategory"-->
+<!--            :slug=false-->
+<!--            :view=false-->
+<!--            :edit=true-->
+<!--        />-->
 
     </AppLayout>
 

@@ -5,17 +5,28 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import Table from "@/Components/Table.vue";
-import {onMounted, ref} from "vue";
+import {onMounted, ref, watch} from "vue";
 import moment from "moment/moment";
 import MobileMenu from "@/Components/MobileMenu.vue";
+import Pagination from "../../Components/Pagination.vue";
 
 const props = defineProps({
-    course: undefined,
+    course: {
+        type: Object,
+        default: () => ({}),
+    },
 });
 
-onMounted(() => {
-    router.reload({only: ['course']})
-})
+let search = ref('');
+watch(search, (value) => {
+    router.get(
+        route('course.index'),
+        { search: value },
+        {
+            preserveState: true,
+        }
+    );
+});
 
 function formatPrice(value) {
     return value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
@@ -24,16 +35,6 @@ function formatPrice(value) {
 function formattedDate(value) {
     return moment(value).format('DD MMM Y HH:mm')
 }
-
-const searchQuery = ref('')
-const gridTitle = [
-    'Nama',
-    'Keterangan',
-]
-const gridColumns = [
-    'name',
-    'desc',
-]
 
 </script>
 
@@ -45,15 +46,12 @@ const gridColumns = [
 
         <div class="flex justify-between gap-3">
             <div class="">
-                <form id="search">
-                    <TextInput
-                        name="query"
-                        v-model="searchQuery"
-                        type="text"
-                        class="block w-full lg:w-96 mb-5 shadow"
-                        placeholder="Cari disini"
-                    />
-                </form>
+                <TextInput
+                    type="text"
+                    v-model="search"
+                    placeholder="Cari disini"
+                    class="block w-full lg:w-96 mb-5 shadow"
+                />
             </div>
 
             <div class="" v-if="$page.props.user.role_id != 3">
@@ -62,7 +60,7 @@ const gridColumns = [
         </div>
 
         <div class="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
-            <div v-for="item in props.course" :key="item.id">
+            <div v-for="item in props.course.data" :key="item.id">
                 <Link :href="$page.props.user.role_id !== 3 ? route('course.show', item) : route('landing.course.show', item)">
                     <div class="bg-white bg-opacity-50 h-full border border-gray-300 rounded-3xl shadow-lg">
                         <div class="h-52 w-full overflow-hidden rounded-t-3xl">
@@ -85,6 +83,8 @@ const gridColumns = [
                 </Link>
             </div>
         </div>
+
+        <Pagination :pagination="props.course" />
 
         <div class="mt-10">
             <p class="text-sm text-gray-900">Cari kelas baru untukmu <Link class="font-semibold text-primary-600 underline" :href="route('landing.course')">disini</Link></p>

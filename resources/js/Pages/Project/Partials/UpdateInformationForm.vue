@@ -91,7 +91,7 @@ const showPage = () => {
             </div>
 
             <div class="col-span-6 sm:col-span-2">
-                <InputLabel for="price" value="Budget mulai dari"/>
+                <InputLabel for="price" value="Budget"/>
                 <div class="flex">
                   <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">Rp</span>
                     <TextInput

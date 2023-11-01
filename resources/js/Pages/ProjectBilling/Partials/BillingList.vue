@@ -71,6 +71,14 @@ function formatPrice(value) {
                         <dd class="mt-1 text-sm text-gray-900">Rp {{formatPrice(props.item.budget_from) }}</dd>
                     </div>
                     <div class="sm:col-span-1">
+                        <dt class="text-sm font-medium text-gray-500">Worker</dt>
+                        <dd class="mt-1 text-sm text-gray-900">{{ props.item.worker.name }}</dd>
+                    </div>
+                    <div class="sm:col-span-1">
+                        <dt class="text-sm font-medium text-gray-500">Owner</dt>
+                        <dd class="mt-1 text-sm text-gray-900">{{ props.item.user.name }}</dd>
+                    </div>
+                    <div class="sm:col-span-1">
                         <dt class="text-sm font-medium text-gray-500">Status Proyek</dt>
                         <dd class="mt-1 text-sm text-gray-900">{{ props.item.status }}</dd>
                     </div>

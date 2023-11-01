@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request as Req;
 use Inertia\Inertia;
 
 class ProjectBillingController extends Controller
@@ -15,9 +16,13 @@ class ProjectBillingController extends Controller
     {
 //        dd(Project::where('worker_id', '!=', null)->latest()->get()->toArray());
         return Inertia::render('ProjectBilling/Index', [
-            'project' => Project::where('status_id', Project::FINISH)
-                ->orWhere('status_id', Project::PAID)
-                ->latest()->get()
+            'project' => Project::query()
+                ->whereIn('status_id', [Project::FINISH, Project::PAID])
+                ->latest()
+                ->when(Req::input('search'), function ($query, $search) {
+                    $query->where('name', 'like', '%' . $search . '%');
+                })->paginate(8)
+                ->withQueryString(),
         ]);
     }
 

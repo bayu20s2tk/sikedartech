@@ -10,6 +10,7 @@ use App\Models\ProjectCategory;
 use App\Models\ProjectChat;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request as Req;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -25,24 +26,37 @@ class ProjectController extends Controller
     {
         switch(auth()->user()->role_id) {
             case(User::ADMIN):
-                $project = Project::latest()->get();
-                $projectMe = Project::where('user_id', auth()->user()->id)->get();
+                $project = Project::query();
+                $projectMe = Project::query()->where('user_id', auth()->user()->id);
                 break;
             case(User::MENTOR):
-                $project = Project::where('worker_id', auth()->user()->id)->get();
-                $projectMe = Project::where('user_id', auth()->user()->id)->get();
+                $project = Project::query()->where('worker_id', auth()->user()->id);
+                $projectMe = Project::query()->where('user_id', auth()->user()->id);
                 break;
             case(User::USER):
-                $project = Project::where('worker_id', auth()->user()->id)->get();
-                $projectMe = Project::where('user_id', auth()->user()->id)->get();
+                $project = Project::query()->where('worker_id', auth()->user()->id);
+                $projectMe = Project::query()->where('user_id', auth()->user()->id);
                 break;
             default:
                 dd('error');
         }
 
         return Inertia::render('Project/Index', [
-            'project' =>  Inertia::lazy(fn () => $project),
-            'projectMe' => Inertia::lazy(fn () => $projectMe),
+//            'project' =>  Inertia::lazy(fn () => $project),
+//            'projectMe' => Inertia::lazy(fn () => $projectMe),
+            'project' => $project
+                ->latest()
+                ->when(Req::input('search'), function ($query, $search) {
+                    $query->where('name', 'like', '%' . $search . '%');
+                })->paginate(8)
+                ->withQueryString(),
+
+            'projectMe' => $projectMe
+                ->latest()
+                ->when(Req::input('searchMe'), function ($query, $search) {
+                    $query->where('name', 'like', '%' . $search . '%');
+                })->paginate(8)
+                ->withQueryString(),
         ]);
     }
 

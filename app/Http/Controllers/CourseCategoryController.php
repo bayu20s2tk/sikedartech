@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\BlogCategory;
 use App\Models\CourseCategory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request as Req;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
@@ -17,7 +19,13 @@ class CourseCategoryController extends Controller
     public function index()
     {
         return Inertia::render('CourseCategory/Index', [
-           'category' => CourseCategory::latest()->paginate(20)
+//           'category' => CourseCategory::latest()->paginate(20)
+            'category' => CourseCategory::query()
+                ->latest()
+                ->when(Req::input('search'), function ($query, $search) {
+                    $query->where('name', 'like', '%' . $search . '%');
+                })->paginate(8)
+                ->withQueryString(),
         ]);
     }
 
@@ -33,6 +41,9 @@ class CourseCategoryController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return RedirectResponse
      */
     public function store(Request $request)
     {

@@ -1,26 +1,36 @@
 <script setup>
-import {Head, Link, useForm} from '@inertiajs/vue3';
+import {Head, Link, router, useForm} from '@inertiajs/vue3';
 import AppLayout from "@/Layouts/AppLayout.vue";
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import SecondaryButton from '@/Components/SecondaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import Table from "@/Components/Table.vue";
-import {ref} from "vue";
+import {ref, watch} from "vue";
 import BillingList from "./Partials/BillingList.vue";
+import moment from "moment";
+import Pagination from "../../Components/Pagination.vue";
 
 const props = defineProps({
-    project: Object | String
+    project: {
+        type: Object,
+        default: () => ({}),
+    },
 });
 
-const searchQuery = ref('')
-const gridTitle = [
-    'Nama',
-    'Keterangan',
-]
-const gridColumns = [
-    'name',
-    'desc',
-]
+let search = ref('');
+watch(search, (value) => {
+    router.get(
+        route('projectBilling.index'),
+        { search: value },
+        {
+            preserveState: true,
+        }
+    );
+});
+
+function formattedDate(value) {
+    return moment(value).format('DD MMM Y HH:mm')
+}
 
 </script>
 
@@ -32,15 +42,12 @@ const gridColumns = [
 
         <div class="flex justify-between gap-3">
             <div class="">
-                <form id="search">
-                    <TextInput
-                        name="query"
-                        v-model="searchQuery"
-                        type="text"
-                        class="block w-full lg:w-96 mb-5 shadow"
-                        placeholder="Cari disini"
-                    />
-                </form>
+                <TextInput
+                    type="text"
+                    v-model="search"
+                    placeholder="Cari disini"
+                    class="block w-full lg:w-96 mb-5 shadow"
+                />
             </div>
 
             <div class="">
@@ -48,27 +55,16 @@ const gridColumns = [
             </div>
         </div>
 
-<!--        <Table-->
-<!--            :title="gridTitle"-->
-<!--            :data="props.subscribe.data"-->
-<!--            :paginate="props.subscribe"-->
-<!--            :columns="gridColumns"-->
-<!--            :filter-key="searchQuery"-->
-<!--            routes="courseSubscribe"-->
-<!--            :slug=false-->
-<!--            :view=false-->
-<!--            :edit=false-->
-<!--        />-->
-
         <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">
             <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
-                <template v-for="item in props.project">
+                <template v-for="item in props.project.data">
                     <BillingList :item="item" />
                 </template>
 
             </ul>
         </div>
 
+        <Pagination :pagination="props.project" />
     </AppLayout>
 
 

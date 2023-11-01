@@ -23,6 +23,7 @@ watch(search, (value) => {
         { search: value },
         {
             preserveState: true,
+            replace: true,
         }
     );
 });

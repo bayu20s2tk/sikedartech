@@ -45,6 +45,7 @@ watch(searchMe, (value) => {
         { searchMe: value },
         {
             preserveState: true,
+            replace: true,
         }
     );
 });

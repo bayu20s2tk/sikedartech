@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Request as Req;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class CourseSubscribeController extends Controller
 {
@@ -48,8 +49,15 @@ class CourseSubscribeController extends Controller
             'photo' => ['required']
         ])->validateWithBag('storeInformation');
 
-        if (CourseSubscribe::where('course_id', $request['course_id'])->where('user_id', auth()->user()->id)->first()) {
-            session()->flash('flash.banner', 'sabar ya kk, sedang di proses!');
+        $course = CourseSubscribe::where('course_id', $request['course_id'])->where('user_id', auth()->user()->id)->first();
+
+        if ($course) {
+            $media = Media::find($course->media[0]->id);
+            $course->deleteMedia($media->id);
+            $course->addMedia($request['photo'])->toMediaCollection();
+            $course->update([
+                'status_id' => CourseSubscribe::REQUEST,
+            ]);
         } else {
             $request['user_id'] = auth()->user()->id;
             $request['status_id'] = CourseSubscribe::REQUEST;
@@ -57,8 +65,8 @@ class CourseSubscribeController extends Controller
             $sub = CourseSubscribe::create($request->all());
             $sub->addMedia($request['photo'])->toMediaCollection();
 
-            session()->flash('flash.banner', 'sabar ya kk, sedang di proses!');
         }
+        session()->flash('flash.banner', 'sabar ya, sedang di proses!');
 
 
 //        return Redirect::route('courseCategory.index', []);

@@ -6,6 +6,8 @@ import TextAreaInput from "@/Components/TextAreaInput.vue";
 import InputError from "@/Components/InputError.vue";
 import {ref} from "vue";
 import CommentChildSection from "./CommentChildSection.vue";
+import ActionMessage from "./ActionMessage.vue";
+import DialogModal from "./DialogModal.vue";
 
 const props = defineProps({
     course_id: Number,
@@ -84,11 +86,35 @@ const dislikeComment = (item) => {
     }
 };
 
+const reportInformation = (item) => {
+    // form.post(route('blogComment.dislike'), {
+    //     errorBag: 'storeInformation',
+    //     preserveScroll: true,
+    //     onSuccess: () => closeModal(),
+    //     // onError: () => passwordInput.value.focus(),
+    //     // onFinish: () => form.reset(),
+    // });
+};
+
+const confirmingModal = ref(false)
+const closeModal = () => {
+    confirmingModal.value = false;
+    // form.reset();
+}
+
 const show = ref(false)
 const childShow = ref(false)
+
 function formattedDate(value) {
     return moment(value).format('DD MMM Y HH:mm')
 }
+
+const plans = [
+    { id: 1, name: 'Kebencian dan pelecehan', description: 'Lorem ipsum dolor sit amet' },
+    { id: 2, name: 'Konten seksual', description: 'Lorem ipsum dolor sit amet' },
+    { id: 3, name: 'Misinformasi', description: 'Lorem ipsum dolor sit amet' },
+    { id: 4, name: 'Penipuan dan scam', description: 'Lorem ipsum dolor sit amet' },
+]
 </script>
 
 <template>
@@ -132,18 +158,18 @@ function formattedDate(value) {
                     <div class="space-x-2">
                         <button type="button" @click="likeComment(props.comment.id)">
                             <i class="text-lg fa-heart"
-                               :class="props.comment.has_upvoted ? 'fa-solid text-red-600' : 'fa-regular text-primary-600' " />
+                               :class="props.comment.has_upvoted ? 'fa-solid text-primary-600' : 'fa-regular text-primary-600' " />
                         </button>
                         <span
                             v-if="props.comment.likes != 0"
-                            :class="props.comment.has_upvoted ? 'text-red-600' : 'text-primary-600' "
+                            :class="props.comment.has_upvoted ? 'text-primary-600' : 'text-primary-600' "
                         >{{ props.comment.likes }}</span>
                     </div>
 
                     <div class="space-x-2">
                         <button type="button" @click="dislikeComment(props.comment.id)">
                             <i class="text-lg fa-thumbs-down"
-                               :class="props.comment.has_downvoted ? 'fa-solid text-primary-600' : 'fa-regular text-primary-600' " />
+                               :class="props.comment.has_downvoted ? 'fa-solid text-red-600' : 'fa-regular text-red-600' " />
                         </button>
 <!--                        <span-->
 <!--                            v-if="props.comment.dislikes != 0"-->
@@ -151,6 +177,12 @@ function formattedDate(value) {
 <!--                        >-->
 <!--                            {{ props.comment.dislikes }}-->
 <!--                        </span>-->
+                    </div>
+
+                    <div class="space-x-2">
+                        <button type="button" @click="confirmingModal=true">
+                            <i class="text-lg fa-regular fa-triangle-exclamation text-red-600" />
+                        </button>
                     </div>
                 </div>
             </div>
@@ -175,4 +207,40 @@ function formattedDate(value) {
     >
         <i class="fa-regular fa-angle-down mr-2" /> {{ props.comment.child.length }} balasan
     </button>
+
+    <DialogModal :show="confirmingModal" @close="closeModal">
+        <template #title>
+            Silahkan pilih alasan
+        </template>
+
+        <template #content>
+            <fieldset>
+                <div class="space-y-5">
+                    <div v-for="plan in plans" :key="plan.id" class="relative flex items-start">
+                        <div class="flex h-5 items-center">
+                            <input :id="plan.id" :aria-describedby="`${plan.id}-description`" name="plan" type="radio" :checked="plan.id === 'small'" class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-500" />
+                        </div>
+                        <div class="ml-3 text-sm">
+                            <label :for="plan.id" class="font-medium text-gray-700">{{ plan.name }}</label>
+                            <p :id="`${plan.id}-description`" class="text-gray-500">{{ plan.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </template>
+
+        <template #footer>
+<!--            <ActionMessage :on="$page.props.user" class="mr-3">-->
+<!--                Saldo anda kurang-->
+<!--            </ActionMessage>-->
+
+            <PrimaryButton
+                :class="{ 'opacity-25': form.processing }"
+                :disabled="form.processing"
+                @click="reportInformation"
+            >
+                Laporkan
+            </PrimaryButton>
+        </template>
+    </DialogModal>
 </template>

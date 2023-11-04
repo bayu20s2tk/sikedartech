@@ -165,14 +165,14 @@ function formattedDate(value) {
                       </div>
                       <div class="ml-3">
                         <div class="text-sm font-medium text-gray-900">
-                                              <span class="hover:underline">
-                                                  {{ blog.user.name }}
-                                              </span>
+                          <span class="hover:underline">
+                              {{ blog.user.name }}
+                          </span>
                         </div>
                         <div class="flex space-x-1 text-sm text-gray-500">
-                                              <span>
-                                                  {{ blog.user.email }}
-                                              </span>
+                          <span>
+                              {{ blog.user.email }}
+                          </span>
                         </div>
                       </div>
                     </div>

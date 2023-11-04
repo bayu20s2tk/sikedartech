@@ -44,6 +44,7 @@ class UserController extends Controller
                             ->OrWhere('email', 'like', '%' . $search . '%');
                     })->paginate(8)
                     ->withQueryString(),
+                'filters' => Req::only(['search'])
             ]
         );
     }
@@ -81,8 +82,11 @@ class UserController extends Controller
 
 //        $request['email_verified_at'] = Carbon::now(); //just for development
 
+        $user = User::create($request->all());
+        $user->sendEmailVerificationNotification();
+
         return Redirect::route('user.index', [
-            'users' => User::create($request->all()),
+            'users' => $user,
         ]);
     }
 

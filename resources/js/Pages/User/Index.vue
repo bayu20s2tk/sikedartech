@@ -14,9 +14,13 @@ const props = defineProps({
         type: Object,
         default: () => ({}),
     },
+    filters: {
+        type: Object,
+        default: () => ({}),
+    },
 });
 
-let search = ref('');
+let search = ref(props.filters.search);
 watch(search, (value) => {
     router.get(
         route('user.index'),

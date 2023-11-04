@@ -96,6 +96,19 @@ function formatPrice(value) {
                             <ul role="list" class="divide-y divide-gray-300 rounded-3xl border border-gray-300">
                                 <li class="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
                                     <div class="flex w-0 flex-1 items-center">
+                                        <i class="fa-regular fa-dog" />
+                                        <span class="ml-2 w-0 flex-1 truncate">Dolor sit amet</span>
+                                    </div>
+                                    <div class="ml-4 flex-shrink-0">
+                                        <a
+                                            target="_blank"
+                                            :href="route('project.show', props.item)"
+                                            class="font-medium text-primary-600 hover:text-indigo-500">Lihat Proyek</a>
+                                    </div>
+                                </li>
+
+                                <li class="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
+                                    <div class="flex w-0 flex-1 items-center">
                                         <i class="fa-regular fa-cat" />
                                         <span class="ml-2 w-0 flex-1 truncate">Lorem ipsum</span>
                                     </div>
@@ -103,15 +116,6 @@ function formatPrice(value) {
                                         <button @click.prevent="storeInformation" class="font-medium text-primary-600">Tandai sudah dibayar</button>
                                     </div>
                                 </li>
-                                <!--                                <li class="flex items-center justify-between py-3 pl-3 pr-4 text-sm">-->
-                                <!--                                    <div class="flex w-0 flex-1 items-center">-->
-                                <!--                                        <i class="fa-regular fa-dog" />-->
-                                <!--                                        <span class="ml-2 w-0 flex-1 truncate">Dolor sit amet</span>-->
-                                <!--                                    </div>-->
-                                <!--                                    <div class="ml-4 flex-shrink-0">-->
-                                <!--                                        <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Download</a>-->
-                                <!--                                    </div>-->
-                                <!--                                </li>-->
                             </ul>
                         </dd>
                     </div>

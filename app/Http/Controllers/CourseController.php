@@ -91,7 +91,8 @@ class CourseController extends Controller
 //        dd($course->toArray(), $course->subscribers->toArray());
         return Inertia::render('Course/Show', [
             'course' => $course,
-            'subscriber' => $course->subscribers
+            'subscriber' => $course->subscribers,
+            'gallery' => Gallery::all(),
         ]);
     }
 

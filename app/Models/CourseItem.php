@@ -18,9 +18,19 @@ class CourseItem extends Model
     protected $fillable = [
         'course_id',
         'user_id',
+        'type_id',
         'name',
         'content'
     ];
+
+    const LESSON = 1;
+    const ASSIGMENT = 2;
+
+    const TYPE = [
+        self::LESSON => 'Lesson',
+        self::ASSIGMENT => 'Assigment',
+    ];
+
 //    protected $with = [
 //        'user',
 //    ];

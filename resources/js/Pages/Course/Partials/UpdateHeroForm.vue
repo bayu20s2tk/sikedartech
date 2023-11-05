@@ -80,7 +80,7 @@ const clearPhotoFileInput = () => {
 <template>
     <FormSection @submitted="storePageHero">
         <template #title>
-            Foto Galeri
+            Foto Cover
         </template>
 
         <template #description>

@@ -34,9 +34,9 @@ import UpdateAboutForm from "./Partials/UpdateAboutForm.vue";
 
                     <SectionBorder />
 
-                    <UpdateContentForm :course="$page.props.course" />
+<!--                    <UpdateContentForm :course="$page.props.course" />-->
 
-                    <SectionBorder />
+<!--                    <SectionBorder />-->
 
                     <UpdateAboutForm :course="$page.props.course" />
 

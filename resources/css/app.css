@@ -54,6 +54,10 @@ h1, h2, h3, h4, h5 {
     @apply text-gray-900;
 }
 
+.tiptap > img {
+    @apply w-1/5;
+}
+
 /*ul {*/
 /*    @apply list-disc;*/
 /*}*/

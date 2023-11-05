@@ -83,14 +83,14 @@ const editor = useEditor({
 
 const emit = defineEmits(['update:modelValue']);
 
-watch(() => props.modelValue, (newValue, oldValue) => {
-    const isSame = newValue === oldValue
-    // console.log(`Same: ${isSame}`)
-    if (isSame) {
-        return
-    }
-    editor.value.commands.setContent(newValue, false,  {preserveWhitespace: "full"})
-})
+// watch(() => props.modelValue, (newValue, oldValue) => {
+//     const isSame = newValue === oldValue
+//     // console.log(`Same: ${isSame}`)
+//     if (isSame) {
+//         return
+//     }
+//     editor.value.commands.setContent(newValue, false,  {preserveWhitespace: "full"})
+// })
 
 const form = useForm({
   // id: props.blog.id,

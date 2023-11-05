@@ -57,7 +57,7 @@ class Course extends Model implements HasMedia
         'user',
         'category',
         'item',
-//        'comment',
+        'assigment',
     ];
 
     public function getRouteKeyName(): string
@@ -78,7 +78,11 @@ class Course extends Model implements HasMedia
     }
     public function item(): HasMany
     {
-        return $this->hasMany(CourseItem::class, 'course_id', 'id');
+        return $this->hasMany(CourseItem::class, 'course_id', 'id')->where('type_id', CourseItem::LESSON);
+    }
+    public function assigment(): HasMany
+    {
+        return $this->hasMany(CourseItem::class, 'course_id', 'id')->where('type_id', CourseItem::ASSIGMENT);
     }
     public function comment(): HasMany
     {

@@ -46,7 +46,7 @@ function formattedDate(value) {
                 {{ props.member.name }}
             </div>
             <div class="flex items-center">
-                <Badge :name="props.member.role" class="mr-5 text-gray-900" />
+<!--                <Badge :name="props.member.role" class="mr-5 text-gray-900" />-->
                 <i class="fa-regular text-gray-900 w-5" :class="show ? 'fa-angle-down' : 'fa-angle-right' " />
             </div>
         </button>

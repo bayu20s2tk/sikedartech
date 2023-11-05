@@ -55,7 +55,7 @@ const editor = useEditor({
     editable: false,
 })
 
-const courseTab = ref(0)
+const courseTab = ref(props.course.item[0]?.id)
 const tab = ref(1)
 
 const form = useForm({
@@ -133,10 +133,31 @@ function formattedDate(value) {
                                     </h3>
 
                                     <template v-for="(list, listIdx) in props.course.item" :key="list.id">
-                                        <button @click="courseTab=listIdx">
+                                        <button @click="courseTab=list.id">
                                             <div
                                                 class="rounded-3xl py-3 px-5 text-left"
-                                                :class="courseTab==listIdx ? 'bg-gray-900 text-white' : 'bg-gray-200 text-gray-900' "
+                                                :class="courseTab==list.id ? 'bg-gray-900 text-white' : 'bg-gray-200 text-gray-900' "
+                                            >
+                                                <i class="fa-solid fa-play mr-1"/>
+                                                {{ list.name }}
+                                            </div>
+                                        </button>
+                                    </template>
+
+                                </div>
+                            </div>
+
+                            <div class="bg-white bg-opacity-50 border border-gray-300 rounded-3xl shadow-lg">
+                                <div class="px-3 py-5 grid gap-3 ">
+                                    <h3 class="font-semibold text-gray-900 ml-2">
+                                        {{ props.course.assigment.length ?? '0' }} tugas
+                                    </h3>
+
+                                    <template v-for="(list, listIdx) in props.course.assigment" :key="list.id">
+                                        <button @click="courseTab=list.id">
+                                            <div
+                                                class="rounded-3xl py-3 px-5 text-left"
+                                                :class="courseTab==list.id ? 'bg-gray-900 text-white' : 'bg-gray-200 text-gray-900' "
                                             >
                                                 <i class="fa-solid fa-play mr-1"/>
                                                 {{ list.name }}
@@ -151,8 +172,15 @@ function formattedDate(value) {
 
                     <div class="lg:col-span-4 py-3">
                         <template v-for="(item, itemIdx) in props.course.item">
-                            <template v-if="courseTab==itemIdx" class="">
+                            <template v-if="courseTab==item.id" class="">
 <!--                                <h3 class="text-gray-900 font-semibold text-xl mb-5" v-html="item.name" />-->
+                                <p class="prose prose-sm lg:prose-lg xl:prose-2xl" v-html="item.content" />
+                            </template>
+                        </template>
+
+                        <template v-for="(item, itemIdx) in props.course.assigment">
+                            <template v-if="courseTab==item.id" class="">
+                                <!--                                <h3 class="text-gray-900 font-semibold text-xl mb-5" v-html="item.name" />-->
                                 <p class="prose prose-sm lg:prose-lg xl:prose-2xl" v-html="item.content" />
                             </template>
                         </template>

@@ -35,10 +35,12 @@ class CourseController extends Controller
                 $course = Course::query();
                 break;
             case(User::MENTOR):
-                $course = Course::query()->where('user_id', auth()->user()->id);
+                $course = Course::query()
+                    ->where('user_id', auth()->user()->id);
                 break;
             case(User::USER):
-                $course = Course::query()->subscribedBy(auth()->user());
+                $course = Course::query()
+                    ->subscribedBy(auth()->user());
                 break;
             default:
                 dd('error');
@@ -75,7 +77,7 @@ class CourseController extends Controller
         ])->validateWithBag('storeInformation');
 
         $request['user_id'] = auth()->user()->id;
-        $request['status'] = true;
+        $request['status_id'] = Course::ACTIVE;
         $request['slug'] = Str::slug($request['name'], '-');
 
         return Redirect::route('course.edit', [

@@ -50,7 +50,7 @@ class LandingController extends Controller
     public function course(): Response
     {
 
-        $course = Course::latest()->get();
+        $course = Course::where('status_id', Course::ACTIVE)->latest()->get();
         auth()->user() ? $course = auth()->user()->attachSubscriptionStatus($course) : '' ;
 
 //        dd($course->toArray());

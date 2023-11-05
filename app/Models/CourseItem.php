@@ -5,10 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class CourseItem extends Model
+class CourseItem extends Model implements HasMedia
 {
     use HasFactory;
+    use InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.
@@ -20,7 +23,8 @@ class CourseItem extends Model
         'user_id',
         'type_id',
         'name',
-        'content'
+        'content',
+        'link'
     ];
 
     const LESSON = 1;
@@ -31,9 +35,9 @@ class CourseItem extends Model
         self::ASSIGMENT => 'Assigment',
     ];
 
-//    protected $with = [
-//        'user',
-//    ];
+    protected $with = [
+        'media',
+    ];
 
     public function user(): BelongsTo
     {

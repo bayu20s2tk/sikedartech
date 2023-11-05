@@ -203,7 +203,7 @@ const closeModal = () => {
                                     </div>
 
                                     <div v-else>
-                                        <p>Silakan <Link class="text-primary-600 font-semibold underline" :href="route('login')">login</Link> untuk buat bid</p>
+                                        <p class="text-gray-900">Silakan <Link class="text-primary-600 font-semibold underline" :href="route('login')">login</Link> untuk buat bid</p>
                                     </div>
 
                                     <div class="space-y-8 sm:space-y-12">

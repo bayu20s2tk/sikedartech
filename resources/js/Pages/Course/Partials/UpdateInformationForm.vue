@@ -72,7 +72,7 @@ const showPage = () => {
       </div>
 
       <div class="col-span-6 sm:col-span-5">
-        <InputLabel for="desc" value="Deskripsi"/>
+        <InputLabel for="desc" value="Deskripsi Singkat"/>
         <TextAreaInput
             id="desc"
             v-model="form.desc"

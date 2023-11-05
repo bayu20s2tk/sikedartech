@@ -45,9 +45,9 @@ function formattedDate(value) {
                         Dasbor
                     </PrimaryButton>
 
-                    <SecondaryButton>
-                        Lorem ipsum
-                    </SecondaryButton>
+<!--                    <SecondaryButton>-->
+<!--                        Lorem ipsum-->
+<!--                    </SecondaryButton>-->
                 </div>
             </div>
         </main>

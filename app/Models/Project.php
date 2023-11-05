@@ -33,37 +33,42 @@ class Project extends Model implements HasMedia
         'deadline_date'
     ];
 
-    const NONACTIVE = 0;
+    const REQUEST = 0;
     const OPEN = 1;
     const SELECTED = 2;
     const ONGOING = 3;
     const FINISH = 4;
     const PAID = 5;
+
+    const CANCEL = 6;
     const STATUS = [
-        self::NONACTIVE => 'Batal',
-        self::OPEN => 'Terbuka',
+        self::REQUEST => 'Registered',
+        self::OPEN => 'Tayang',
         self::SELECTED => 'Terpilih',
         self::ONGOING => 'Berlangsung',
         self::FINISH => 'Selesai',
         self::PAID => 'Selesai',
+        self::CANCEL => 'Batal'
     ];
 
     const COLOR = [
-        self::NONACTIVE => 'bg-red-100 text-red-800',
+        self::REQUEST => 'bg-amber-100 text-amber-800',
         self::OPEN => 'bg-primary-100 text-primary-800',
         self::SELECTED => 'bg-primary-100 text-primary-800',
         self::ONGOING => 'bg-primary-100 text-primary-800',
         self::FINISH => 'bg-green-100 text-green-800',
-        self::PAID => 'bg-indigo-100 text-indigo-800'
+        self::PAID => 'bg-indigo-100 text-indigo-800',
+        self::CANCEL => 'bg-red-100 text-red-800'
     ];
 
     const BILLING = [
-        self::NONACTIVE => '',
+        self::REQUEST => '',
         self::OPEN => '',
         self::SELECTED => '',
         self::ONGOING => '',
         self::FINISH => 'Belum dibayar',
-        self::PAID => 'Sudah dibayar'
+        self::PAID => 'Sudah dibayar',
+        self::CANCEL => ''
     ];
 
     const TIGAHARI = 3;
@@ -95,6 +100,7 @@ class Project extends Model implements HasMedia
         'category',
         'bid',
 //        'chat'
+        'progress'
     ];
 
     /**
@@ -141,5 +147,9 @@ class Project extends Model implements HasMedia
     public function chat(): hasMany
     {
         return $this->hasMany(ProjectChat::class, 'project_id', 'id');
+    }
+    public function progress(): hasMany
+    {
+        return $this->hasMany(ProjectProgress::class, 'project_id', 'id');
     }
 }

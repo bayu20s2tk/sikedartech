@@ -34,13 +34,22 @@ class Course extends Model implements HasMedia
         'user_id',
     ];
 
+    const REQUEST = 0;
     const ACTIVE = 1;
     const NONACTIVE = 2;
     const DRAFT = 3;
     const STATUS = [
+        self::REQUEST => 'Validasi',
         self::ACTIVE => 'Aktif',
         self::NONACTIVE => 'Nonaktif',
         self::DRAFT => 'Draft',
+    ];
+
+    const COLOR = [
+        self::REQUEST => 'bg-gray-100 text-gray-800',
+        self::ACTIVE => 'bg-green-100 text-green-800',
+        self::NONACTIVE => 'bg-red-100 text-red-800',
+        self::DRAFT => 'bg-amber-100 text-amber-800',
     ];
 
     /**
@@ -49,7 +58,8 @@ class Course extends Model implements HasMedia
      * @var array
      */
     protected $appends = [
-        'status'
+        'status',
+        'color'
     ];
 
     protected $with = [
@@ -67,6 +77,10 @@ class Course extends Model implements HasMedia
     public function getStatusAttribute(): string
     {
         return self::STATUS[$this->status_id];
+    }
+    public function getColorAttribute(): string
+    {
+        return self::COLOR[$this->status_id];
     }
     public function user(): BelongsTo
     {

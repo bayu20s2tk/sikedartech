@@ -9,103 +9,110 @@ import {onMounted, ref, watch} from "vue";
 import moment from "moment/moment";
 import MobileMenu from "@/Components/MobileMenu.vue";
 import Pagination from "../../Components/Pagination.vue";
+import Badge from "../../Components/Badge.vue";
 
 const props = defineProps({
-    course: {
-        type: Object,
-        default: () => ({}),
-    },
+  course: {
+    type: Object,
+    default: () => ({}),
+  },
 });
 
 let search = ref('');
 watch(search, (value) => {
-    router.get(
-        route('course.index'),
-        { search: value },
-        {
-            preserveState: true,
-            replace: true,
-        }
-    );
+  router.get(
+      route('course.index'),
+      {search: value},
+      {
+        preserveState: true,
+        replace: true,
+      }
+  );
 });
 
 function formatPrice(value) {
-    return value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+  return value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 }
 
 function formattedDate(value) {
-    return moment(value).format('DD MMM Y HH:mm')
+  return moment(value).format('DD MMM Y HH:mm')
 }
 
 </script>
 
 <template>
-    <AppLayout title="Kelas"
-               name="Kelas"
-               desc="lorem ipsum"
-               >
+  <AppLayout title="Kelas"
+             name="Kelas"
+             desc="lorem ipsum"
+  >
 
-        <div class="flex justify-between gap-3">
-            <div class="">
-                <TextInput
-                    type="text"
-                    v-model="search"
-                    placeholder="Cari disini"
-                    class="block w-full lg:w-96 mb-5 shadow"
-                />
+    <div class="flex justify-between gap-3">
+      <div class="">
+        <TextInput
+            type="text"
+            v-model="search"
+            placeholder="Cari disini"
+            class="block w-full lg:w-96 mb-5 shadow"
+        />
+      </div>
+
+      <div class="" v-if="$page.props.user.role_id != 3">
+        <PrimaryButton as="a" :href="route('course.create')">Tambah</PrimaryButton>
+      </div>
+    </div>
+
+    <div class="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
+      <div v-for="item in props.course.data" :key="item.id">
+        <Link :href="$page.props.user.role_id !== 3 ? route('course.show', item) : route('landing.course.show', item)">
+          <div class="bg-white bg-opacity-50 h-full border border-gray-300 rounded-3xl shadow-lg">
+            <div class="h-52 w-full overflow-hidden rounded-t-3xl relative">
+              <img :src="item.media[0]?.original_url" :alt="item.name"
+                   class="rounded-t-3xl h-full w-full object-cover object-center"/>
+              <div class="absolute inset-0">
+                <div class="flex justify-end p-3">
+                  <Badge :name="item.status" :class="item.color"/>
+                </div>
+              </div>
             </div>
-
-            <div class="" v-if="$page.props.user.role_id != 3">
-                <PrimaryButton as="a" :href="route('course.create')" >Tambah</PrimaryButton>
+            <div class="py-3 px-5 items-end">
+              <h3 class="text-lg font-semibold text-gray-900">{{ item.name }}</h3>
+              <p class="mt-1 text-sm text-gray-500">{{ item.desc }}</p>
+              <!--                            <p class="mt-1 text-sm font-semibold text-gray-700">-->
+              <!--                                <template v-if="item.has_subscribed">-->
+              <!--                                    <i class="fa-duotone fa-circle-check text-green-600 mr-1" /> Akses selamanya-->
+              <!--                                </template>-->
+              <!--                                <template v-else>-->
+              <!--                                    Rp {{ formatPrice(item.price) }}-->
+              <!--                                </template>-->
+              <!--                            </p>-->
             </div>
-        </div>
+          </div>
+        </Link>
+      </div>
+    </div>
 
-        <div class="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
-            <div v-for="item in props.course.data" :key="item.id">
-                <Link :href="$page.props.user.role_id !== 3 ? route('course.show', item) : route('landing.course.show', item)">
-                    <div class="bg-white bg-opacity-50 h-full border border-gray-300 rounded-3xl shadow-lg">
-                        <div class="h-52 w-full overflow-hidden rounded-t-3xl">
-                            <img :src="item.media[0]?.original_url" :alt="item.name"
-                                 class="rounded-t-3xl h-full w-full object-cover object-center"/>
-                        </div>
-                        <div class="py-3 px-5 items-end">
-                            <h3 class="text-lg font-semibold text-gray-900">{{ item.name }}</h3>
-                            <p class="mt-1 text-sm text-gray-500">{{ item.desc }}</p>
-<!--                            <p class="mt-1 text-sm font-semibold text-gray-700">-->
-<!--                                <template v-if="item.has_subscribed">-->
-<!--                                    <i class="fa-duotone fa-circle-check text-green-600 mr-1" /> Akses selamanya-->
-<!--                                </template>-->
-<!--                                <template v-else>-->
-<!--                                    Rp {{ formatPrice(item.price) }}-->
-<!--                                </template>-->
-<!--                            </p>-->
-                        </div>
-                    </div>
-                </Link>
-            </div>
-        </div>
+    <Pagination :pagination="props.course"/>
 
-        <Pagination :pagination="props.course" />
+    <div class="mt-10">
+      <p class="text-sm text-gray-900">Cari kelas baru untukmu
+        <Link class="font-semibold text-primary-600 underline" :href="route('landing.course')">disini</Link>
+      </p>
+    </div>
 
-        <div class="mt-10">
-            <p class="text-sm text-gray-900">Cari kelas baru untukmu <Link class="font-semibold text-primary-600 underline" :href="route('landing.course')">disini</Link></p>
-        </div>
+    <!--        <Table-->
+    <!--            :title="gridTitle"-->
+    <!--            :data="props.course.data"-->
+    <!--            :paginate="props.course"-->
+    <!--            :columns="gridColumns"-->
+    <!--            :filter-key="searchQuery"-->
+    <!--            routes="course"-->
+    <!--            :slug=true-->
+    <!--            :view=true-->
+    <!--            :edit=true-->
+    <!--        />-->
+    <MobileMenu/>
 
-<!--        <Table-->
-<!--            :title="gridTitle"-->
-<!--            :data="props.course.data"-->
-<!--            :paginate="props.course"-->
-<!--            :columns="gridColumns"-->
-<!--            :filter-key="searchQuery"-->
-<!--            routes="course"-->
-<!--            :slug=true-->
-<!--            :view=true-->
-<!--            :edit=true-->
-<!--        />-->
-        <MobileMenu />
-
-    </AppLayout>
-
+  </AppLayout>
 
 
 </template>

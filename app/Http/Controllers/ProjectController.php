@@ -77,16 +77,18 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+//        dd($request->all());
         Validator::make($request->toArray(), [
             'name' => ['required', 'string', 'max:255'],
         ])->validateWithBag('storeInformation');
 
         $request['user_id'] = auth()->user()->id;
-        $request['status'] = true;
+        $request['status_id'] = Project::REQUEST;
         $request['slug'] = Str::slug($request['name'], '-');
 
         Project::create($request->all());
-        return Redirect::route('project.index');
+//        return Redirect::route('project.index');
+        return Redirect::route('project.verification');
     }
 
     /**
@@ -157,5 +159,15 @@ class ProjectController extends Controller
         $media = Media::find($id);
         $model = Project::find($media->model_id);
         $model->deleteMedia($media->id);
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function verification()
+    {
+        return Inertia::render('Project/Verification', [
+
+        ]);
     }
 }

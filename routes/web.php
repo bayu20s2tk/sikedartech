@@ -19,6 +19,7 @@ use App\Http\Controllers\ProjectBillingController;
 use App\Http\Controllers\ProjectCategoryController;
 use App\Http\Controllers\ProjectChatController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ProjectProgressController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -55,17 +56,23 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     Route::resource('/course-subscribe', CourseSubscribeController::class)->names('courseSubscribe');
     Route::resource('/course-item', CourseItemController::class)->names('courseItem');
+    Route::post('course-item/add-media', [CourseItemController::class, 'addMedia'])->name('courseItem.addMedia');
+    Route::delete('course-item/delete-media/{id}', [CourseItemController::class, 'deleteMedia'])->name('courseItem.deleteMedia');
+
     Route::resource('/course-category', CourseCategoryController::class)->names('courseCategory');
     Route::resource('/course-comment', CourseCommentController::class)->names('courseComment');
     Route::post('/course-comment/like/{courseComment}', [CourseCommentController::class, 'like'])->name('courseComment.like');
     Route::post('/course-comment/dislike/{courseComment}', [CourseCommentController::class, 'dislike'])->name('courseComment.dislike');
 
     Route::resource('/project', ProjectController::class)->names('project');
-    Route::get('/project-me', [ProjectController::class, 'indexMe'])->name('project.indexMe');
+//    Route::get('/project-me', [ProjectController::class, 'indexMe'])->name('project.indexMe');
     Route::post('project/add-media', [ProjectController::class, 'addMedia'])->name('project.addMedia');
     Route::delete('project/delete-media/{id}', [ProjectController::class, 'deleteMedia'])->name('project.deleteMedia');
+    Route::get('/project-verification', [ProjectController::class, 'verification'])->name('project.verification');
+
 
     Route::resource('/project-chat', ProjectChatController::class)->names('projectChat');
+    Route::resource('/project-progress', ProjectProgressController::class)->names('projectProgress');
     Route::resource('/project-category', ProjectCategoryController::class)->names('projectCategory');
     Route::resource('/project-bid', ProjectBidController::class)->names('projectBid');
     Route::resource('/project-billing', ProjectBillingController::class)->names('projectBilling');

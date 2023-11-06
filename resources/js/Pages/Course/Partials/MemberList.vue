@@ -52,7 +52,7 @@ function formattedDate(value) {
         </button>
         <div v-if="show" class="">
             <div class="px-4 py-5 sm:px-6">
-                <h3 class="text-lg font-medium leading-6 text-gray-900">Member Information</h3>
+                <h3 class="text-lg font-medium leading-6 text-gray-900">Informasi Peserta</h3>
                 <p class="mt-1 max-w-2xl text-sm text-gray-500">Personal details and application.</p>
             </div>
             <div class="px-4 py-5 sm:px-6">

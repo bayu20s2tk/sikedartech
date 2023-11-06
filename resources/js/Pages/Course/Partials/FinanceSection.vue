@@ -32,8 +32,11 @@ function formatPrice(value) {
 <!--                </template>-->
 
                 <div class="sm:col-span-2">
-                    <dt class="text-sm font-medium text-gray-500">Total Saldo</dt>
-                    <dd class="mt-1 text-sm text-gray-900">Rp {{ formatPrice(Number(props.subscriber?.length) * Number(props.course.price)) }}</dd>
+                    <dt class="text-sm font-medium text-gray-900"><span class="text-gray-500">Harga kelas <i class="fa-regular fa-xmark" /> peserta = </span> Total Saldo</dt>
+                    <dd class="mt-1 text-sm font-medium text-gray-90">
+                        <span class="text-sm text-gray-500">Rp {{ formatPrice(props.course.price) }} <i class="fa-regular fa-xmark" /> {{ props.subscriber.length }} = </span>
+                        Rp {{ formatPrice(Number(props.subscriber?.length) * Number(props.course.price)) }}
+                    </dd>
                 </div>
             </dl>
         </div>

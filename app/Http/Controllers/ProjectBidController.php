@@ -31,16 +31,17 @@ class ProjectBidController extends Controller
      */
     public function store(Request $request)
     {
-        if (ProjectBid::where('project_id', $request['project_id'])->where('user_id', auth()->user()->id)->first()) {
+        Validator::make($request->toArray(), [
+            'project_id' => ['required'],
+            'desc' => ['required', 'string'],
+            'price' => ['required', 'numeric'],
+        ])->validateWithBag('storeInformation');
+
+        $bid = ProjectBid::where('project_id', $request['project_id'])->where('user_id', auth()->user()->id)->first();
+        if ($bid) {
+            $bid->update($request->all());
             session()->flash('flash.banner', 'Kamu sudah pernah mengajukan!');
-
         } else {
-            Validator::make($request->toArray(), [
-                'project_id' => ['required'],
-                'desc' => ['required', 'string'],
-//                'price' => ['required', 'numeric'],
-            ])->validateWithBag('storeInformation');
-
             $request['user_id'] = auth()->user()->id;
             $request['status_id'] = ProjectBid::NOTSELECTED;
             $request['price'] = 0;

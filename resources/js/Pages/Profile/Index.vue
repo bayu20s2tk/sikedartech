@@ -60,7 +60,7 @@ function formatPrice(value) {
                         <div class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4">
                             <i class="fa-duotone fa-money-bill-wave text-green-400"/>
                             <div class="ml-3">
-                                <div class="text-xs text-gray-500">Lorem</div>
+                                <div class="text-xs text-gray-500">Total keseluruhan uang masuk dari proyek dan kelas</div>
                                 <div class="text-sm font-medium text-gray-700">0</div>
                             </div>
                         </div>
@@ -69,7 +69,7 @@ function formatPrice(value) {
                         <div class="relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4">
                             <i class="fa-duotone fa-coins text-amber-400"/>
                             <div class="ml-3">
-                                <div class="text-xs text-gray-500">Ipsum</div>
+                                <div class="text-xs text-gray-500">Total keseluruhan uang keluar yang ditarik dari proyek dan kelas</div>
                                 <div class="text-sm font-medium text-gray-700">0</div>
                             </div>
                         </div>

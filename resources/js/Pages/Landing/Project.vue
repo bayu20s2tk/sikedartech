@@ -1,6 +1,6 @@
 <script setup>
 import {Link, router, useForm} from "@inertiajs/vue3";
-import {onMounted, ref} from "vue";
+import {onMounted, ref, watch} from "vue";
 import moment from "moment";
 import LandingLayout from "@/Layouts/LandingLayout.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
@@ -14,12 +14,15 @@ import TextInput from "@/Components/TextInput.vue";
 import TextAreaInput from "@/Components/TextAreaInput.vue";
 
 const props = defineProps({
-    project: undefined,
+    project: {
+        type: Object,
+        default: () => ({}),
+    },
 });
 
-onMounted(() => {
-  router.reload({only: ['project']})
-})
+// onMounted(() => {
+//   router.reload({only: ['project']})
+// })
 
 function formatPrice(value) {
     return value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
@@ -68,6 +71,18 @@ const closeModal = () => {
     form.reset();
 };
 
+let search = ref('');
+watch(search, (value) => {
+    router.get(
+        route('landing.project'),
+        {search: value},
+        {
+            preserveState: true,
+            replace: true,
+        }
+    );
+});
+
 </script>
 
 <template>
@@ -83,6 +98,21 @@ const closeModal = () => {
                         Lorem ipsum dolor sit amet
                     </template>
                 </Heading>
+
+                <div class="flex justify-between gap-3">
+                    <div class="">
+                        <TextInput
+                            type="text"
+                            v-model="search"
+                            placeholder="Cari disini"
+                            class="block w-full lg:w-96 mb-5 shadow"
+                        />
+                    </div>
+
+<!--                    <div class="" v-if="$page.props.user.role_id != 3">-->
+<!--                        <PrimaryButton as="a" :href="route('course.create')">Tambah</PrimaryButton>-->
+<!--                    </div>-->
+                </div>
 
                 <div class="relative mx-auto grid lg:grid-cols-6 gap-10">
                     <!-- Content area -->
@@ -270,22 +300,22 @@ const closeModal = () => {
                         <InputError :message="form.errors.desc" class="mt-2"/>
                     </div>
 
-<!--                    <div class="col-span-6 sm:col-span-3">-->
-<!--                        <InputLabel for="price" value="Harga" />-->
-<!--                        <div class="flex">-->
-<!--                            <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">-->
-<!--                                Rp-->
-<!--                            </span>-->
-<!--                            <TextInput-->
-<!--                                id="price"-->
-<!--                                v-model="form.price"-->
-<!--                                type="number"-->
-<!--                                class="mt-1 block w-full rounded-l-none"-->
-<!--                                required-->
-<!--                            />-->
-<!--                        </div>-->
-<!--                        <InputError :message="form.errors.price" class="mt-2" />-->
-<!--                    </div>-->
+                    <div class="col-span-6 sm:col-span-3">
+                        <InputLabel for="price" value="Harga" />
+                        <div class="flex">
+                            <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">
+                                Rp
+                            </span>
+                            <TextInput
+                                id="price"
+                                v-model="form.price"
+                                type="number"
+                                class="mt-1 block w-full rounded-l-none"
+                                required
+                            />
+                        </div>
+                        <InputError :message="form.errors.price" class="mt-2" />
+                    </div>
                 </div>
 
             </template>

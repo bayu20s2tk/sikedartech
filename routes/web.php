@@ -77,6 +77,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::resource('/project-bid', ProjectBidController::class)->names('projectBid');
     Route::resource('/project-billing', ProjectBillingController::class)->names('projectBilling');
 
+    Route::get('/complaint', function () {
+        return Inertia::render('Complaint/Index', []);
+    })->name('complaint.index');
+
     Route::resource('/blog', BlogController::class)->names('blog');
     Route::post('/blog-comment/like/{blogComment}', [BlogCommentController::class, 'like'])->name('blogComment.like');
     Route::post('/blog-comment/dislike/{blogComment}', [BlogCommentController::class, 'dislike'])->name('blogComment.dislike');

@@ -70,6 +70,9 @@ function formattedDate(value) {
                                         {{ item.name }}
                                     </p>
                                     <div class="ml-2 flex-shrink-0 flex">
+                                        <p class="px-2 inline-flex text-sm leading-5 font-semibold rounded-full text-gray-600">
+                                            {{ item.role }}
+                                        </p>
                                         <p  v-if="item.email_verified_at"
                                             class="px-2 text-xs leading-5 font-semibold rounded-full mr-2 bg-green-100 text-green-800"
                                         >

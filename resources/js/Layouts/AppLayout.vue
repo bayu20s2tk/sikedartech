@@ -241,7 +241,7 @@ const logout = () => {
                                             icon="fa-book"
                                             v-if="$page.props.user.role_id==1"
                                         >
-                                            Subscribe
+                                            Billing Kelas
                                         </NavLinkAlt>
 
                                         <NavLinkAlt
@@ -258,7 +258,16 @@ const logout = () => {
                                             icon="fa-umbrella-beach"
                                             v-if="$page.props.user.role_id==1"
                                         >
-                                            Billing
+                                            Billing Proyek
+                                        </NavLinkAlt>
+
+                                        <NavLinkAlt
+                                            :href="route('complaint.index')"
+                                            :active="$page.component.startsWith('Complaint')"
+                                            icon="fa-triangle-exclamation"
+                                            v-if="$page.props.user.role_id==1"
+                                        >
+                                            Pengaduan
                                         </NavLinkAlt>
 
                                         <NavLinkAlt

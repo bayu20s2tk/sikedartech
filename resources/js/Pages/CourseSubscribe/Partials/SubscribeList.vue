@@ -15,7 +15,6 @@ const form = useForm({
 });
 
 const storeInformation = (status) => {
-    console.log('anying');
     form.status_id = status == true;
 
     form.patch(route('courseSubscribe.update', props.item), {
@@ -83,7 +82,7 @@ function formattedDate(value) {
                                     <li class="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
                                         <div class="flex w-0 flex-1 items-center">
                                             <i class="fa-regular fa-cat" />
-                                            <span class="ml-2 w-0 flex-1 truncate">Lorem ipsum</span>
+                                            <span class="ml-2 w-0 flex-1 truncate">Status</span>
                                         </div>
                                         <div class="ml-4 flex-shrink-0">
                                             <button @click="storeInformation(true)" class="font-medium text-green-600">Accept</button>
@@ -92,7 +91,7 @@ function formattedDate(value) {
                                     <li class="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
                                         <div class="flex w-0 flex-1 items-center">
                                             <i class="fa-regular fa-dog" />
-                                            <span class="ml-2 w-0 flex-1 truncate">Dolor sit amet</span>
+                                            <span class="ml-2 w-0 flex-1 truncate">Status</span>
                                         </div>
                                         <div class="ml-4 flex-shrink-0">
                                             <button @click="storeInformation(false)" class="font-medium text-red-600">Reject</button>

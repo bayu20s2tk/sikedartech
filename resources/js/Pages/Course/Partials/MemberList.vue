@@ -76,21 +76,21 @@ function formattedDate(value) {
                                 <li class="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
                                     <div class="flex w-0 flex-1 items-center">
                                         <i class="fa-regular fa-cat" />
-                                        <span class="ml-2 w-0 flex-1 truncate">Lorem ipsum</span>
+                                        <span class="ml-2 w-0 flex-1 truncate">Status</span>
                                     </div>
                                     <div class="ml-4 flex-shrink-0">
-                                        <button type="button" class="font-medium text-green-600">Lorem ipsum</button>
+                                        <button type="button" class="font-medium text-green-600">Lulus</button>
                                     </div>
                                 </li>
-<!--                                <li class="flex items-center justify-between py-3 pl-3 pr-4 text-sm">-->
-<!--                                    <div class="flex w-0 flex-1 items-center">-->
-<!--                                        <i class="fa-regular fa-dog" />-->
-<!--                                        <span class="ml-2 w-0 flex-1 truncate">Dolor sit amet</span>-->
-<!--                                    </div>-->
-<!--                                    <div class="ml-4 flex-shrink-0">-->
-<!--                                        <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Download</a>-->
-<!--                                    </div>-->
-<!--                                </li>-->
+                                <li class="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
+                                    <div class="flex w-0 flex-1 items-center">
+                                        <i class="fa-regular fa-dog" />
+                                        <span class="ml-2 w-0 flex-1 truncate">Status</span>
+                                    </div>
+                                    <div class="ml-4 flex-shrink-0">
+                                        <a href="#" class="font-medium text-red-600">Tidak Lulus</a>
+                                    </div>
+                                </li>
                             </ul>
                         </dd>
                     </div>

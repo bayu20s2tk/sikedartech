@@ -13,11 +13,7 @@ const props = defineProps({
 });
 
 function formattedDate(value) {
-    return moment(value).format('DD MMM Y')
-}
-
-function formattedTime(value) {
-    return moment(value).format('HH:mm')
+    return moment(value).format('DD MMM Y HH:mm')
 }
 
 function formatPrice(value) {

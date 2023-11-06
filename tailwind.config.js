@@ -30,7 +30,8 @@ module.exports = {
             indigo: colors.indigo,
             amber: colors.amber,
             red: colors.red,
-            pink: colors.pink
+            pink: colors.pink,
+            yellow: colors.yellow
         },
         extend: {
             fontFamily: {

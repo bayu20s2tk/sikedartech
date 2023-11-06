@@ -52,7 +52,7 @@ const showPage = () => {
         </template>
 
         <template #description>
-            Update your account's profile information and email address.
+            Tambahkan informasi kategori kursus sesuai kebutuhan aplikasi.
         </template>
 
         <template #form>

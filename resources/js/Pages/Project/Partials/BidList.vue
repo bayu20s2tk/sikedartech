@@ -30,7 +30,8 @@ const storeInformation = () => {
 
 const show = ref(false)
 function formatPrice(value) {
-    return value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+    let val = (value/1).toFixed(0).replace('.', '')
+    return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
 }
 function formattedDate(value) {
     return moment(value).format('DD MMM Y HH:mm')
@@ -61,10 +62,10 @@ function formattedDate(value) {
                         <dt class="text-sm font-medium text-gray-500">User</dt>
                         <dd class="mt-1 text-sm text-gray-900">{{ props.bid.user.name }}</dd>
                     </div>
-<!--                    <div class="sm:col-span-1">-->
-<!--                        <dt class="text-sm font-medium text-gray-500">Salary expectation</dt>-->
-<!--                        <dd class="mt-1 text-sm text-gray-900">Rp {{ formatPrice(props.bid.price) }}</dd>-->
-<!--                    </div>-->
+                    <div class="sm:col-span-1">
+                        <dt class="text-sm font-medium text-gray-500">Harga</dt>
+                        <dd class="mt-1 text-sm text-gray-900">Rp {{ formatPrice(props.bid.price) }}</dd>
+                    </div>
                     <div class="sm:col-span-2">
                         <dt class="text-sm font-medium text-gray-500">About</dt>
                         <dd class="mt-1 text-sm text-gray-900" v-html="props.bid.desc" />

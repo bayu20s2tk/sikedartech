@@ -36,8 +36,8 @@ function formattedDate(value) {
 </script>
 
 <template>
-    <AppLayout title="Subscribe Kelas"
-               name="Subscribe Kelas"
+    <AppLayout title="Billing Kelas"
+               name="Billing Kelas"
                desc="lorem ipsum"
                >
 

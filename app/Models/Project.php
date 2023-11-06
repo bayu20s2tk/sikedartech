@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -90,7 +91,8 @@ class Project extends Model implements HasMedia
     protected $appends = [
         'status',
         'color',
-        'billing'
+        'billing',
+        'price'
     ];
 
     protected $with = [
@@ -128,6 +130,10 @@ class Project extends Model implements HasMedia
     {
         return self::BILLING[$this->status_id];
     }
+    public function getPriceAttribute(): string | null
+    {
+        return ProjectBid::where('project_id', $this->id)->where('status_id', ProjectBid::SELECTED)->pluck('price')->first();
+    }
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
@@ -142,7 +148,7 @@ class Project extends Model implements HasMedia
     }
     public function bid(): hasMany
     {
-        return $this->hasMany(ProjectBid::class, 'project_id', 'id');
+        return $this->hasMany(ProjectBid::class, 'project_id', 'id')->latest();
     }
     public function chat(): hasMany
     {
@@ -150,6 +156,6 @@ class Project extends Model implements HasMedia
     }
     public function progress(): hasMany
     {
-        return $this->hasMany(ProjectProgress::class, 'project_id', 'id');
+        return $this->hasMany(ProjectProgress::class, 'project_id', 'id')->latest();
     }
 }

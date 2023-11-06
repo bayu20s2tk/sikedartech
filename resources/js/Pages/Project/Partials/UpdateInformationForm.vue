@@ -57,7 +57,7 @@ const showPage = () => {
         </template>
 
         <template #description>
-            Update your account's profile information and email address.
+            Tambahkan informasi proyek sesuai kebutuhan pekerjaan.
         </template>
 
         <template #form>
@@ -90,18 +90,32 @@ const showPage = () => {
                 <InputError :message="form.errors.desc" class="mt-2"/>
             </div>
 
-            <div class="col-span-6 sm:col-span-2">
-                <InputLabel for="price" value="Budget"/>
+            <div class="col-span-6 sm:col-span-3">
+                <InputLabel for="price" value="Rentang Budget"/>
                 <div class="flex">
-                  <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">Rp</span>
-                    <TextInput
-                        id="price"
-                        v-model="form.budget_from"
-                        type="number"
-                        class="mt-1 block w-full rounded-l-none"
-                    />
+                    <div class="flex">
+                        <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 rounded-3xl rounded-r-none shadow-sm mt-1 px-3 ">Rp</span>
+                        <TextInput
+                            id="price"
+                            v-model="form.budget_from"
+                            type="number"
+                            class="mt-1 block w-full rounded-l-none rounded-r-none"
+                        />
+                        <InputError :message="form.errors.budget_from" class="mt-2"/>
+                    </div>
+
+                    <div class="flex">
+                        <span class="flex items-center bg-white text-black border border-gray-300 border-r-0 border-l-0 rounded-3xl rounded-r-none rounded-l-none shadow-sm mt-1 px-3 "> - </span>
+                        <TextInput
+                            id="price"
+                            v-model="form.budget_to"
+                            type="number"
+                            :min="form.budget_from"
+                            class="mt-1 block w-full rounded-l-none"
+                        />
+                        <InputError :message="form.errors.budget_to" class="mt-2"/>
+                    </div>
                 </div>
-                <InputError :message="form.errors.budget_from" class="mt-2"/>
             </div>
 
             <div class="col-span-6 sm:col-span-3">

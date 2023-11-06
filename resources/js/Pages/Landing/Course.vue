@@ -7,6 +7,7 @@ import SecondaryButton from "../../Components/SecondaryButton.vue";
 import Heading from "../../Components/Heading.vue";
 import {onMounted, ref, watch} from "vue";
 import TextInput from "../../Components/TextInput.vue";
+import Pagination from "../../Components/Pagination.vue";
 
 const props = defineProps({
     course: {
@@ -70,7 +71,7 @@ function formattedDate(value) {
 <!--                    </div>-->
                 </div>
 
-                <div class="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
+                <div class="mt-8 mb-5 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
                     <!--            <template v-if="props.course===undefined">-->
                     <!--              <div class="animate-pulse bg-white bg-opacity-50 h-full border border-gray-300 rounded-3xl shadow-lg">-->
                     <!--                <div class="h-72 w-full overflow-hidden rounded-t-3xl">-->
@@ -83,7 +84,7 @@ function formattedDate(value) {
                     <!--                </div>-->
                     <!--              </div>-->
                     <!--            </template>-->
-                    <div v-for="item in props.course" :key="item.id">
+                    <div v-for="item in props.course.data" :key="item.id">
                         <Link :href="route('landing.course.show', item)">
                             <div class="bg-white bg-opacity-50 h-full border border-gray-300 rounded-3xl shadow-lg">
                                 <div class="h-52 w-full overflow-hidden rounded-t-3xl">
@@ -98,7 +99,7 @@ function formattedDate(value) {
 <!--                                            <i class="fa-duotone fa-circle-check text-green-600 mr-1"/> Akses selamanya-->
 <!--                                        </template>-->
 <!--                                        <template v-else>-->
-<!--                                            Rp {{ formatPrice(item.price) }}-->
+                                            Rp {{ formatPrice(item.price) }}
 <!--                                        </template>-->
                                     </p>
                                 </div>
@@ -106,6 +107,8 @@ function formattedDate(value) {
                         </Link>
                     </div>
                 </div>
+
+                <Pagination :pagination="props.course" />
             </div>
         </div>
     </LandingLayout>

@@ -84,7 +84,7 @@ const clearPhotoFileInput = () => {
         </template>
 
         <template #description>
-            Update your account's profile information and email address.
+            Tambahkan informasi foto cover kelas sesuai kebutuhan aplikasi.
         </template>
 
         <template #preview>

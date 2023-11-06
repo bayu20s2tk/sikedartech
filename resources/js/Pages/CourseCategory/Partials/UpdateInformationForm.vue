@@ -48,11 +48,11 @@ const showPage = () => {
 <template>
     <FormSection @submitted="storeInformation">
         <template #title>
-            Kategori Kursus
+            Kategori Kelas
         </template>
 
         <template #description>
-            Tambahkan informasi kategori kursus sesuai kebutuhan aplikasi.
+            Tambahkan informasi kategori kelas sesuai kebutuhan aplikasi.
         </template>
 
         <template #form>

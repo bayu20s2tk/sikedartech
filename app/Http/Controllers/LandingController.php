@@ -44,13 +44,14 @@ class LandingController extends Controller
      */
     public function course(): Response
     {
-        $course = Course::query()->where('status_id', Course::ACTIVE);
+        $course = Course::query();
 
 //        auth()->user() ? $course = auth()->user()->attachSubscriptionStatus($course) : '' ;
 
 //        dd($course->toArray());
         return Inertia::render('Landing/Course', [
-            'course' =>  $course->latest()
+            'course' => $course
+                ->latest()
                 ->when(Req::input('search'), function ($query, $search) {
                     $query->where('name', 'like', '%' . $search . '%');
                 })->paginate(8)
@@ -118,8 +119,14 @@ class LandingController extends Controller
      */
     public function blog(): Response
     {
+        $blog = Blog::query();
         return Inertia::render('Landing/Blog', [
-            'blog' =>  Inertia::lazy(fn () => Blog::latest()->get()),
+            'blog' =>  $blog
+                ->latest()
+                ->when(Req::input('search'), function ($query, $search) {
+                    $query->where('name', 'like', '%' . $search . '%');
+                })->paginate(8)
+                ->withQueryString(),
         ]);
     }
 

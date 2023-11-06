@@ -40,7 +40,7 @@ const showPage = () => {
         </template>
 
         <template #description>
-            Update your account's profile information and email address.
+            Isi konten blog
         </template>
 
         <template #form>

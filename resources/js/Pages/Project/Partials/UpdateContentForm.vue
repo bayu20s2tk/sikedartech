@@ -77,7 +77,7 @@ const courseTab = ref(false)
         </template>
 
         <template #description>
-            Update your account's profile information and email address.
+            Tambahkan informasi konten sesuai kebutuhan aplikasi.
         </template>
 
         <template #form>

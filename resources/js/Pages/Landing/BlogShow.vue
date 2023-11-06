@@ -77,7 +77,7 @@ const storeInformation = () => {
 };
 
 function formattedDate(value) {
-    return moment(value).format('DD MMM Y HH:mm')
+    return moment(value).format('DD MMM Y')
 }
 
 </script>
@@ -93,9 +93,9 @@ function formattedDate(value) {
                     <span class="block text-lg font-semibold text-indigo-600"><i class="fa-regular mr-2" :class="blog.category.icon" />{{ props.blog.category.name }}</span>
                     <span class="mt-2 block text-3xl font-bold leading-8 tracking-tight text-gray-900 sm:text-4xl">{{ props.blog.name }}</span>
                 </h1>
-<!--                    <p class="mt-8 text-lg leading-8 text-gray-500">Aliquet nec orci mattis amet quisque ullamcorper neque, nibh sem. At arcu, sit dui mi, nibh dui, diam eget aliquam. Quisque id at vitae feugiat egestas ac. Diam nulla orci at in viverra scelerisque eget. Eleifend egestas fringilla sapien.</p>-->
+                <p class="text-sm leading-8 text-gray-500">{{ formattedDate(props.blog.created_at) }}</p>
             </div>
-            <div class="prose prose-2xl prose-indigo mx-auto mt-6 ">
+            <div class="prose prose-2xl prose-indigo mx-auto mt-10 ">
                 <EditorContent :editor="editor" />
 
             </div>

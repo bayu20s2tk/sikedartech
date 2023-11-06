@@ -34,11 +34,11 @@ const updateAbout = () => {
 <template>
     <FormSection @submitted="updateAbout">
         <template #title>
-            About
+            Tentang
         </template>
 
         <template #description>
-            Update your account's profile information and email address.
+            Tambahkan informasi tentang kelas sesuai kebutuhan aplikasi.
         </template>
 
         <template #form>

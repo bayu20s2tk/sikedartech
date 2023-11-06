@@ -50,11 +50,11 @@ const showPage = () => {
 <template>
   <FormSection @submitted="storeInformation">
     <template #title>
-      Informasi Course
+      Informasi Kelas
     </template>
 
     <template #description>
-      Update your account's profile information and email address.
+        Tambahkan informasi kelas sesuai kebutuhan aplikasi.
     </template>
 
     <template #form>

@@ -53,7 +53,7 @@ const showPage = () => {
         </template>
 
         <template #description>
-            Update your account's profile information and email address.
+            Tambahkan informasi blog sesuai kebutuhan aplikasi.
         </template>
 
         <template #form>

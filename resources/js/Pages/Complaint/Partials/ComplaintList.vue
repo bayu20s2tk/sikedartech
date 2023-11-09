@@ -61,7 +61,7 @@ function formattedDate(value) {
                     <p class="mt-1 max-w-2xl text-sm text-gray-500">Lorem ipsum dolor sit amet.</p>
                 </div>
                 <div class="mt-5 border-t border-gray-200">
-                    <dl class="sm:divide-y sm:divide-gray-300">
+                    <dl class="sm:divide-y sm:divide-gray-300 dark:divide-gray-600">
                         <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
                             <dt class="text-sm font-medium text-gray-500">Pelapor</dt>
                             <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
@@ -97,7 +97,7 @@ function formattedDate(value) {
                         <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
                             <dt class="text-sm font-medium text-gray-500">Aksi</dt>
                             <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                <ul role="list" class="divide-y divide-gray-300 rounded-3xl border border-gray-300">
+                                <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600 rounded-3xl border border-gray-300">
                                     <li class="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
                                         <div class="flex w-0 flex-1 items-center">
                                             <i class="fa-regular fa-cat" />

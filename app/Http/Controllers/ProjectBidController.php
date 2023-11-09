@@ -44,7 +44,7 @@ class ProjectBidController extends Controller
         } else {
             $request['user_id'] = auth()->user()->id;
             $request['status_id'] = ProjectBid::NOTSELECTED;
-            $request['price'] = 0;
+//            $request['price'] = 0;
 
             ProjectBid::create($request->all());
             session()->flash('flash.banner', 'Ok!');

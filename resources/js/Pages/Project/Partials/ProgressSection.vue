@@ -37,7 +37,7 @@ function formattedDate(value) {
 </script>
 
 <template>
-  <ActionSection>
+  <ActionSection v-if="props.project.worker_id == $page.props.user.id">
     <template #title>
       Buat Progress
     </template>

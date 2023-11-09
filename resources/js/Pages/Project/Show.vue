@@ -200,7 +200,14 @@ const paymentModal = ref(false)
                 :project="props.project"
             />
 
-            <template v-if="props.project.status_id<=1">
+            <template v-if="props.project.status_id==0">
+                <SummarySection
+                    class="mt-10"
+                    :project="props.project"
+                />
+            </template>
+
+            <template v-else-if="props.project.status_id==1">
                 <h1 class="mt-10 text-sm font-medium leading-6 text-gray-900">Total bids {{
                         props.project.bid.length
                     }}</h1>

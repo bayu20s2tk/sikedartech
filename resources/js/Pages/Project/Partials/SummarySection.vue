@@ -31,15 +31,19 @@ function formatPrice(value) {
                     <dt class="text-sm font-medium text-gray-500">Owner</dt>
                     <dd class="mt-1 text-sm text-gray-900">{{ props.project.user.name }}</dd>
                 </div>
-                <div class="sm:col-span-1">
-                    <dt class="text-sm font-medium text-gray-500">Worker</dt>
-                    <dd class="mt-1 text-sm text-gray-900">{{ props.project.worker.name }}</dd>
-                </div>
 
-                <div class="sm:col-span-1">
-                    <dt class="text-sm font-medium text-gray-500">Harga</dt>
-                    <dd class="mt-1 text-sm text-gray-900">Rp {{ formatPrice(props.project.price) }}</dd>
-                </div>
+                <template v-if="props.project.worker">
+                    <div class="sm:col-span-1">
+                        <dt class="text-sm font-medium text-gray-500">Worker</dt>
+                        <dd class="mt-1 text-sm text-gray-900">{{ props.project.worker.name }}</dd>
+                    </div>
+
+                    <div class="sm:col-span-1">
+                        <dt class="text-sm font-medium text-gray-500">Harga</dt>
+                        <dd class="mt-1 text-sm text-gray-900">Rp {{ formatPrice(props.project.price) }}</dd>
+                    </div>
+                </template>
+
                 <div class="sm:col-span-2">
                     <dt class="text-sm font-medium text-gray-500">Keterangan</dt>
                     <dd class="mt-1 text-sm text-gray-900 prose prose-sm lg:prose-lg xl:prose-2xl" v-html="props.project.desc" />

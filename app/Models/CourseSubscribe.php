@@ -28,16 +28,22 @@ class CourseSubscribe extends Model implements HasMedia
     const REQUEST = 1;
     const ACCEPT = 2;
     const REJECT = 3;
+    const PASSED = 4;
+    const NOTPASS = 5;
     const STATUS = [
         self::REQUEST => 'Request',
-        self::ACCEPT => 'Accepted',
-        self::REJECT => 'Rejected',
+        self::ACCEPT => 'Peserta',
+        self::REJECT => 'Ditolak',
+        self::PASSED => 'Lulus',
+        self::NOTPASS => 'Tidak Lulus'
     ];
 
     const COLOR = [
         self::REQUEST => 'bg-primary-100 text-primary-800',
         self::ACCEPT => 'bg-green-100 text-green-800',
         self::REJECT => 'bg-red-100 text-red-800',
+        self::PASSED => 'bg-primary-100 text-primary-800',
+        self::NOTPASS => 'bg-red-100 text-red-800'
     ];
 
     /**
@@ -52,7 +58,7 @@ class CourseSubscribe extends Model implements HasMedia
 
     protected $with = [
         'media',
-        'course',
+//        'course',
         'user',
         'admin'
     ];

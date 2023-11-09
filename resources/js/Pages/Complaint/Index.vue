@@ -9,23 +9,23 @@ import TextInput from "../../Components/TextInput.vue";
 import PrimaryButton from "../../Components/PrimaryButton.vue";
 
 const props = defineProps({
-    subscribe: {
+    complaint: {
         type: Object,
         default: () => ({}),
     },
 });
 
-let search = ref('');
-watch(search, (value) => {
-    router.get(
-        route('courseSubscribe.index'),
-        { search: value },
-        {
-            preserveState: true,
-            replace: true,
-        }
-    );
-});
+// let search = ref('');
+// watch(search, (value) => {
+//     router.get(
+//         route('complaint.index'),
+//         { search: value },
+//         {
+//             preserveState: true,
+//             replace: true,
+//         }
+//     );
+// });
 
 function formattedDate(value) {
     return moment(value).format('DD MMM Y HH:mm')
@@ -56,14 +56,14 @@ function formattedDate(value) {
 
         <div class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">
             <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
-                <template v-for="item in 3">
-                    <ComplaintList />
+                <template v-for="item in props.complaint.data">
+                    <ComplaintList :item="item" />
                 </template>
 
             </ul>
         </div>
 
-        <Pagination :pagination="props.subscribe" />
+<!--        <Pagination :pagination="props.complaint" />-->
 
     </AppLayout>
 

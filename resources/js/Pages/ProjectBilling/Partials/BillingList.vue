@@ -12,13 +12,13 @@ const form = useForm({
     // course_id: props.item.course.id,
     // user_id: props.item.user.id,
     project_id: props.item.id,
-    status_id: 5
+    status_id: null
 });
 
-const storeInformation = () => {
-    // form.status_id = 5;
+const storeInformation = (index) => {
+    form.status_id = index;
 
-    form.patch(route('projectBilling.update', props.item.id), {
+    form.post(route('projectBilling.store'), {
         errorBag: 'storeInformation',
         preserveScroll: true,
         onSuccess: () => {
@@ -51,6 +51,7 @@ function formatPrice(value) {
                 </p>
             </div>
             <div class="">
+                <Badge v-if="props.item.media[0]" name="Ada foto" class="text-amber-600 bg-amber-100 mr-5" />
                 <Badge :name="props.item.billing" class="mr-5" :class="props.item.color" />
                 <i class="fa-regular text-gray-900 w-5" :class="show ? 'fa-angle-down' : 'fa-angle-right' " />
             </div>
@@ -90,14 +91,20 @@ function formatPrice(value) {
                     <!--                        <dt class="text-sm font-medium text-gray-500">About</dt>-->
                     <!--                        <dd class="mt-1 text-sm text-gray-900" v-html="props.desc" />-->
                     <!--                    </div>-->
-                    <div class="sm:col-span-2" v-if="props.item.status_id==4">
+                    <div class="sm:col-span-1" v-if="props.item.media[0]">
+                        <dt class="text-sm font-medium text-gray-500">Foto</dt>
+                        <dd class="mt-1 text-sm text-gray-900">
+                            <img :src="props.item.media[0].original_url" class="rounded-3xl max-w-sm" />
+                        </dd>
+                    </div>
+                    <div class="sm:col-span-2">
                         <dt class="text-sm font-medium text-gray-500">Aksi</dt>
                         <dd class="mt-1 text-sm text-gray-900">
                             <ul role="list" class="divide-y divide-gray-300 rounded-3xl border border-gray-300">
                                 <li class="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
                                     <div class="flex w-0 flex-1 items-center">
-                                        <i class="fa-regular fa-dog" />
-                                        <span class="ml-2 w-0 flex-1 truncate">Dolor sit amet</span>
+<!--                                        <i class="fa-regular fa-dog" />-->
+<!--                                        <span class="ml-2 w-0 flex-1 truncate">Dolor sit amet</span>-->
                                     </div>
                                     <div class="ml-4 flex-shrink-0">
                                         <a
@@ -106,14 +113,22 @@ function formatPrice(value) {
                                             class="font-medium text-primary-600 hover:text-indigo-500">Lihat Proyek</a>
                                     </div>
                                 </li>
-
-                                <li class="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
+                                <li class="flex items-center justify-between py-3 pl-3 pr-4 text-sm" v-if="props.item.status_id==2 && props.item.media[0]">
                                     <div class="flex w-0 flex-1 items-center">
-                                        <i class="fa-regular fa-cat" />
-                                        <span class="ml-2 w-0 flex-1 truncate">Lorem ipsum</span>
+                                        <!--                                        <i class="fa-regular fa-cat" />-->
+                                        <!--                                        <span class="ml-2 w-0 flex-1 truncate">Lorem ipsum</span>-->
                                     </div>
                                     <div class="ml-4 flex-shrink-0">
-                                        <button @click.prevent="storeInformation" class="font-medium text-primary-600">Tandai sudah dibayar</button>
+                                        <button @click.prevent="storeInformation(3)" class="font-medium text-primary-600">Mulai Proyek</button>
+                                    </div>
+                                </li>
+                                <li class="flex items-center justify-between py-3 pl-3 pr-4 text-sm" v-if="props.item.status_id==4">
+                                    <div class="flex w-0 flex-1 items-center">
+<!--                                        <i class="fa-regular fa-cat" />-->
+<!--                                        <span class="ml-2 w-0 flex-1 truncate">Lorem ipsum</span>-->
+                                    </div>
+                                    <div class="ml-4 flex-shrink-0">
+                                        <button @click.prevent="storeInformation(5)" class="font-medium text-primary-600">Tandai sudah dibayar</button>
                                     </div>
                                 </li>
                             </ul>

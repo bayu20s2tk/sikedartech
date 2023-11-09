@@ -300,8 +300,7 @@ function formattedDate(value) {
                 </div>
 
                 <div class="">
-                  <template v-for="(comment, commentIdx) in props.comment"
-                            :key="comment.id">
+                  <template v-for="(comment, commentIdx) in props.comment" :key="comment.id">
                     <CommentSection
                         :course_id="props.course.id"
                         :comment="comment"

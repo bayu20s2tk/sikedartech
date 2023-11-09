@@ -8,9 +8,12 @@ import {ref} from "vue";
 import CommentChildSection from "./CommentChildSection.vue";
 import ActionMessage from "./ActionMessage.vue";
 import DialogModal from "./DialogModal.vue";
+import InputLabel from "./InputLabel.vue";
+import DangerButton from "./DangerButton.vue";
 
 const props = defineProps({
     course_id: Number,
+    project_id: Number,
     blog_id: Number,
     comment: Object,
     comment_idx: Number
@@ -86,14 +89,26 @@ const dislikeComment = (item) => {
     }
 };
 
-const reportInformation = (item) => {
-    // form.post(route('blogComment.dislike'), {
-    //     errorBag: 'storeInformation',
-    //     preserveScroll: true,
-    //     onSuccess: () => closeModal(),
-    //     // onError: () => passwordInput.value.focus(),
-    //     // onFinish: () => form.reset(),
-    // });
+const formReport = useForm({
+    id: null,
+    course_id: props.course_id ?? null,
+    project_id: props.project_id ?? null,
+    blog_id: props.blog_id ?? null,
+    comment_id: props.comment.id,
+    category_id: null,
+    desc: null
+});
+const reportInformation = () => {
+    formReport.post(route('complaint.store'), {
+        errorBag: 'storeInformation',
+        preserveScroll: true,
+        onSuccess: () => {
+            setTimeout(() => closeModal(), 2000);
+            formReport.reset()
+        }
+        // onError: () => passwordInput.value.focus(),
+        // onFinish: () => form.reset(),
+    });
 };
 
 const confirmingModal = ref(false)
@@ -109,12 +124,6 @@ function formattedDate(value) {
     return moment(value).format('DD MMM Y HH:mm')
 }
 
-const plans = [
-    { id: 1, name: 'Kebencian dan pelecehan', description: 'Lorem ipsum dolor sit amet' },
-    { id: 2, name: 'Konten seksual', description: 'Lorem ipsum dolor sit amet' },
-    { id: 3, name: 'Misinformasi', description: 'Lorem ipsum dolor sit amet' },
-    { id: 4, name: 'Penipuan dan scam', description: 'Lorem ipsum dolor sit amet' },
-]
 </script>
 
 <template>
@@ -193,6 +202,7 @@ const plans = [
         <CommentChildSection
             v-if="childShow"
             :course_id="props.course_id ?? null"
+            :project_id="props.project_id ?? null"
             :blog_id="props.blog_id ?? null"
             :comment="props.comment"
             :child="child"
@@ -216,31 +226,52 @@ const plans = [
         <template #content>
             <fieldset>
                 <div class="space-y-5">
-                    <div v-for="plan in plans" :key="plan.id" class="relative flex items-start">
+                    <div v-for="(complaint, key) in $page.props.selectComplaint" :key="key" class="relative flex items-start">
                         <div class="flex h-5 items-center">
-                            <input :id="plan.id" :aria-describedby="`${plan.id}-description`" name="plan" type="radio" :checked="plan.id === 'small'" class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-500" />
+                            <input
+                                :id="key"
+                                v-model.number="formReport.category_id"
+                                type="radio"
+                                :value="key"
+                                class="h-4 w-4 border-gray-300 text-primary-600 focus:ring-primary-500"
+                                required
+                            />
                         </div>
                         <div class="ml-3 text-sm">
-                            <label :for="plan.id" class="font-medium text-gray-700">{{ plan.name }}</label>
-                            <p :id="`${plan.id}-description`" class="text-gray-500">{{ plan.description }}</p>
+                            <InputLabel :value="complaint" />
+<!--                            <label class="font-medium text-gray-700">{{ complaint }}</label>-->
+<!--                            <p :id="`${index}-description`" class="text-gray-500">{{ index }}</p>-->
                         </div>
                     </div>
                 </div>
+                <InputError :message="formReport.errors.category_id" class="mt-2" />
             </fieldset>
+
+            <div class="mt-10" >
+                <InputLabel for="desc" class="ml-2" value="Keterangan"/>
+                <TextAreaInput
+                    id="desc"
+                    v-model="formReport.desc"
+                    class="mt-1 block w-full"
+                    rows="2"
+                    required
+                />
+                <InputError :message="formReport.errors.desc" class="mt-2" />
+            </div>
         </template>
 
         <template #footer>
-<!--            <ActionMessage :on="$page.props.user" class="mr-3">-->
-<!--                Saldo anda kurang-->
-<!--            </ActionMessage>-->
+            <ActionMessage :on="formReport.recentlySuccessful" class="mr-3">
+                Berhasil disimpan.
+            </ActionMessage>
 
-            <PrimaryButton
-                :class="{ 'opacity-25': form.processing }"
-                :disabled="form.processing"
-                @click="reportInformation"
+            <DangerButton
+                :class="{ 'opacity-25': formReport.processing }"
+                :disabled="formReport.processing"
+                @click.prevent="reportInformation"
             >
                 Laporkan
-            </PrimaryButton>
+            </DangerButton>
         </template>
     </DialogModal>
 </template>

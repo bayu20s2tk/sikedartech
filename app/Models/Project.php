@@ -40,7 +40,6 @@ class Project extends Model implements HasMedia
     const ONGOING = 3;
     const FINISH = 4;
     const PAID = 5;
-
     const CANCEL = 6;
     const STATUS = [
         self::REQUEST => 'Registered',
@@ -65,10 +64,10 @@ class Project extends Model implements HasMedia
     const BILLING = [
         self::REQUEST => '',
         self::OPEN => '',
-        self::SELECTED => '',
-        self::ONGOING => '',
-        self::FINISH => 'Belum dibayar',
-        self::PAID => 'Sudah dibayar',
+        self::SELECTED => 'Menunggu pembayaran dari owner',
+        self::ONGOING => 'Proyek berlangsung',
+        self::FINISH => 'Proses bayar ke Worker',
+        self::PAID => 'Sudah dibayarkan ke worker',
         self::CANCEL => ''
     ];
 

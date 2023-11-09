@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\BlogCategory;
+use App\Models\Complaint;
 use App\Models\Course;
 use App\Models\CourseCategory;
 use App\Models\Gallery;

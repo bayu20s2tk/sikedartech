@@ -19,6 +19,7 @@ import DangerButton from "../../Components/DangerButton.vue";
 import ProgressSection from "./Partials/ProgressSection.vue";
 import SummarySection from "./Partials/SummarySection.vue";
 import PaymentModal from "./Partials/PaymentModal.vue";
+import WorkerAlert from "./Partials/WorkerAlert.vue";
 
 const props = defineProps({
     project: Object,
@@ -114,13 +115,13 @@ const paymentModal = ref(false)
                         >
                             Ubah Data
                         </PrimaryButton>
-                        <PrimaryButton
-                            v-if="props.project.status_id==2"
-                            @click="storeInformation(3)"
-                        >
-                            <i class="fa-duotone fa-paper-plane mr-2"/>
-                            Mulai Proyek
-                        </PrimaryButton>
+<!--                        <PrimaryButton-->
+<!--                            v-if="props.project.status_id==2"-->
+<!--                            @click="storeInformation(3)"-->
+<!--                        >-->
+<!--                            <i class="fa-duotone fa-paper-plane mr-2"/>-->
+<!--                            Mulai Proyek-->
+<!--                        </PrimaryButton>-->
                         <PrimaryButton
                             v-if="props.project.status_id==3"
                             @click="storeInformation(4)"
@@ -196,9 +197,11 @@ const paymentModal = ref(false)
             </div>
 
             <PaymentModal
-                v-if="props.project.status_id==2"
+                v-if="props.project.status_id==2 && props.project.user.id==$page.props.user.id"
                 :project="props.project"
             />
+
+            <WorkerAlert v-if="props.project.status_id==2 && props.project.worker?.id==$page.props.user.id" />
 
             <template v-if="props.project.status_id==0">
                 <SummarySection

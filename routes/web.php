@@ -4,6 +4,7 @@ use App\Http\Controllers\AppSettingController;
 use App\Http\Controllers\BlogCategoryController;
 use App\Http\Controllers\BlogCommentController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\CourseCategoryController;
 use App\Http\Controllers\CourseCommentController;
 use App\Http\Controllers\CourseController;
@@ -77,9 +78,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::resource('/project-bid', ProjectBidController::class)->names('projectBid');
     Route::resource('/project-billing', ProjectBillingController::class)->names('projectBilling');
 
-    Route::get('/complaint', function () {
-        return Inertia::render('Complaint/Index', []);
-    })->name('complaint.index');
+    Route::resource('/complaint', ComplaintController::class)->names('complaint');
 
     Route::resource('/blog', BlogController::class)->names('blog');
     Route::post('/blog-comment/like/{blogComment}', [BlogCommentController::class, 'like'])->name('blogComment.like');

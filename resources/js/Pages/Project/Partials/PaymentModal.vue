@@ -12,28 +12,21 @@ import moment from "moment/moment";
 const props = defineProps({
     project: Object,
     modelValue: String | Number,
-    // showBill: {
-    //     type: Boolean,
-    //     default: false
-    // }
 });
-
-// defineProps({
-//     modelValue: String | Number,
-// });
 
 defineEmits(['update:modelValue']);
 
 const form = useForm({
     project_id: props.project.id,
     photo: null,
+    status_id: 2
 });
 
 const storeInformation = () => {
     if (photoInput.value) {
         form.photo = photoInput.value.files[0];
     }
-    form.post(route('projectSubscribe.store', props.project), {
+    form.post(route('projectBilling.store'), {
         errorBag: 'storeInformation',
         preserveScroll: true,
         onSuccess: () => {
@@ -43,7 +36,6 @@ const storeInformation = () => {
         // onError: () => passwordInput.value.focus(),
         onFinish: () => {
             form.reset()
-            photoPreview.value=null
         }
     });
 };
@@ -114,7 +106,7 @@ function formatPrice(value) {
             <div class="ml-3 w-full">
                 <h3 class="text-sm font-medium text-yellow-800">Attention needed</h3>
                 <div class="mt-2 text-sm text-yellow-700 flex justify-between w-full">
-                    <p>Bayar dulu yaaaaa.</p>
+                    <p>Silahkan lakukan pembayaran terlebih dahulu untuk memulai proyek.</p>
 
                     <button @click="showBill=true" class="font-medium text-yellow-900">
                         Link Pembayaran

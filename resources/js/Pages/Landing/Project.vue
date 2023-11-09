@@ -42,22 +42,22 @@ const form = useForm({
 });
 
 const storeInformation = () => {
-    console.log(form.desc)
     form.project_id = showForm
+    // console.log(form.project_id)
 
-    form.post(route('projectBid.store', props.project), {
+    form.post(route('projectBid.store'), {
         errorBag: 'storeInformation',
         preserveScroll: true,
         onSuccess: () => {
             closeModal()
-            console.log('2')
+            // console.log('2')
         },
         onError: () => {
-            console.log('3')
+            // console.log('3')
         },
         onFinish: () => {
             // form.reset()
-            console.log('5')
+            // console.log('5')
             router.reload({only: ['project']})
         }
     });

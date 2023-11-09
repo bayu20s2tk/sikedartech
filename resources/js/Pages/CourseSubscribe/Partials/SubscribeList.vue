@@ -15,7 +15,7 @@ const form = useForm({
 });
 
 const storeInformation = (status) => {
-    form.status_id = status == true;
+    form.status_id = status;
 
     form.patch(route('courseSubscribe.update', props.item), {
         errorBag: 'storeInformation',
@@ -31,7 +31,9 @@ const storeInformation = (status) => {
 };
 
 const show = ref(false)
-
+function formatPrice(value) {
+    return value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+}
 function formattedDate(value) {
     return moment(value).format('DD MMM Y HH:mm')
 }
@@ -72,6 +74,10 @@ function formattedDate(value) {
                             <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ props.item.user.name }}</dd>
                         </div>
                         <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
+                            <dt class="text-sm font-medium text-gray-500">Harga Kelas</dt>
+                            <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">Rp {{ formatPrice(props.item.course.price) }}</dd>
+                        </div>
+                        <div class="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
                             <dt class="text-sm font-medium text-gray-500">Tanggal Request</dt>
                             <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ formattedDate(props.item.created_at) }}</dd>
                         </div>
@@ -85,7 +91,7 @@ function formattedDate(value) {
                                             <span class="ml-2 w-0 flex-1 truncate">Status</span>
                                         </div>
                                         <div class="ml-4 flex-shrink-0">
-                                            <button @click="storeInformation(true)" class="font-medium text-green-600">Accept</button>
+                                            <button @click="storeInformation(2)" class="font-medium text-green-600">Accept</button>
                                         </div>
                                     </li>
                                     <li class="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
@@ -94,7 +100,7 @@ function formattedDate(value) {
                                             <span class="ml-2 w-0 flex-1 truncate">Status</span>
                                         </div>
                                         <div class="ml-4 flex-shrink-0">
-                                            <button @click="storeInformation(false)" class="font-medium text-red-600">Reject</button>
+                                            <button @click="storeInformation(3)" class="font-medium text-red-600">Reject</button>
                                         </div>
                                     </li>
                                 </ul>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Complaint;
 use App\Models\Course;
 use App\Models\Gallery;
 use App\Models\Project;
@@ -73,7 +74,8 @@ class LandingController extends Controller
             auth()->user()->id == User::ADMIN) {
             return Inertia::render('Landing/CourseShow', [
                 'course' => $course,
-                'comment' => $comment
+                'comment' => $comment,
+                'selectComplaint' => Complaint::CATEGORY,
             ]);
         } else {
             return Inertia::render('Course/Join', [
@@ -105,12 +107,12 @@ class LandingController extends Controller
     /**
      * Display the specified resource.
      */
-    public function projectShow(Project $project)
-    {
-        return Inertia::render('Landing/ProjectShow', [
-            'project' => $project,
-        ]);
-    }
+//    public function projectShow(Project $project)
+//    {
+//        return Inertia::render('Landing/ProjectShow', [
+//            'project' => $project,
+//        ]);
+//    }
 
     /**
      * Display a listing of the resource.
@@ -138,7 +140,8 @@ class LandingController extends Controller
 //        dd(auth()->user()->attachVoteStatus($blog->comment));
         return Inertia::render('Landing/BlogShow', [
             'blog' => $blog,
-            'comment' => auth()->user()->attachVoteStatus($blog->comment)
+            'comment' => auth()->user()->attachVoteStatus($blog->comment),
+            'selectComplaint' => Complaint::CATEGORY,
         ]);
     }
 }

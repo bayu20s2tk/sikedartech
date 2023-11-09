@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Request as Req;
+use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class ProjectBillingController extends Controller
 {
@@ -14,16 +16,44 @@ class ProjectBillingController extends Controller
      */
     public function index()
     {
-//        dd(Project::where('worker_id', '!=', null)->latest()->get()->toArray());
+//        dd(Project::whereNotIn('status_id', [Project::REQUEST, Project::OPEN])->latest()->get()->toArray());
         return Inertia::render('ProjectBilling/Index', [
             'project' => Project::query()
-                ->whereIn('status_id', [Project::FINISH, Project::PAID])
+                ->whereNotIn('status_id', [Project::REQUEST, Project::OPEN])
                 ->latest()
                 ->when(Req::input('search'), function ($query, $search) {
                     $query->where('name', 'like', '%' . $search . '%');
                 })->paginate(8)
                 ->withQueryString(),
         ]);
+    }
+
+    public function store(Request $request)
+    {
+//        dd($request->toArray());
+        if ($request['status_id'] == Project::SELECTED) {
+            Validator::make($request->toArray(), [
+                'project_id' => ['required'],
+                'photo' => ['required'],
+                'status_id' => ['required']
+            ])->validateWithBag('storeInformation');
+
+            $project = Project::find($request['project_id']);
+
+            if ($project->media[0]->exists()) {
+                $media = Media::find($project->media[0]->id);
+                $project->deleteMedia($media->id);
+            }
+            $project->update($request->all());
+            $project->addMedia($request['photo'])->toMediaCollection('ownerToApp');
+        } else {
+            $project = Project::find($request['project_id']);
+            $project->update($request->all());
+        }
+
+
+
+
     }
 
     /**

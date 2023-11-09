@@ -35,7 +35,7 @@ function formattedDate(value) {
 
 const stats = [
     {name: 'Status', stat: props.course.status, previousStat: ''},
-    {name: 'Peserta', stat: props.subscriber.length, previousStat: ''},
+    {name: 'Peserta', stat: props.course.member.length, previousStat: ''},
     {name: 'Owner', stat: props.course.user.name, previousStat: ''},
 ]
 
@@ -196,8 +196,8 @@ const createAssigment = () => {
                 <div
                     class="rounded-3xl bg-white bg-opacity-50 backdrop-blur-2xl border border-gray-300 overflow-hidden shadow-lg">
                     <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600">
-                        <template v-for="sub in props.subscriber">
-                            <MemberList :member="sub"/>
+                        <template v-for="sub in props.course.member">
+                            <MemberList :member="sub" :course_id="props.course.id" />
                         </template>
                     </ul>
                 </div>

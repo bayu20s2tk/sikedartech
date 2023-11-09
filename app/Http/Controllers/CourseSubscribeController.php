@@ -22,7 +22,7 @@ class CourseSubscribeController extends Controller
     {
 //        dd(CourseSubscribe::latest()->get());
         return Inertia::render('CourseSubscribe/Index', [
-            'subscribe' => CourseSubscribe::query()->with('user')
+            'subscribe' => CourseSubscribe::query()->with('user', 'course')
                 ->latest()
                 ->when(Req::input('search'), function ($query, $search) {
                     $query->where('user.name', 'like', '%' . $search . '%');
@@ -97,12 +97,14 @@ class CourseSubscribeController extends Controller
         $user = User::where('id', $courseSubscribe['user_id'])->first();
         $course = Course::where('id', $courseSubscribe['course_id'])->first();
 
-        if ($request['status_id'] == true) {
+        if ($request['status_id'] == CourseSubscribe::ACCEPT) {
             $user->subscribe($course);
             $courseSubscribe->update(['status_id' => CourseSubscribe::ACCEPT]);
-        } else {
+        } elseif ($request['status_id'] == CourseSubscribe::REJECT) {
             $courseSubscribe->update(['status_id' => CourseSubscribe::REJECT]);
             $user->unsubscribe($course);
+        } else {
+            $courseSubscribe->update($request->all());
         }
     }
 

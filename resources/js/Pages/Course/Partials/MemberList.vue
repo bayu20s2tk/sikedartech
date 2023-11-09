@@ -5,17 +5,20 @@ import Badge from "@/Components/Badge.vue";
 import moment from "moment/moment";
 
 const props = defineProps({
-    member: Object
+    member: Object,
+    course_id: Number
 })
 
 const form = useForm({
-    // worker_id: props.member.user.id,
-    // status_id: 2
+    course_id: props.course_id,
+    user_id: props.member.user.id,
+    status_id: null
 });
 
-const storeInformation = () => {
+const storeInformation = (status) => {
+    form.status_id = status;
 
-    form.patch(route('project.update', props.member), {
+    form.patch(route('courseSubscribe.update', props.member), {
         errorBag: 'storeInformation',
         preserveScroll: true,
         onSuccess: () => {
@@ -41,12 +44,12 @@ function formattedDate(value) {
     <li>
         <button @click="show=!show" class="flex w-full justify-between px-6 py-4">
             <div class="font-medium text-gray-900 flex items-center">
-                <img :src="props.member.profile_photo_url"
+                <img :src="props.member.user.profile_photo_url"
                      class="h-10 w-10 rounded-full object-cover mr-2">
-                {{ props.member.name }}
+                {{ props.member.user.name }}
             </div>
             <div class="flex items-center">
-<!--                <Badge :name="props.member.role" class="mr-5 text-gray-900" />-->
+                <Badge :name="props.member.status" class="mr-5 " :class="props.member.color" />
                 <i class="fa-regular text-gray-900 w-5" :class="show ? 'fa-angle-down' : 'fa-angle-right' " />
             </div>
         </button>
@@ -59,11 +62,11 @@ function formattedDate(value) {
                 <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
                     <div class="sm:col-span-1">
                         <dt class="text-sm font-medium text-gray-500">User</dt>
-                        <dd class="mt-1 text-sm text-gray-900">{{ props.member.name }}</dd>
+                        <dd class="mt-1 text-sm text-gray-900">{{ props.member.user.name }}</dd>
                     </div>
                     <div class="sm:col-span-1">
                         <dt class="text-sm font-medium text-gray-500">Tanggal Bergabung</dt>
-                        <dd class="mt-1 text-sm text-gray-900">{{ formattedDate(props.member.pivot.created_at) }}</dd>
+                        <dd class="mt-1 text-sm text-gray-900">{{ formattedDate(props.member.created_at) }}</dd>
                     </div>
 <!--                    <div class="sm:col-span-2">-->
 <!--                        <dt class="text-sm font-medium text-gray-500">About</dt>-->
@@ -72,14 +75,14 @@ function formattedDate(value) {
                     <div class="sm:col-span-2">
                         <dt class="text-sm font-medium text-gray-500">Aksi</dt>
                         <dd class="mt-1 text-sm text-gray-900">
-                            <ul role="list" class="divide-y divide-gray-300 rounded-3xl border border-gray-300">
+                            <ul role="list" class="divide-y divide-gray-300 dark:divide-gray-600 rounded-3xl border border-gray-300">
                                 <li class="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
                                     <div class="flex w-0 flex-1 items-center">
                                         <i class="fa-regular fa-cat" />
                                         <span class="ml-2 w-0 flex-1 truncate">Status</span>
                                     </div>
                                     <div class="ml-4 flex-shrink-0">
-                                        <button type="button" class="font-medium text-green-600">Lulus</button>
+                                        <button @click="storeInformation(4)" class="font-medium text-primary-600">Lulus</button>
                                     </div>
                                 </li>
                                 <li class="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
@@ -88,7 +91,7 @@ function formattedDate(value) {
                                         <span class="ml-2 w-0 flex-1 truncate">Status</span>
                                     </div>
                                     <div class="ml-4 flex-shrink-0">
-                                        <a href="#" class="font-medium text-red-600">Tidak Lulus</a>
+                                        <button @click="storeInformation(5)" class="font-medium text-red-600">Tidak Lulus</button>
                                     </div>
                                 </li>
                             </ul>

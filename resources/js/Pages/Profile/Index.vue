@@ -29,11 +29,7 @@ const logout = () => {
 };
 
 function formattedDate(value) {
-    return moment(value).format('DD MMM Y')
-}
-
-function formattedTime(value) {
-    return moment(value).format('HH:mm')
+    return moment(value).format('DD MMM Y HH:mm')
 }
 
 function formatPrice(value) {
@@ -57,34 +53,15 @@ function formatPrice(value) {
             <div>
                 <div class="-mt-px flex divide-x divide-gray-300 dark:divide-gray-600">
                     <div class="flex w-0 flex-1">
-                        <div class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4">
-                            <i class="fa-duotone fa-money-bill-wave text-green-400"/>
-                            <div class="ml-3">
-                                <div class="text-xs text-gray-500">Uang masuk</div>
-                                <div class="text-sm font-medium text-gray-700">0</div>
-                            </div>
+                        <div class="relative -mr-px grid w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4">
+                            <div class="text-xs text-gray-500">Saldo</div>
+                            <div class="text-sm font-medium text-gray-700">Rp {{ formatPrice($page.props.user.wallet_balance) }}</div>
                         </div>
                     </div>
                     <div class="-ml-px flex w-0 flex-1">
-                        <div class="relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4">
-                            <i class="fa-duotone fa-coins text-amber-400"/>
-                            <div class="ml-3">
-                                <div class="text-xs text-gray-500">Uang keluar</div>
-                                <div class="text-sm font-medium text-gray-700">0</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div>
-                <div class="-mt-px flex divide-x divide-gray-300 dark:divide-gray-600 border-t border-gray-300">
-                    <div class="flex w-0 flex-1">
-                        <div class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4">
-                            <i class="fa-duotone fa-money-simple-from-bracket text-indigo-400"/>
-                            <div class="ml-3">
-<!--                                <div class="text-xs text-gray-500">Withdraw</div>-->
-                                <div class="text-sm font-medium text-gray-700">Withdraw</div>
-                            </div>
+                        <div class="relative grid w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4">
+<!--                            <div class="text-xs text-gray-500">Uang keluar</div>-->
+                            <div class="text-sm font-medium text-primary-700"><i class="fa-duotone fa-dollar-sign mr-2"/>Withdraw</div>
                         </div>
                     </div>
                 </div>

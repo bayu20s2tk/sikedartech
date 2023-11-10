@@ -101,7 +101,7 @@ const paymentModal = ref(false)
                 </div>
 
                 <div class="flex items-center gap-2">
-                    <template v-if="props.project.user_id==$page.props.user.id">
+                    <template v-if="props.project.user_id==$page.props.user.id || $page.props.user.role_id==1">
                         <DangerButton
                             v-if="props.project.status_id==0 || props.project.status_id==1"
                             @click="cancelInformation"
@@ -132,11 +132,6 @@ const paymentModal = ref(false)
                     </template>
 
                     <template v-if="$page.props.user.role_id==1">
-                        <!--            <DangerButton-->
-                        <!--                @click="cancelInformation"-->
-                        <!--            >-->
-                        <!--              Cancel-->
-                        <!--            </DangerButton>-->
                         <PrimaryButton
                             v-if="props.project.status_id==0"
                             @click="storeInformation(1)"
@@ -197,7 +192,7 @@ const paymentModal = ref(false)
             </div>
 
             <PaymentModal
-                v-if="props.project.status_id==2 && props.project.user.id==$page.props.user.id"
+                v-if="props.project.status_id==2 && props.project.user.id==$page.props.user.id || props.project.status_id==2 && $page.props.user.role_id==1"
                 :project="props.project"
             />
 
@@ -238,6 +233,7 @@ const paymentModal = ref(false)
                         <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
                                 :class="tabProjectShow==2 ? 'border-cyan-600 text-cyan-600' : 'text-gray-500 border-gray-300 ' "
                                 @click="tabProjectShow=2"
+                                v-if="props.project.status_id!=2"
                         >
                             Resources
                         </button>

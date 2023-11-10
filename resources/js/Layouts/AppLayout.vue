@@ -47,46 +47,6 @@ const hasPrevious = computed(() => !!useSlots().previous);
 
 const split = props.name.split(" ");
 
-const setting = [
-    {
-        name: 'Aplikasi',
-        desc: 'Measure actions your users take',
-        href: '/setting',
-        icon: 'fa-screwdriver-wrench',
-    },
-    {
-        name: 'Pengguna',
-        desc: 'Measure actions your users take',
-        href: '/user',
-        icon: 'fa-users',
-    },
-    {
-        name: 'Galeri',
-        desc: 'Measure actions your users take',
-        href: '/gallery',
-        icon: 'fa-image',
-    },
-    {
-        name: 'Kategori Proyek',
-        desc: 'Measure actions your users take',
-        href: '/project-category',
-        icon: 'fa-umbrella-beach',
-    },
-    {
-        name: 'Kategori Kelas',
-        desc: 'Measure actions your users take',
-        href: '/course-category',
-        icon: 'fa-book',
-    },
-    {
-        name: 'Kategori Artikel',
-        desc: 'Measure actions your users take',
-        href: '/blog-category',
-        icon: 'fa-blog',
-    },
-
-]
-
 const logout = () => {
     router.post(route('logout'));
 };
@@ -259,6 +219,14 @@ const logout = () => {
                                             v-if="$page.props.user.role_id==1"
                                         >
                                             Billing Proyek
+                                        </NavLinkAlt>
+
+                                        <NavLinkAlt
+                                            :href="route('transaction.index')"
+                                            :active="$page.component.startsWith('Transaction')"
+                                            icon="fa-money-bills"
+                                        >
+                                            Transaksi
                                         </NavLinkAlt>
 
                                         <NavLinkAlt

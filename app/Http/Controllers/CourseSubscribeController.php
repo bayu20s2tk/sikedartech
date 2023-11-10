@@ -97,8 +97,10 @@ class CourseSubscribeController extends Controller
         $user = User::where('id', $courseSubscribe['user_id'])->first();
         $course = Course::where('id', $courseSubscribe['course_id'])->first();
 
+//dd($owner);
         if ($request['status_id'] == CourseSubscribe::ACCEPT) {
             $user->subscribe($course);
+            $course->user->deposit($course->price);
             $courseSubscribe->update(['status_id' => CourseSubscribe::ACCEPT]);
         } elseif ($request['status_id'] == CourseSubscribe::REJECT) {
             $courseSubscribe->update(['status_id' => CourseSubscribe::REJECT]);

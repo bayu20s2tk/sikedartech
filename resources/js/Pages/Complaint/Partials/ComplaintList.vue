@@ -44,6 +44,7 @@ function formattedDate(value) {
             <div class="">
                 <p class="font-medium text-gray-900">
                     <i class="fa-regular fa-triangle-exclamation text-red-600 mr-2" />
+                    <span class="text-gray-500 font-normal">#{{ props.item.id }}</span>
                     {{ props.item.user.name }}
                 </p>
             </div>

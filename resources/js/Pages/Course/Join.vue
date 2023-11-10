@@ -28,7 +28,7 @@ const storeInformation = () => {
     if (photoInput.value) {
         form.photo = photoInput.value.files[0];
     }
-    form.post(route('courseSubscribe.store', props.course), {
+    form.post(route('courseSubscribe.store'), {
         errorBag: 'storeInformation',
         preserveScroll: true,
         onSuccess: () => {
@@ -147,11 +147,13 @@ function formatPrice(value) {
                                         </ul>
                                         <div class="mt-8">
                                             <PrimaryButton
+                                                :disabled="$page.props.user.role_id==2"
                                                 class="w-full justify-center"
                                                 @click="confirmBill"
                                             >
                                                 Mulai Belajar
                                             </PrimaryButton>
+                                            <p class="mt-1 text-sm text-gray-600">* Kelas hanya untuk peserta</p>
                                         </div>
                                     </div>
                                 </div>
@@ -168,8 +170,9 @@ function formatPrice(value) {
                             </div>
                             <div>
                                 <button
-                                    class="inline-block rounded-3xl bg-primary-50 px-4 py-2.5 text-center text-sm font-semibold leading-5 text-primary-700 hover:bg-primary-100"
+                                    class="inline-block rounded-3xl bg-primary-50 px-4 py-2.5 text-center text-sm font-semibold leading-5 text-primary-700 disabled:opacity-25"
                                     @click="confirmForm"
+                                    :disabled="$page.props.user.role_id==2"
                                 >
                                     Isi form bukti pembayaran <span aria-hidden="true">&rarr;</span>
                                 </button>

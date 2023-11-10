@@ -40,12 +40,21 @@ class ProjectBillingController extends Controller
 
             $project = Project::find($request['project_id']);
 
-            if ($project->media[0]->exists()) {
-                $media = Media::find($project->media[0]->id);
-                $project->deleteMedia($media->id);
-            }
+//            if ($project->media) {
+//                $media = Media::find($project->media[0]->id);
+//                $project->deleteMedia($media->id);
+//            }
             $project->update($request->all());
             $project->addMedia($request['photo'])->toMediaCollection('ownerToApp');
+        } elseif ($request['status_id'] == Project::ONGOING) {
+            $project = Project::find($request['project_id']);
+            $project->user->deposit($project->price);
+            $project->update($request->all());
+        } elseif ($request['status_id'] == Project::PAID) {
+            $project = Project::find($request['project_id']);
+            $project->user->withdraw($project->price);
+            $project->worker->deposit($project->price);
+            $project->update($request->all());
         } else {
             $project = Project::find($request['project_id']);
             $project->update($request->all());

@@ -21,6 +21,7 @@ use App\Http\Controllers\ProjectCategoryController;
 use App\Http\Controllers\ProjectChatController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectProgressController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -79,6 +80,8 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::resource('/project-billing', ProjectBillingController::class)->names('projectBilling');
 
     Route::resource('/complaint', ComplaintController::class)->names('complaint');
+
+    Route::resource('/transaction', TransactionController::class)->names('transaction');
 
     Route::resource('/blog', BlogController::class)->names('blog');
     Route::post('/blog-comment/like/{blogComment}', [BlogCommentController::class, 'like'])->name('blogComment.like');

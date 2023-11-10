@@ -69,7 +69,7 @@ function formatPrice(value) {
                     </div>
                     <div class="sm:col-span-1">
                         <dt class="text-sm font-medium text-gray-500">Nominal Pembayaran</dt>
-                        <dd class="mt-1 text-sm text-gray-900">Rp {{formatPrice(props.item.budget_from) }}</dd>
+                        <dd class="mt-1 text-sm text-gray-900">Rp {{formatPrice(props.item.price) }}</dd>
                     </div>
                     <div class="sm:col-span-1">
                         <dt class="text-sm font-medium text-gray-500">Worker</dt>
@@ -92,7 +92,7 @@ function formatPrice(value) {
                     <!--                        <dd class="mt-1 text-sm text-gray-900" v-html="props.desc" />-->
                     <!--                    </div>-->
                     <div class="sm:col-span-1" v-if="props.item.media[0]">
-                        <dt class="text-sm font-medium text-gray-500">Foto</dt>
+                        <dt class="text-sm font-medium text-gray-500">Bukti transfer</dt>
                         <dd class="mt-1 text-sm text-gray-900">
                             <img :src="props.item.media[0].original_url" class="rounded-3xl max-w-sm" />
                         </dd>

@@ -49,7 +49,8 @@ class DashboardController extends Controller
 //            $projectMe->get()
 //        );
 
-        return Inertia::render('Dashboard', [
+        return Inertia::render('Dashboard/Index', [
+            'user' => auth()->user(),
             'course' => $course->get(),
             'course_me' => $courseMe->get(),
             'project' => $project->get(),

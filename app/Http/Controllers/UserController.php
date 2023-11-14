@@ -98,8 +98,9 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+//        dd(User::where('id', $user->id)->with('worker', 'owner')->first());
         return Inertia::render('User/Show', [
-            'users' => $user,
+            'users' => User::where('id', $user->id)->with('worker', 'owner')->first(),
 //            'history' => Transaction::where('user_id', $user->id)->get()
         ]);
     }

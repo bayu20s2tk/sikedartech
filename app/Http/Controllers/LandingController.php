@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Models\Complaint;
 use App\Models\Course;
+use App\Models\CourseSubscribe;
 use App\Models\Gallery;
 use App\Models\Project;
+use App\Models\Review;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -65,7 +67,8 @@ class LandingController extends Controller
      */
     public function courseShow(Course $course)
     {
-//        $comment = auth()->user()->attachLikeStatus($course->comment);
+//        dd(CourseSubscribe::where([['course_id', $course->id], ['user_id', auth()->user()->id]])->pluck('status_id')->first());
+
         $comment = auth()->user()->attachVoteStatus($course->comment);
 //        $comment = $comment->toArray();
 //        dd($comment);
@@ -76,6 +79,7 @@ class LandingController extends Controller
                 'course' => $course,
                 'comment' => $comment,
                 'selectComplaint' => Complaint::CATEGORY,
+                'user_status' => CourseSubscribe::where([['course_id', $course->id], ['user_id', auth()->user()->id]])->pluck('status_id')->first()
             ]);
         } else {
             return Inertia::render('Course/Join', [

@@ -8,12 +8,14 @@ use App\Models\Complaint;
 use App\Models\Course;
 use App\Models\CourseCategory;
 use App\Models\Gallery;
+use App\Models\Review;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Request as Req;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
@@ -161,17 +163,22 @@ class CourseController extends Controller
 //    /**
 //     * Remove the specified resource from storage.
 //     *
-//     * @param Course $course
+//     * @param Request $request
 //     * @return void
+//     * @throws ValidationException
 //     */
-//    public function subscribe(Request $request, Course $course)
+//    public function addReview(Request $request)
 //    {
+////        dd($request->toArray());
 //        Validator::make($request->toArray(), [
-//            'photo' => ['required'],
+//            'desc' => ['required', 'string', 'max:255'],
+//            'rating' => ['required']
 //        ])->validateWithBag('storeInformation');
 //
-//        dd($request->all(), $course);
-////        auth()->user()->follow($course);
-//        auth()->user()->subscribe($course);
+//        $course = Course::find($request['course_id']);
+//        $request['user_id'] = auth()->user()->id;
+//
+//        Review::create($request->all());
+//
 //    }
 }

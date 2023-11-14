@@ -20,6 +20,7 @@ import ProgressSection from "./Partials/ProgressSection.vue";
 import SummarySection from "./Partials/SummarySection.vue";
 import PaymentModal from "./Partials/PaymentModal.vue";
 import WorkerAlert from "./Partials/WorkerAlert.vue";
+import ReviewSection from "./Partials/ReviewSection.vue";
 
 const props = defineProps({
     project: Object,
@@ -252,6 +253,14 @@ const paymentModal = ref(false)
                         >
                             Progress
                         </button>
+
+                        <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
+                                :class="tabProjectShow==5 ? 'border-sky-600 text-sky-600' : 'text-gray-500 border-gray-300 ' "
+                                @click="tabProjectShow=5"
+                                v-if="props.project.status_id>=4"
+                        >
+                            Review
+                        </button>
                     </nav>
                 </div>
 
@@ -285,6 +294,19 @@ const paymentModal = ref(false)
                     v-else-if="tabProjectShow==4"
                     :project="props.project"
                 />
+
+                <div class="" v-else-if="tabProjectShow==5">
+                    <ReviewSection
+                        v-if="props.project.user.id==$page.props.user.id"
+                        :worker_id="props.project.worker.id"
+                        :project="props.project"
+                    />
+                    <ReviewSection
+                        v-if="props.project.worker.id==$page.props.user.id"
+                        :owner_id="props.project.user.id"
+                        :project="props.project"
+                    />
+                </div>
 
             </div>
 

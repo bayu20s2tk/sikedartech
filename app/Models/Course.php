@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+//use Codebyray\ReviewRateable\Contracts\ReviewRateable;
+//use Codebyray\ReviewRateable\Traits\ReviewRateable as ReviewRateableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -17,6 +19,7 @@ class Course extends Model implements HasMedia
     use InteractsWithMedia;
     use Subscribable;
 //    use Followable;
+//    use ReviewRateableTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -59,7 +62,8 @@ class Course extends Model implements HasMedia
      */
     protected $appends = [
         'status',
-        'color'
+        'color',
+        'review_average',
     ];
 
     protected $with = [
@@ -68,7 +72,8 @@ class Course extends Model implements HasMedia
         'category',
         'item',
         'assigment',
-        'member'
+        'member',
+        'review'
     ];
 
     public function getRouteKeyName(): string
@@ -82,6 +87,10 @@ class Course extends Model implements HasMedia
     public function getColorAttribute(): string
     {
         return self::COLOR[$this->status_id];
+    }
+    public function getReviewAverageAttribute()
+    {
+        return Review::Where([['course_id', $this->id],])->pluck('rating')->avg();
     }
     public function user(): BelongsTo
     {
@@ -106,5 +115,9 @@ class Course extends Model implements HasMedia
     public function member(): HasMany
     {
         return $this->hasMany(CourseSubscribe::class, 'course_id', 'id')->where('status_id', '!=', CourseSubscribe::REQUEST)->latest();
+    }
+    public function review(): HasMany
+    {
+        return $this->hasMany(Review::class, 'course_id', 'id')->latest();
     }
 }

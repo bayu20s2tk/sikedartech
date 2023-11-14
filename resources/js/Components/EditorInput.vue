@@ -304,7 +304,7 @@ const closeModal = () => {
         </template>
 
         <template #footer>
-            Lorem ipsum
+
         </template>
     </DialogModal>
 </template>

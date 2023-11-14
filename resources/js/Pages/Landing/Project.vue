@@ -95,7 +95,7 @@ watch(search, (value) => {
                         Proyek
                     </template>
                     <template #desc>
-                        Lorem ipsum dolor sit amet
+                        Mari bekerja menjadi worker di SIKEDAR
                     </template>
                 </Heading>
 

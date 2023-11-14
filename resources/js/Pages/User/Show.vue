@@ -7,6 +7,8 @@ import PrimaryButton from "@/Components/PrimaryButton.vue";
 import PreviousButton from "@/Components/PreviousButton.vue";
 import {Link} from "@inertiajs/vue3";
 import moment from "moment/moment";
+import SecondaryButton from "../../Components/SecondaryButton.vue";
+import {StarIcon} from "@heroicons/vue/20/solid";
 
 const props = defineProps({
     users: Object | String,
@@ -43,14 +45,15 @@ function formatPrice(value) {
 
                     <div class="">
                         <span class="block text-xl font-bold text-gray-900 sm:text-2xl capitalize">{{ props.users.name }}</span>
-                        <span class="block text-lg font-extrabold text-primary-600">
-                            Rp {{ formatPrice(props.users.wallet_balance) }}
+                        <span class="block font-medium text-gray-600">
+<!--                            Rp {{ formatPrice(props.users.wallet_balance) }}-->
+                            {{ props.users.role }}
                         </span>
                     </div>
 
                 </div>
                 <div class="mt-5 flex lg:mt-0 lg:flex-shrink-0 gap-x-2">
-                    <PrimaryButton as="a" :href="route('user.edit', props.users)">
+                    <PrimaryButton v-if="$page.props.user.role_id==1" as="a" :href="route('user.edit', props.users)">
                         Ubah Data
                     </PrimaryButton>
 
@@ -59,6 +62,91 @@ function formatPrice(value) {
                     <!--                        Withdraw-->
                     <!--                    </SecondaryButton>-->
                 </div>
+            </div>
+        </div>
+
+        <div class="mt-10">
+            <div class="lg:grid lg:grid-cols-2 mt-10">
+                <div class="">
+                    <h2 class="text-xl font-bold tracking-tight text-gray-900">Review Worker</h2>
+                    <div class="mt-3 flex items-center">
+                        <div>
+                            <div class="flex items-center">
+                                <StarIcon v-for="rating in [0, 1, 2, 3, 4]" :key="rating"
+                                          :class="[Number(props.users.review_worker_average) > rating ? 'text-yellow-400' : 'text-gray-300', 'flex-shrink-0 h-5 w-5']"
+                                          aria-hidden="true"/>
+                            </div>
+                        </div>
+                        <p class="ml-2 text-sm text-gray-900">Based on {{ props.users.worker.length }} reviews</p>
+                    </div>
+
+                    <div class="mt-10">
+                        <div class="flow-root">
+                            <div class="">
+                                <div v-for="review in props.users.worker" :key="review.id"
+                                     class="py-5">
+                                    <div class="flex items-center">
+                                        <img :src="review.user.profile_photo_url" :alt="`${review.user.name}.`"
+                                             class="h-12 w-12 rounded-full"/>
+                                        <div class="ml-4">
+                                            <h4 class="text-sm font-bold text-gray-900">{{ review.user.name }}</h4>
+                                            <div class="mt-1 flex items-center">
+                                                <StarIcon v-for="rating in [0, 1, 2, 3, 4]"
+                                                          :key="rating"
+                                                          :class="[review.rating > rating ? 'text-yellow-400' : 'text-gray-300', 'h-5 w-5 flex-shrink-0']"
+                                                          aria-hidden="true"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-4 space-y-6 text-sm text-gray-600"
+                                         v-html="review.desc"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="">
+                    <h2 class="text-xl font-bold tracking-tight text-gray-900">Review Owner</h2>
+                    <div class="mt-3 flex items-center">
+                        <div>
+                            <div class="flex items-center">
+                                <StarIcon v-for="rating in [0, 1, 2, 3, 4]" :key="rating"
+                                          :class="[Number(props.users.review_owner_average) > rating ? 'text-yellow-400' : 'text-gray-300', 'flex-shrink-0 h-5 w-5']"
+                                          aria-hidden="true"/>
+                            </div>
+                        </div>
+                        <p class="ml-2 text-sm text-gray-900">Based on {{ props.users.owner.length }} reviews</p>
+                    </div>
+
+                    <div class="mt-10">
+                        <div class="flow-root">
+                            <div class="">
+                                <div v-for="review in props.users.owner" :key="review.id"
+                                     class="py-5">
+                                    <div class="flex items-center">
+                                        <img :src="review.user.profile_photo_url" :alt="`${review.user.name}.`"
+                                             class="h-12 w-12 rounded-full"/>
+                                        <div class="ml-4">
+                                            <h4 class="text-sm font-bold text-gray-900">{{ review.user.name }}</h4>
+                                            <div class="mt-1 flex items-center">
+                                                <StarIcon v-for="rating in [0, 1, 2, 3, 4]"
+                                                          :key="rating"
+                                                          :class="[review.rating > rating ? 'text-yellow-400' : 'text-gray-300', 'h-5 w-5 flex-shrink-0']"
+                                                          aria-hidden="true"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-4 space-y-6 text-sm text-gray-600"
+                                         v-html="review.desc"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
 

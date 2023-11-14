@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
@@ -97,12 +98,19 @@ class User extends Authenticatable implements Wallet, MustVerifyEmail
      *
      * @var array
      */
+//    protected $with = [
+//        'worker',
+//        'owner',
+//    ];
+
     protected $appends = [
         'profile_photo_url',
         'created',
         'role',
         'color',
         'status',
+        'review_worker_average',
+        'review_user_average'
     ];
 
     public function getCreatedAttribute()
@@ -120,6 +128,23 @@ class User extends Authenticatable implements Wallet, MustVerifyEmail
     public function getRoleAttribute(): string
     {
         return self::ROLE[$this->role_id];
+    }
+
+    public function getReviewWorkerAverageAttribute(): string | null
+    {
+        return Review::Where([['worker_id', $this->id],])->pluck('rating')->avg();
+    }
+    public function getReviewUserAverageAttribute(): string | null
+    {
+        return Review::Where([['user_id', $this->id],])->pluck('rating')->avg();
+    }
+    public function worker(): HasMany
+    {
+        return $this->hasMany(Review::class, 'worker_id', 'id')->latest();
+    }
+    public function owner(): HasMany
+    {
+        return $this->hasMany(Review::class, 'owner_id', 'id')->latest();
     }
 
 }

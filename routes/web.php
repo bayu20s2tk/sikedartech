@@ -21,8 +21,10 @@ use App\Http\Controllers\ProjectCategoryController;
 use App\Http\Controllers\ProjectChatController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectProgressController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WithdrawController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -52,7 +54,6 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/artikel/{blog}', [LandingController::class, 'blogShow'])->name('landing.blog.show');
 
     Route::resource('/course', CourseController::class)->names('course');
-//    Route::post('/course/subscribe/{course}', [CourseController::class, 'subscribe'])->name('course.subscribe');
     Route::post('/course/add-hero', [CourseController::class, 'addHero'])->name('course.addHero');
     Route::delete('/course/delete-hero/{id}', [CourseController::class, 'deleteHero'])->name('course.deleteHero');
 
@@ -80,9 +81,11 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::resource('/project-billing', ProjectBillingController::class)->names('projectBilling');
 
     Route::resource('/complaint', ComplaintController::class)->names('complaint');
+    Route::resource('/review', ReviewController::class)->names('review');
+//    Route::post('/review', [ReviewController::class, 'store'])->name('review.store');
 
     Route::resource('/transaction', TransactionController::class)->names('transaction');
-
+    Route::resource('/withdraw', WithdrawController::class)->names('withdraw');
     Route::resource('/blog', BlogController::class)->names('blog');
     Route::post('/blog-comment/like/{blogComment}', [BlogCommentController::class, 'like'])->name('blogComment.like');
     Route::post('/blog-comment/dislike/{blogComment}', [BlogCommentController::class, 'dislike'])->name('blogComment.dislike');

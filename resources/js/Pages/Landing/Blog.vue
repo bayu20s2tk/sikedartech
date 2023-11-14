@@ -51,8 +51,7 @@ function formattedDate(value) {
                         Artikel
                     </template>
                     <template #desc>
-                        Belajar membangun website yang dinamis seperti toko online dengan teknologi web development
-                        terbaru
+                        Artikel SIKEDAR
                     </template>
                 </Heading>
 

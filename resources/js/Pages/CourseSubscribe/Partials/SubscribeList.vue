@@ -60,8 +60,8 @@ function formattedDate(value) {
 
             <div class="w-full p-5 sm:col-span-4">
                 <div>
-                    <h3 class="text-lg font-medium leading-6 text-gray-900">Subscribe Information</h3>
-                    <p class="mt-1 max-w-2xl text-sm text-gray-500">Lorem ipsum dolor sit amet.</p>
+                    <h3 class="text-lg font-medium leading-6 text-gray-900">Billing Kelas</h3>
+                    <p class="mt-1 max-w-2xl text-sm text-gray-500">Informasi kelas per user</p>
                 </div>
                 <div class="mt-5 border-t border-gray-200">
                     <dl class="sm:divide-y sm:divide-gray-300">

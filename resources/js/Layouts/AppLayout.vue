@@ -230,6 +230,15 @@ const logout = () => {
                                         </NavLinkAlt>
 
                                         <NavLinkAlt
+                                            :href="route('withdraw.index')"
+                                            :active="$page.component.startsWith('Withdraw')"
+                                            icon="fa-money-from-bracket"
+                                            v-if="$page.props.user.role_id==1"
+                                        >
+                                            Withdraw
+                                        </NavLinkAlt>
+
+                                        <NavLinkAlt
                                             :href="route('complaint.index')"
                                             :active="$page.component.startsWith('Complaint')"
                                             icon="fa-triangle-exclamation"

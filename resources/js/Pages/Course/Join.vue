@@ -104,8 +104,8 @@ function formatPrice(value) {
             <div class="relative overflow-hidden pt-32 pb-96 lg:pt-10">
                 <div class="relative mx-auto max-w-7xl px-6 text-center lg:px-8">
                     <div class="mx-auto max-w-2xl lg:max-w-4xl">
-                        <h2 class="text-lg font-semibold leading-8 text-primary-600">#kamubelumbayar</h2>
-                        <p class="mt-2 text-4xl font-bold tracking-tight text-gray-900">Lorem ipsum dolor</p>
+<!--                        <h2 class="text-lg font-semibold leading-8 text-primary-600">#kamubelumbayar</h2>-->
+                        <p class="mt-2 text-4xl font-bold tracking-tight text-gray-900">{{ props.course.name }}</p>
                         <p class="mt-6 text-lg leading-8 text-gray-600">Langkah yang tepat untuk berinvestasi kepada ilmu pengetahuan yang baru di bidang IT.</p>
                     </div>
                 </div>
@@ -166,7 +166,7 @@ function formatPrice(value) {
                         <div class="flex flex-col gap-6 rounded-3xl p-8 border border-gray-300 sm:p-10 lg:flex-row lg:items-center lg:gap-8">
                             <div class="lg:min-w-0 lg:flex-1">
                                 <h3 class="text-lg font-semibold leading-8 tracking-tight text-primary-600">Sudah bayar?</h3>
-                                <div class="mt-2 text-base leading-7 text-gray-600">Lorem ipsum dolor sit amet <span class="font-semibold text-gray-900">Rp {{ formatPrice(props.course.price) }}</span>.</div>
+                                <div class="mt-2 text-base leading-7 text-gray-600">Nilai kelas yang dibayar sebesar <span class="font-semibold text-gray-900">Rp {{ formatPrice(props.course.price) }}</span>.</div>
                             </div>
                             <div>
                                 <button
@@ -185,7 +185,7 @@ function formatPrice(value) {
 
         <DialogModal :show="showBill" @close="closeModal">
             <template #title>
-                Lorem ipsum dolor sit amet
+                Silahkan bayar sesuai nominal kelas
             </template>
 
             <template #content>
@@ -247,7 +247,7 @@ function formatPrice(value) {
 
         <DialogModal :show="showForm" @close="closeModal">
             <template #title>
-                Lorem ipsum dolor sit amet
+                Isi form bukti pembayaran
             </template>
 
             <template #content>

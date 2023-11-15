@@ -154,7 +154,7 @@ const createAssigment = () => {
                                 :class="tabCourseShow==1 ? 'border-primary-600 text-primary-600' : 'text-gray-500 border-gray-300' "
                                 @click="tabCourseShow=1"
                         >
-                            Ringkasann
+                            Ringkasan
                         </button>
 
                         <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"

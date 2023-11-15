@@ -31,7 +31,7 @@ class CourseItem extends Model implements HasMedia
     const ASSIGMENT = 2;
 
     const TYPE = [
-        self::LESSON => 'Lessons',
+        self::LESSON => 'Lesson',
         self::ASSIGMENT => 'Assigment',
     ];
 

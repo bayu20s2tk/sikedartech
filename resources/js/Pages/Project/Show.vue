@@ -228,7 +228,7 @@ const paymentModal = ref(false)
                                 :class="tabProjectShow==1 ? 'border-primary-600 text-primary-600' : 'text-gray-500 border-gray-300' "
                                 @click="tabProjectShow=1"
                         >
-                            Ringkasan
+                            Ringkasann
                         </button>
 
                         <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"

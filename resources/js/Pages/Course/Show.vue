@@ -1,6 +1,7 @@
 <script setup>
 import {Link} from "@inertiajs/vue3";
 import {ref} from "vue";
+import {router, Head, Link} from '@inertiajs/vue3';
 import {useForm} from "@inertiajs/vue3";
 import moment from "moment";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
@@ -163,7 +164,7 @@ const createAssigment = () => {
                         >
                             Peserta
                         </button>
-                        <template v-if="props.course.user.role_id==1">
+                        <template v-if="$page.props.course.user.role_id==1">
                         <button class=" w-1/2 py-4 px-1 text-center border-b-2 font-medium text-sm"
                                 :class="tabCourseShow==3 ? 'border-cyan-600 text-cyan-600' : 'text-gray-500 border-gray-300 ' "
                                 @click="tabCourseShow=3"

@@ -170,7 +170,7 @@ const createAssigment = () => {
                                 
                         >
                         
-                            Lesson
+                            Lessons
                         </button>
                         </template>
 

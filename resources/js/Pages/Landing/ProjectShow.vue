@@ -125,7 +125,7 @@ function formattedDate(value) {
                             <div class="bg-white bg-opacity-50 border border-gray-300 rounded-3xl shadow-lg">
                                 <div class="px-3 py-5 grid gap-3 ">
                                     <h3 class="font-semibold text-gray-900 ml-2">
-                                        {{ props.project.item.length ?? '0' }} lessons
+                                        {{ props.project.item.length ?? '0' }} lesson
                                     </h3>
 
                                     <template v-for="(list, listIdx) in props.project.item" :key="list.id">

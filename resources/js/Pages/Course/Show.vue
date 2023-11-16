@@ -21,7 +21,8 @@ import FinanceSection from "./Partials/FinanceSection.vue";
 
 const props = defineProps({
     course: Object,
-    subscriber: Object
+    subscriber: Object,
+    user:Object
 });
 
 const tab = ref(null)
@@ -170,7 +171,7 @@ const createAssigment = () => {
                                 
                         >
                         
-                            Lessons
+                            Lesson
                         </button>
                         </template>
 

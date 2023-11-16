@@ -1,7 +1,7 @@
 <script setup>
 import {Link} from "@inertiajs/vue3";
 import {ref} from "vue";
-import {router, Head, Link} from '@inertiajs/vue3';
+import {router, Head} from '@inertiajs/vue3';
 import {useForm} from "@inertiajs/vue3";
 import moment from "moment";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
